@@ -16,10 +16,7 @@ const resolvers = {
     Query: {
         me: async (parent, args, context) => {
             if (context.user) {
-                const userData = await User.findOne({ _id: context.user._id })
-                    .select('-__v -password')
-                    .populate('questions');
-                return userData;
+                return User.findOne({ _id: context.user._id }).populate('quizzes');
             }
 
             throw new AuthenticationError('Not logged in');
@@ -47,8 +44,8 @@ const resolvers = {
     },
 
     Mutation: {
-        addUser: async (parent, args) => {
-            const user = await User.create(args);
+        addUser: async (parent, { username, email, password }) => {
+            const user = await User.create(username, email, password);
             const token = signToken(user);
 
             return { token, user };
@@ -71,6 +68,7 @@ const resolvers = {
 
             return { token, user };
         },
+
 
         saveBook: async (parent, { input }, context) => {
             const updatedBookUser = await User.findOneAndUpdate(
@@ -113,6 +111,31 @@ const resolvers = {
                     }
                 );
             }
+        },
+        addLeaderboard: async (parent, { quizId, points }, context) => {
+            if (context.user) {
+                User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { playedQuizzes: quiz._Id } },
+                    {
+                        new: true,
+                        runValidators: true,
+                    }
+                )
+                return Quiz.findOneAndUpdate(
+                    { _id: quizId },
+                    {
+                        $addToSet: {
+                            Leaderboards: { points, playerId: context.user._id },
+                        },
+                    },
+                    {
+                        new: true,
+                        runValidators: true,
+                    }
+                );
+            }
+            throw new AuthenticationError('You need to be logged in!');
         },
     }
 };
