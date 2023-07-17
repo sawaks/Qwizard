@@ -1,10 +1,7 @@
-//////////////////////////////////////////////////////////////////
-//// NEEDS UPDATING!!!!!
-//////////////////////////////////////////////////////////////////
-
 const { Schema } = require('mongoose');
 
 const quizSchema = new Schema({
+  _id: true,
   quizAuthor: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -22,36 +19,19 @@ const quizSchema = new Schema({
     type: String,
     required: true,
   },
-  questions: [
+  questions: [questionSchema],
+  leaderboard: [
     {
-      _id: true,
-      questionText: {
-        type: String,
-        required: true,
+      playerID: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
       },
-      questionType: {
-        type: String,
-        required: true,
-      },
-      timeLimit: {
+      points: {
         type: Number,
         required: true,
       },
-      correctAnswer: {
-        type: String,
-        required: true,
-      },
-      answers: [
-        {
-          answerText: {
-            type: String,
-            required: true,
-          },
-        }
-      ]
     }
   ],
-  results: [],
 });
 
 module.exports = quizSchema;

@@ -1,5 +1,5 @@
-// might need updating?
-
 const User = require('./User');
+const questionSchema = require('./Quiz');
+const questionSchema = require('./Question');
 
-module.exports = { User };
+module.exports = { User, questionSchema, questionSchema};
