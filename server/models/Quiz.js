@@ -1,39 +1,57 @@
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 //// NEEDS UPDATING!!!!!
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 
 const { Schema } = require('mongoose');
 
-// This is a subdocument schema, it won't become its own model but we'll use it as the schema for the User's `savedBooks` array in User.js
-const bookSchema = new Schema({
-  authors: [
-    {
-      type: String,
-    },
-  ],
-  description: {
-    type: String,
-    // required: true,
-  },
-  // saved book id from GoogleBooks
-  bookId: {
-    type: String,
+const quizSchema = new Schema({
+  quizAuthor: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
-  image: {
+  description: {
     type: String,
-  },
-  link: {
-    type: String,
+    required: true,
   },
   title: {
     type: String,
     required: true,
   },
+  imgURL: {
+    type: String,
+    required: true,
+  },
+  questions: [
+    {
+      _id: true,
+      questionText: {
+        type: String,
+        required: true,
+      },
+      questionType: {
+        type: String,
+        required: true,
+      },
+      timeLimit: {
+        type: Number,
+        required: true,
+      },
+      correctAnswer: {
+        type: String,
+        required: true,
+      },
+      answers: [
+        {
+          answerText: {
+            type: String,
+            required: true,
+          },
+        }
+      ]
+    }
+  ],
+  results: [],
 });
 
-module.exports = bookSchema;
+module.exports = quizSchema;
