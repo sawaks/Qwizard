@@ -21,6 +21,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 
 import HomePage from './pages/Homepage';
+import CreateQuiz from './pages/CreateQuiz';
 // import SearchBooks from './pages/SearchBooks';
 // import SavedBooks from './pages/SavedBooks';
 
@@ -56,13 +57,13 @@ function App() {
           <Navbar />
           <Routes>
             <Route
-              path='/'
+              path='/homepage'
               element={<HomePage />}
             />
-            {/* <Route
-              path='/saved'
-              element={<SavedBooks />}
-            /> */}
+            <Route
+              path='/'
+              element={<CreateQuiz />}
+            />
             <Route
               path='*'
               element={<h1 className='display-2'>Wrong page!</h1>}
