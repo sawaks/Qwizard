@@ -71,7 +71,7 @@ const typeDefs = gql`
         dbQuizzes: [Quiz]
         
         getQuizQuestions(quizID: ID!): Quiz
-        getPlayedQuizzes(userID: ID!): [Quiz]
+        getPlayedQuizzes: [Quiz]
     }
 
     type Mutation {
@@ -79,7 +79,7 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         addLeaderboard(playerId: ID!, points:Int!): Quiz
 
-        addQuiz(quizAuthor: ID!, input: QuizInput!): Quiz
+        addQuiz( input: QuizInput!): Quiz
         addQuestion(quizId: ID!, input: QuestionInput!): Quiz
 
         removeQuiz(quizId: ID!): Quiz

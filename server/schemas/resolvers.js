@@ -24,7 +24,7 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        // in progress -- awaiting verification
+    
         getQuizQuestions: async (parent, { quizId }, context) => {
             if (context.user) {
                 const quizData = await Quiz.find({ _id: quizId })
@@ -34,10 +34,10 @@ const resolvers = {
 
             throw new AuthenticationError('Not logged in');
         },
-        // in progress -- awaiting verification
+    
         getPlayedQuizzes: async (parent, args, context) => {
             if (context.user) {
-                const quizData = await User.find({ _id: args.userId })
+                const quizData = await User.find({ _id: context.user._id })
                     .populate('playedQuizzes');
                 return quizData;
             }
@@ -96,11 +96,12 @@ const resolvers = {
         //     return updatedBookUser;
         // },
 
-        // ADD QUIZ -- awaiting verification
+   
         addQuiz: async (parent, { input }, context) => {
             if (context.user) {
                 const quiz = await Quiz.create(
-                    {
+                    {   
+                        quizAuthor: context.user.username,
                         description: input.description,
                         title: input.title,
                         imgURL: input.imgURL,
@@ -110,7 +111,7 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         },
-        // ADD QUESTION -- awaiting verification
+    
         addQuestion: async (parent, { quizId, input }, context) => {
             if (context.user) {
                 const question = await Question.create(

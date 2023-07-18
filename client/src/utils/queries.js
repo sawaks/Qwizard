@@ -37,8 +37,8 @@ export const GET_DB_QUIZZES = gql`
 `;
 
 export const GET_QUIZ_QUESTIONS = gql`
-  query getQuizQuestions {
-    getQuizQuestions {
+  query getQuizQuestions ($quizId: ID!) {
+    getQuizQuestions (quizId: $quizId) {
       _id
       questionText
       questionType
