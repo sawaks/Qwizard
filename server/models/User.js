@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 // import schema from Quiz.js
-const quizSchema = require('./Quiz');
+const Quiz = require('./Quiz');
 
 const userSchema = new Schema(
   {
@@ -22,8 +22,8 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    createdQuizzes: [quizSchema],
-    playedQuizzes: [quizSchema],
+    createdQuizzes: [Quiz.schema],
+    playedQuizzes: [Quiz.schema],
 
   },
 

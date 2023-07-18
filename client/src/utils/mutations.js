@@ -38,7 +38,7 @@ export const REMOVE_QUIZ = gql`
         _id
       }
       leaderboard {
-        playerID
+        playerId
         points
       }
     }
@@ -72,7 +72,7 @@ export const EDIT_QUIZ = gql`
         _id
       }
       leaderboard {
-        playerID
+        playerId
         points
       }
     }
@@ -90,6 +90,49 @@ export const EDIT_QUESTION = gql`
         answerText
       }
       correctAnswer
+    }
+  }
+`;
+
+export const ADD_QUIZ = gql`
+  mutation addQuiz( $input: QuizInput!) {
+    addQuiz( input: $input) {
+      _id
+      quizAuthor
+      description
+      title
+      imageURL
+    }
+  }`;
+
+export const ADD_QUESTION = gql`
+  mutation addQuestion($quizId: ID!, $input: QuestionInput!) {
+    addQuestion(quizId: $quizId, input: $input) {
+      _id
+      questionText
+      questionType
+      timeLimit
+
+      answers {
+        answerText
+      }
+      correctAnswer
+    }
+  }
+`;
+
+export const ADD_LEADERBOARD = gql`
+  mutation addLeaderboard($quizId: ID!, $points: Int!) {
+    addLeaderboard(quizId: $quizId, points: $points) {
+      _id
+      quizAuthor
+      description
+      title
+      imageURL
+      leaderboard {
+        playerId
+        points
+      }
     }
   }
 `;

@@ -24,6 +24,7 @@ import AppFooter from './components/AppFooter';
 
 import HomePage from './pages/Homepage';
 import UserPage from './pages/Userpage';
+import CreateQuiz from './pages/CreateQuiz';
 // import SearchBooks from './pages/SearchBooks';
 // import SavedBooks from './pages/SavedBooks';
 

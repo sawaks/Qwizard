@@ -1,7 +1,8 @@
 const { Schema, model } = require('mongoose');
 
+const Question = require('./Question');
+
 const quizSchema = new Schema({
-  _id: true,
   quizAuthor: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -19,10 +20,10 @@ const quizSchema = new Schema({
     type: String,
     required: true,
   },
-  questions: [questionSchema],
+  questions: [Question.schema],
   leaderboard: [
     {
-      playerID: {
+      playerId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
       },

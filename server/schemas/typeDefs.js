@@ -43,13 +43,17 @@ const typeDefs = gql`
     }
 
     type Leaderboard {
-        playerID: ID!
+        playerId: ID!
         points: Int!
     }
 
     type Auth {
         token: ID!
         user: User
+    }
+
+    input AnswerInput {
+        answerText: String!
     }
 
     input QuestionInput {
@@ -69,13 +73,21 @@ const typeDefs = gql`
     type Query {
         me: User
         dbQuizzes: [Quiz]
+        
+        getQuizQuestions(quizID: ID!): Quiz
+        getPlayedQuizzes: [Quiz]
+
+        getLeaderboard(quizID: ID!): Quiz
     }
 
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addLeaderboard(playerId: ID!, points:Int!): Quiz
-        
+        addLeaderboard(playerId: ID!, points: Int!): Quiz
+
+        addQuiz( input: QuizInput!): Quiz
+        addQuestion(quizId: ID!, input: QuestionInput!): Quiz
+
         removeQuiz(quizId: ID!): Quiz
         removeQuestion(quizId: ID!, questionId: ID!): Quiz
         editQuizDetails(quizId: ID!, input: QuizInput!): Quiz
