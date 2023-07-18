@@ -1,5 +1,19 @@
+* {
+  box-sizing: border-box;
+
+}
+
+.app-container {
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Rubik', sans-serif;
+  position: relative;
+  max-width: 960px;
+
 }
 
 h1,
@@ -22,8 +36,122 @@ h6 {
 
 }
 
+.logo {
+  width: 180px;
+}
+
 .footer-style {
   background-color: #05004E;
   color: white;
   text-align: center;
+  /* margin-top: 500px; */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+
+}
+
+.footer-style p {
+  padding-top: 40px;
+}
+
+/* Homepage */
+.hero-container {
+  width: 100%;
+  background-color: #76B39D;
+
+}
+
+/* quizList */
+.title-conatiner {
+  position: relative;
+}
+
+.title-conatiner img {
+  padding-left: 3px;
+}
+
+.title-conatiner h2 {
+  width: 60%;
+  border: solid black 1px;
+  padding-left: 50px;
+  background-color: #F4D160;
+
+}
+
+.icon-container {
+  width: 30px;
+  height: 30px;
+  background-color: #76B39D;
+  border: solid black 1px;
+  position: absolute;
+  top: 5px;
+  left: -15px;
+}
+
+.quizList-container {
+  padding: 50px;
+  padding-bottom: 200px;
+}
+
+/* .quizCards-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-right: -24px;
+
+} */
+
+.quizCard {
+  border: solid black 1px;
+  border-radius: 6px;
+  background-color: #F9F8EB;
+  padding: 30px;
+  text-align: center;
+
+
+}
+
+.quizCards-container {
+  width: auto;
+}
+
+
+.card-title {
+  text-align: center;
+}
+
+.quiz-img {
+  width: 90%;
+  object-fit: cover;
+  margin: 0 auto;
+  margin-top: 15px;
+  border: solid black 1px;
+
+}
+
+
+.card-style {
+  margin-top: 30px;
+  border: solid black 1px;
+  background-color: #F9F8EB;
+
+  box-shadow: 9px 5px 23px -5px rgba(241, 175, 98, 0.75);
+  -webkit-box-shadow: 9px 5px 23px -5px rgba(241, 175, 98, 0.75);
+  -moz-box-shadow: 9px 5px 23px -5px rgba(241, 175, 98, 0.75);
+}
+
+/* userPage */
+.userPage-container {
+  padding: 30px;
+}
+
+/* CreatedQuizList */
+.createdQuizList-Container {
+  background-color: #76B39D;
+}
+
+/* PlayedQuizList */
+.playedQuizList-Container {
+  background-color: #F9F8EB;
 }
