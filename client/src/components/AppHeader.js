@@ -10,8 +10,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
+import { Button } from 'antd';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
+import logo from '../images/logoQuiz.png';
 
 import Auth from '../utils/auth';
 
@@ -21,27 +23,29 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar bg='dark' variant='dark' expand='lg'>
+      <Navbar bg="white" data-bs-theme="light" expand='lg'>
         <Container fluid>
-          <Navbar.Brand as={Link} to='/'>
-            Google Books Search
+          <Navbar.Brand className="logo-container" as={Link} to='/'>
+            <img src={logo} alt='logo' className='logo' />
           </Navbar.Brand>
+
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='ml-auto'>
-              <Nav.Link as={Link} to='/'>
-                Search For Books
-              </Nav.Link>
+
+              <Button as={Link} to='/' type="primary" style={{ margin: "5px", background: "#FD5F00", borderColor: "#FD5F00" }} shape="round">
+                Home
+              </Button>
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/saved'>
-                    See Your Books
-                  </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  <Button as={Link} to='/saved' type="primary" style={{ margin: "5px", background: "#76B39D", borderColor: "#76B39D" }} shape="round">
+                    User page
+                  </Button>
+                  <Button onClick={Auth.logout} type="primary" style={{ margin: "5px", background: "#05004E", borderColor: "#05004E" }} shape="round">Logout</Button>
                 </>
               ) : (
-                <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+                <Button onClick={() => setShowModal(true)} type="primary" style={{ margin: "5px", background: "#05004E", borderColor: "#05004E" }} shape="round"> Login/Sign Up</Button>
               )}
             </Nav>
           </Navbar.Collapse>
