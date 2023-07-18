@@ -14,9 +14,6 @@ import { Button } from 'antd';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 import logo from '../images/logoQuiz.png';
-import {
-  HomeOutlined,
-} from '@ant-design/icons';
 
 import Auth from '../utils/auth';
 
