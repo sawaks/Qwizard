@@ -63,7 +63,7 @@ function App() {
             <Routes>
               <Route
                 // path='/homepage'
-                // path='/'
+                path='/'
                 element={<HomePage />}
               />
               <Route

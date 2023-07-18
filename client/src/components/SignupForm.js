@@ -24,6 +24,7 @@ const SignupForm = () => {
 
   const [addUser] = useMutation(ADD_USER,
     { onCompleted: (data) => { console.log(data) 
+      // debugger;
     const token = data.addUser.token;
     Auth.login(token);
     } }
@@ -45,6 +46,7 @@ const SignupForm = () => {
     }
 
     try {
+      debugger;
       const { response } = await addUser({
         variables: {
           username: userFormData.username,
@@ -52,10 +54,11 @@ const SignupForm = () => {
           password: userFormData.password,
         },
       });
-
+      // debugger;
       Auth.login(response.token);
-
+      // debugger;
     } catch (err) {
+      // debugger;
       console.error(err);
       setShowAlert(true);
     }

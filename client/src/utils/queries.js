@@ -1,20 +1,26 @@
 import { gql } from '@apollo/client';
 
-// GET_ME NEEDS UPDATING!!!!!!!
 export const GET_ME = gql`
   query me {
     me {
       _id
       username
       email
-      bookCount
-      savedBooks {
-          bookId
-          authors
-          description
-          title
-          image
-          link
+      
+      createdQuizzes {
+        _id
+        quizAuthor
+        description
+        title
+        imageURL
+      }
+
+      playedQuizzes {
+        _id
+        quizAuthor
+        description
+        title
+        imageURL
       }
     }
   }
@@ -29,7 +35,7 @@ export const GET_DB_QUIZZES = gql`
       title
       imageURL
       leaderboard {
-        playerID
+        playerId
         points
       }
     }
@@ -50,7 +56,7 @@ export const GET_QUIZ_QUESTIONS = gql`
     }
   }`;
 
-  export const GET_PLAYED_QUIZZES = gql`
+export const GET_PLAYED_QUIZZES = gql`
   query getPlayedQuizzes {
     getPlayedQuizzes {
       _id
@@ -59,8 +65,25 @@ export const GET_QUIZ_QUESTIONS = gql`
       title
       imageURL
       leaderboard {
-        playerID
+        playerId
         points
       }
     }
-  }`;
+  }
+`;
+
+export const GET_LEADERBOARD = gql`
+  query getLeaderboard ($quizId: ID!) {
+    leaderboard (quizId: $quizId) {
+      _id
+      quizAuthor
+      description
+      title
+      imageURL
+      leaderboard {
+        playerId
+        points
+      }
+    }
+  }
+`;

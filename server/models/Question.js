@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose');
 
 const questionSchema = new Schema({
-    _id: true,
     questionText: {
         type: String,
         required: true,
