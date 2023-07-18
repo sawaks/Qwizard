@@ -22,7 +22,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    createQuizzes: [quizSchema],
+    createdQuizzes: [quizSchema],
     playedQuizzes: [quizSchema],
 
   },

@@ -1,13 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//// NEEDS UPDATING!!!!!
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 const { gql } = require('@apollo/client');
 
 export const LOGIN_USER = gql`
@@ -36,40 +26,70 @@ export const ADD_USER = gql`
   }
 `;
 
-export const SAVE_BOOK = gql`
-  mutation saveBook($input: BookInput!) {
-    saveBook(input: $input) {
+export const REMOVE_QUIZ = gql`
+  mutation removeQuiz($quizId: ID!) {
+    removeQuiz(quizId: $quizId) {
       _id
-      username
-      email
-      bookCount
-      savedBooks {
-        bookId
-        authors
-        description
-        title
-        image
-        link
+      quizAuthor
+      description
+      title
+      imageURL
+      questions {
+        _id
+      }
+      leaderboard {
+        playerID
+        points
       }
     }
   }
 `;
 
-export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: ID!) {
-    removeBook(bookId: $bookId) {
+export const REMOVE_QUESTION = gql`
+  mutation removeQuestion($quizId: ID!, $questionId: ID!) {
+    removeQuestion(quizId: $quizId, questionId: $questionId) {
       _id
-      username
-      email
-      bookCount
-      savedBooks {
-        bookId
-        authors
-        description
-        title
-        image
-        link
+      questionText
+      questionType
+      timeLimit
+      answers {
+        answerText
       }
+      correctAnswer
+    }
+  }
+`;
+
+export const EDIT_QUIZ = gql`
+  mutation editQuizDetails($quizId: ID!, $input: QuizInput!) {
+    removeQuestion(quizId: $quizId, input: $input) {
+      _id
+      quizAuthor
+      description
+      title
+      imageURL
+      questions {
+        _id
+      }
+      leaderboard {
+        playerID
+        points
+      }
+    }
+  }
+`;
+
+export const EDIT_QUESTION = gql`
+  mutation editQuestion($questionId: ID!, $input: QuestionInput!) {
+    editQuestion(questionId: $questionId, input: $input) {
+      _id
+      questionText
+      questionType
+      timeLimit
+      answers {
+        answerText
+      }
+      correctAnswer
     }
   }
 `;
