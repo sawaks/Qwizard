@@ -8,7 +8,6 @@ import { useCreateQuizContext } from '../utils/CreateQuizContext';
 
 import { ADD_QUIZ } from '../utils/mutations';
 // IMG URLS NEED UPDATING
-// ADD CREATE QUIZ MUTATION ON SUBMIT
 // URL REROUTING NEEDS UPDATING
 
 const CreateQuizDetails = () => {
@@ -22,6 +21,7 @@ const CreateQuizDetails = () => {
     const [showModal, setShowModal] = useState(true);
 
     const [addQuiz] = useMutation(ADD_QUIZ);
+
     // CHANGE!!!!!!!!!!!!!!!
     const navigate = useNavigate();
     const handleModalCancel = () => {
@@ -35,29 +35,21 @@ const CreateQuizDetails = () => {
 
     };
 
-    /// NEEDS UPDATING!!!!!
     const handleQuizSubmit = async (event) => {
         console.log("handleQuizSubmit");
-        // event.preventDefault();
 
-        // check if form has everything (as per react-bootstrap docs)
-        // const { Title, Description, Theme } = event.currentTarget;
-        // use EDIT Details mutation instead of loginUser function
-        
-        console.log("imageURL: " + quizDetails.imageURL);
         try {
           const {data} = await addQuiz({
             variables: {  input: { ...quizDetails} }
           });
 
             setQuizId(data.addQuiz._id);
+            setShowModal(false);
         } catch (e) {
           console.error(e);
         }
-
-        setShowModal(false);
     
-        console.log(quizId);
+        // console.log(quizId);
     };
 
     return (

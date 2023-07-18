@@ -74,7 +74,7 @@ export const GET_PLAYED_QUIZZES = gql`
 
 export const GET_LEADERBOARD = gql`
   query getLeaderboard ($quizId: ID!) {
-    leaderboard (quizId: $quizId) {
+    getLeaderboard (quizId: $quizId) {
       _id
       quizAuthor
       description

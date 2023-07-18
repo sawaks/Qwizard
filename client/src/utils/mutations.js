@@ -62,7 +62,7 @@ export const REMOVE_QUESTION = gql`
 
 export const EDIT_QUIZ = gql`
   mutation editQuizDetails($quizId: ID!, $input: QuizInput!) {
-    removeQuestion(quizId: $quizId, input: $input) {
+    editQuizDetails(quizId: $quizId, input: $input) {
       _id
       quizAuthor
       description
