@@ -93,3 +93,29 @@ export const EDIT_QUESTION = gql`
     }
   }
 `;
+
+export const ADD_QUIZ = gql`
+  mutation addQuiz($quizAuthor: ID!, $input: QuizInput!) {
+    addQuiz(quizAuthor: $quizAuthor, input: $input) {
+      _id
+      quizAuthor
+      description
+      title
+      imageURL
+    }
+  }`;
+
+export const ADD_QUESTION = gql`
+  mutation addQuestion($quizId: ID!, $input: QuestionInput!) {
+    addQuestion(quizId: $quizId, input: $input) {
+      _id
+      questionText
+      questionType
+      timeLimit
+
+      answers {
+        answerText
+      }
+      correctAnswer
+    }
+  }`;
