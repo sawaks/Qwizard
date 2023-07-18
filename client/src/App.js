@@ -18,12 +18,16 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import { Layout } from 'antd';
+import AppHeader from './components/AppHeader';
+import AppFooter from './components/AppFooter';
 
 import HomePage from './pages/Homepage';
 import CreateQuiz from './pages/CreateQuiz';
 // import SearchBooks from './pages/SearchBooks';
 // import SavedBooks from './pages/SavedBooks';
+
+const { Header, Content, Footer } = Layout;
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -54,21 +58,24 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <>
-          <Navbar />
-          <Routes>
-            <Route
-              path='/homepage'
-              element={<HomePage />}
-            />
-            <Route
-              path='/'
-              element={<CreateQuiz />}
-            />
-            <Route
-              path='*'
-              element={<h1 className='display-2'>Wrong page!</h1>}
-            />
-          </Routes>
+          <Layout>
+            <Header className='header-style'><AppHeader /></Header>
+            <Routes>
+              <Route
+                path='/homepage'
+                element={<HomePage />}
+              />
+              <Route
+                path='/'
+                element={<CreateQuiz />}
+              />
+              <Route
+                path='*'
+                element={<h1 className='display-2'>Wrong page!</h1>}
+              />
+            </Routes>
+            <Footer className='footer-style'>< AppFooter /></Footer>
+          </Layout>
         </>
       </Router>
     </ApolloProvider>
