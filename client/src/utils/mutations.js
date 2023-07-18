@@ -33,7 +33,7 @@ export const REMOVE_QUIZ = gql`
       quizAuthor
       description
       title
-      imageURL
+      imgURL
       questions {
         _id
       }
@@ -67,7 +67,7 @@ export const EDIT_QUIZ = gql`
       quizAuthor
       description
       title
-      imageURL
+      imgURL
       questions {
         _id
       }
@@ -101,7 +101,7 @@ export const ADD_QUIZ = gql`
       quizAuthor
       description
       title
-      imageURL
+      imgURL
     }
   }`;
 
@@ -128,7 +128,7 @@ export const ADD_LEADERBOARD = gql`
       quizAuthor
       description
       title
-      imageURL
+      imgURL
       leaderboard {
         playerId
         points

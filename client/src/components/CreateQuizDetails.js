@@ -2,9 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Modal, Button, Image, Col, Row } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
 
 import { useCreateQuizContext } from '../utils/CreateQuizContext';
 
+import { ADD_QUIZ } from '../utils/mutations';
 // IMG URLS NEED UPDATING
 // ADD CREATE QUIZ MUTATION ON SUBMIT
 // URL REROUTING NEEDS UPDATING
@@ -17,15 +19,14 @@ const CreateQuizDetails = () => {
 
     const { quizId, setQuizId, quizDetails, setQuizDetails} = useCreateQuizContext();
 
-    // const [state, dispatch] = useReducer(reducer, initialState);
-
     const [showModal, setShowModal] = useState(true);
 
+    const [addQuiz] = useMutation(ADD_QUIZ);
     // CHANGE!!!!!!!!!!!!!!!
     const navigate = useNavigate();
     const handleModalCancel = () => {
         setShowModal(false);
-        navigate("/homepage");
+        navigate("/");
     };
 
     const handleQuizInputChange = (event) => {
@@ -42,19 +43,21 @@ const CreateQuizDetails = () => {
         // check if form has everything (as per react-bootstrap docs)
         // const { Title, Description, Theme } = event.currentTarget;
         // use EDIT Details mutation instead of loginUser function
-        // try {
-        //   const {data} = await loginUser({
-        //     variables: {...userFormData}
-        //   });
-        // } catch (e) {
-        //   console.error(e);
-        // //   setShowAlert(true);
-        // }
+        
+        console.log("imageURL: " + quizDetails.imageURL);
+        try {
+          const {data} = await addQuiz({
+            variables: {  input: { ...quizDetails} }
+          });
+
+            setQuizId(data.addQuiz._id);
+        } catch (e) {
+          console.error(e);
+        }
 
         setShowModal(false);
-
-        setQuizId(12345);
-        console.log(quizId)
+    
+        console.log(quizId);
     };
 
     return (
@@ -121,9 +124,9 @@ const CreateQuizDetails = () => {
                                     value={quizDetails.theme}
                                     onChange={handleQuizInputChange}
                                 >
-                                    <option value="./default">Default</option>
-                                    <option value="./dark">Dark</option>
-                                    <option value="./light">Light</option>
+                                    <option value='./logo512.png'>Default</option>
+                                    <option value='./logo512.png'>Dark</option>
+                                    <option value='./logo512.png'>Light</option>
                                 </select>
                             </Form.Item>
                         </Form>
