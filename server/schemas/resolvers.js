@@ -7,9 +7,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-const { User, questionSchema } = require('../models');
+const { User, Quiz, Question } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
-i
+
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -98,7 +98,7 @@ const resolvers = {
         // ADD QUESTION -- in progress
         addQuestion: async (parent, args, context) => {
             if (context.user) {
-                const question = await questionSchema.create(args);
+                const question = await Question.create(args);
 
                 return Quiz.findOneAndUpdate(
                     { _id: args.quizID },
