@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-const { User } = require('../models');
+const { User, Quiz, Question } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 
 const { signToken } = require('../utils/auth');
@@ -16,12 +16,42 @@ const resolvers = {
     Query: {
         me: async (parent, args, context) => {
             if (context.user) {
-                return User.findOne({ _id: context.user._id }).populate('quizzes');
+                return User.findOne({ _id: context.user._id })
+                    .populate('createdQuizzes')
+                    .populate('playedQuizzes');
             }
 
             throw new AuthenticationError('Not logged in');
-        }
+        },
+
+        // in progress -- syntax needs checking
+        getQuizQuestions: async (parent, args, context) => {
+            if (context.user) {
+                const quizData = await Quiz.find({ _id: quizID })
+                    .populate('questions');
+                return quizData;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+        // in progress -- syntax needs checking
+        getQuizzesPlayed: async (parent, args, context) => {
+            if (context.user) {
+                const quizData = await Quiz.find({ _id: args.playerID })
+                    .populate('quizzesPlayed');
+                return quizData;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        // gets a list of all quizes from the db
+        dbQuizzes: async (parent, args, context) => {
+            const quizData = await Quiz.find({})
+            return quizData;
+        },
     },
+
     Mutation: {
         addUser: async (parent, { username, email, password }) => {
             const user = await User.create(username, email, password);
@@ -48,27 +78,55 @@ const resolvers = {
             return { token, user };
         },
 
-        saveBook: async (parent, { input }, context) => {
-            const updatedBookUser = await User.findOneAndUpdate(
-                { _id: context.user._id },
-                { $addToSet: { savedBooks: input } },
-                { new: true, runValidators: true }
-            );
-            return updatedBookUser;
+
+        // saveBook: async (parent, { input }, context) => {
+        //     const updatedBookUser = await User.findOneAndUpdate(
+        //         { _id: context.user._id },
+        //         { $addToSet: { savedBooks: input } },
+        //         { new: true, runValidators: true }
+        //     );
+        //     return updatedBookUser;
+        // },
+        // removeBook: async (parent, { bookId }, context) => {
+        //     const updatedBookUser = await User.findOneAndUpdate(
+        //         { _id: context.user._id },
+        //         { $pull: { savedBooks: { bookId } } },
+        //         { new: true }
+        //     );
+        //     return updatedBookUser;
+        // },
+
+        // ADD QUIZ -- in progress
+        addQuiz: async (parent, args, context) => {
+            if (context.user) {
+                const quiz = await Quiz.create(args);
+
+                return { quiz };
+            }
         },
-        removeBook: async (parent, { bookId }, context) => {
-            const updatedBookUser = await User.findOneAndUpdate(
-                { _id: context.user._id },
-                { $pull: { savedBooks: { bookId } } },
-                { new: true }
-            );
-            return updatedBookUser;
+        // ADD QUESTION -- in progress
+        addQuestion: async (parent, args, context) => {
+            if (context.user) {
+                const question = await Question.create(args);
+
+                return Quiz.findOneAndUpdate(
+                    { _id: args.quizID },
+                    {
+                        $addToSet: { questions: question._id },
+                    },
+                    {
+                        new: true,
+                        runValidators: true,
+                    }
+                );
+            }
         },
+
         addLeaderboard: async (parent, { quizId, points }, context) => {
             if (context.user) {
                 User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $addToSet: { playedQuizzes: quiz._Id } },
+                    { $addToSet: { playedQuizzes: quizId } },
                     {
                         new: true,
                         runValidators: true,
@@ -89,6 +147,72 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         },
+
+        removeQuiz: async (parent, { quizId }, context) => {
+            if (context.user) {
+                User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { createdQuizzes: quizId } }
+                );
+
+                User.findSeveralAndUpdate(
+                    { playedQuizzes: quizId },
+                    { $pull: { playedQuizzes: quizId } }
+                );
+
+                Question.deleteMany({ quizId });
+
+                return Quiz.findOneAndDelete({ _id: quizId });
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+
+        removeQuestion: async (parent, { quizId, questionId }, context) => {
+            if (context.user) {
+
+                Question.findOneAndDelete({ _id: questionId });
+
+                return Quiz.findOneAndUpdate(
+                    { _id: quizId },
+                    { $pull: { questions: { _id: questionId } } },
+                    { new: true }
+                );
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+
+        editQuizDetails: async (parent, { quizId, input }, context) => {
+            if (context.user) {
+                return Quiz.findOneAndUpdate(
+                    { _id: quizId },
+                    {
+                        title: input.title,
+                        description: input.description,
+                        imgURL: input.imgURL
+                    },
+                    { new: true }
+                );
+            }
+
+            throw new AuthenticationError('You need to be logged in!');
+        },
+
+        editQuestion: async (parent, { questionId, input }, context) => {
+            if (context.user) {
+                return await Question.findOneAndUpdate(
+                    { _id: questionId },
+                    {
+                        questionText: input.questionText,
+                        questionType: input.questionType,
+                        timeLimit: input.timeLimit,
+                        answers: input.answers,
+                        correctAnswer: input.correctAnswer,
+                    },
+                    { new: true }
+                );
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        }
     }
 };
 
