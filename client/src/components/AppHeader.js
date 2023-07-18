@@ -10,7 +10,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
-import { Button } from 'antd';
+import { Button, Image } from 'antd';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 import logo from '../images/logoQuiz.png';
@@ -24,9 +24,9 @@ const AppNavbar = () => {
   return (
     <>
       <Navbar bg="white" data-bs-theme="light" expand='lg'>
-        <Container fluid>
+        <Container fluid >
           <Navbar.Brand className="logo-container" as={Link} to='/'>
-            <img src={logo} alt='logo' className='logo' />
+            <Image src={logo} alt='logo' className='logo' />
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls='navbar' />

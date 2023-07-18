@@ -23,6 +23,7 @@ import AppHeader from './components/AppHeader';
 import AppFooter from './components/AppFooter';
 
 import HomePage from './pages/Homepage';
+import CreateQuiz from './pages/CreateQuiz';
 // import SearchBooks from './pages/SearchBooks';
 // import SavedBooks from './pages/SavedBooks';
 
@@ -58,16 +59,18 @@ function App() {
       <Router>
         <>
           <Layout>
-            <Header className='header-style'><AppHeader /></Header>
+            <Header className='header-style' style={{height: 'fit-content'}}><AppHeader /></Header>
             <Routes>
               <Route
-                path='/'
+                // path='/homepage'
+                // path='/'
                 element={<HomePage />}
               />
-              {/* <Route
-              path='/saved'
-              element={<SavedBooks />}
-            /> */}
+              <Route
+                // path='/'
+                path='/createQuiz'
+                element={<CreateQuiz />}
+              />
               <Route
                 path='*'
                 element={<h1 className='display-2'>Wrong page!</h1>}
