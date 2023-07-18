@@ -1,4 +1,4 @@
-import {gql} from '@apollo/client';
+import { gql } from '@apollo/client';
 
 // GET_ME NEEDS UPDATING!!!!!!!
 export const GET_ME = gql`
@@ -35,3 +35,32 @@ export const GET_DB_QUIZZES = gql`
     }
   }
 `;
+
+export const GET_QUIZ_QUESTIONS = gql`
+  query getQuizQuestions {
+    getQuizQuestions {
+      _id
+      questionText
+      questionType
+      timeLimit
+      correctAnswer
+      answers {
+        answerText
+      }
+    }
+  }`;
+
+  export const GET_PLAYED_QUIZZES = gql`
+  query getPlayedQuizzes {
+    getPlayedQuizzes {
+      _id
+      quizAuthor
+      description
+      title
+      imageURL
+      leaderboard {
+        playerID
+        points
+      }
+    }
+  }`;
