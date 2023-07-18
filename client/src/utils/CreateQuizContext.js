@@ -14,7 +14,7 @@ export default function CreateQuizProvider({ children }) {
         {
             title: 'My Quiz',
             description: 'Description',
-            imageURL: './logo512.png',
+            imgURL: './logo512.png',
         });
 
 

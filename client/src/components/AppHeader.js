@@ -40,7 +40,7 @@ const AppNavbar = () => {
               {Auth.loggedIn() ? (
                 <>
                   <Button as={Link} to='/saved' type="primary" style={{ margin: "5px", background: "#76B39D", borderColor: "#76B39D" }} shape="round">
-                    User page
+                    My Quizzes
                   </Button>
                   <Button onClick={Auth.logout} type="primary" style={{ margin: "5px", background: "#05004E", borderColor: "#05004E" }} shape="round">Logout</Button>
                 </>

@@ -62,12 +62,19 @@ function App() {
         <div className="app-container">
           <AppHeader />
           <Routes>
-            {/* <Route
-              path='/'
+            <Route
+              // path='/'
+              path='/homepage'
               element={<HomePage />}
-            /> */}
+            />
             <Route
               path='/'
+              // path='/myQuizzes'
+              element={<UserPage />}
+            />
+            <Route
+              path='/createQuiz'
+              // path='/'
               element={<UserPage />}
             />
             {/* <Route path='/saved' element={<SavedBooks />} /> */}

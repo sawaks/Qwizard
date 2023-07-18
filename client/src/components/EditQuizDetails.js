@@ -2,15 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, Image, Col, Row } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 // import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+
+import { EDIT_QUIZ } from '../utils/mutations';
 
 import { useCreateQuizContext } from '../utils/CreateQuizContext';
 
 // NEEDS TO UPDATE DATABASE!!!!!
 
 const EditQuizDetails = () => {
+    
+    useEffect(() => {
+        setToEdit(false);
+    }, []);
+    
     const { quizId, quizDetails, setQuizDetails } = useCreateQuizContext();
 
     const [isEdit, setToEdit] = useState(false);
+    const [editQuiz] = useMutation(EDIT_QUIZ);
+
 
     const handleQuizInputChange = (event) => {
         const { name, value } = event.target;
@@ -18,21 +28,20 @@ const EditQuizDetails = () => {
 
     };
 
-    //UPDATE DATABASE & state??
-    const handleQuizDetailsUpdate = (event) => {
-        event.preventDefault();
-        setToEdit(false);
+    const handleQuizDetailsUpdate = async (event) => {
+        console.log("handleQuizDetailsUpdate");
+
+        try {
+            await editQuiz({
+                variables: { quizId, input: { ...quizDetails } }
+            });
+
+            setToEdit(false);
+        } catch (e) {
+            console.error(e);
+        }
+
     };
-
-    console.log("heeeeeeeeeey");
-    console.log(quizId);
-
-    useEffect(() => {
-        // setShowModal(true);
-        console.log("state??");
-        console.log(quizId);
-
-    }, [quizId]);
 
     return (
         <>
@@ -83,7 +92,7 @@ const EditQuizDetails = () => {
                             <Form.Item label="Theme">
                                 <select
                                     id="QuizTheme"
-                                    name="imageURL"
+                                    name="imgURL"
                                     value={quizDetails.theme}
                                     onChange={handleQuizInputChange}
                                 >
@@ -92,10 +101,10 @@ const EditQuizDetails = () => {
                                     <option value="./light">Light</option>
                                 </select>
                             </Form.Item>
-                            <Button 
-                            type="primary" 
-                            htmlType="submit"
-                            onClick= {handleQuizDetailsUpdate}
+                            <Button
+                                type="primary"
+                                htmlType="submit"
+                                onClick={handleQuizDetailsUpdate}
                             >
                                 Save</Button>
                         </Form>
@@ -110,7 +119,7 @@ const EditQuizDetails = () => {
                     <p>Title: {quizDetails.title}</p>
                     <p>Description: {quizDetails.description}</p>
                     <p>Theme: {quizDetails.imageURL}</p>
-                    <EditOutlined onClick={() => setToEdit(true)}/>
+                    <EditOutlined onClick={() => setToEdit(true)} />
                     {/* </Col> */}
                 </Row>
             )}
