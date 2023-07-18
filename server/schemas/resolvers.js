@@ -24,21 +24,21 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        // in progress -- syntax needs checking
-        getQuizQuestions: async (parent, args, context) => {
+        // in progress -- awaiting verification
+        getQuizQuestions: async (parent, { quizId }, context) => {
             if (context.user) {
-                const quizData = await Quiz.find({ _id: quizID })
+                const quizData = await Quiz.find({ _id: quizId })
                     .populate('questions');
                 return quizData;
             }
 
             throw new AuthenticationError('Not logged in');
         },
-        // in progress -- syntax needs checking
-        getQuizzesPlayed: async (parent, args, context) => {
+        // in progress -- awaiting verification
+        getPlayedQuizzes: async (parent, args, context) => {
             if (context.user) {
-                const quizData = await Quiz.find({ _id: args.playerID })
-                    .populate('quizzesPlayed');
+                const quizData = await User.find({ _id: args.userId })
+                    .populate('playedQuizzes');
                 return quizData;
             }
 
@@ -96,30 +96,41 @@ const resolvers = {
         //     return updatedBookUser;
         // },
 
-        // ADD QUIZ -- in progress
-        addQuiz: async (parent, args, context) => {
+        // ADD QUIZ -- awaiting verification
+        addQuiz: async (parent, { input }, context) => {
             if (context.user) {
-                const quiz = await Quiz.create(args);
+                const quiz = await Quiz.create(
+                    {
+                        description: input.description,
+                        title: input.title,
+                        imgURL: input.imgURL,
+                    });
 
                 return { quiz };
             }
+            throw new AuthenticationError('You need to be logged in!');
         },
-        // ADD QUESTION -- in progress
-        addQuestion: async (parent, args, context) => {
+        // ADD QUESTION -- awaiting verification
+        addQuestion: async (parent, { quizId, input }, context) => {
             if (context.user) {
-                const question = await Question.create(args);
+                const question = await Question.create(
+                    {
+                        questionText: input.questionText,
+                        questionType: input.questionType,
+                        timeLimit: input.timeLimit,
+                        correctAnswer: input.correctAnswer,
+                        answers: input.answers
+                    });
 
                 return Quiz.findOneAndUpdate(
-                    { _id: args.quizID },
+                    { _id: quizId },
                     {
                         $addToSet: { questions: question._id },
                     },
-                    {
-                        new: true,
-                        runValidators: true,
-                    }
+                    { new: true }
                 );
             }
+            throw new AuthenticationError('You need to be logged in!');
         },
 
         addLeaderboard: async (parent, { quizId, points }, context) => {
