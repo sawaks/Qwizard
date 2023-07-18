@@ -50,11 +50,21 @@ const resolvers = {
             const quizData = await Quiz.find({})
             return quizData;
         },
+
+        getLeaderboard: async (parent, { quizId }, context) => {
+            if (context.user) {
+                const quizData = await Quiz.find({ _id: quizId })
+                    .populate('leaderboard');
+                return quizData;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        }
     },
 
     Mutation: {
-        addUser: async (parent, { username, email, password }) => {
-            const user = await User.create(username, email, password);
+        addUser: async (parent, args) => {
+            const user = await User.create(args);
             const token = signToken(user);
 
             return { token, user };
@@ -148,7 +158,7 @@ const resolvers = {
                     { _id: quizId },
                     {
                         $addToSet: {
-                            Leaderboards: { points, playerId: context.user._id },
+                            leaderboard: { points, playerId: context.user._id },
                         },
                     },
                     {

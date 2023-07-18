@@ -38,7 +38,7 @@ export const REMOVE_QUIZ = gql`
         _id
       }
       leaderboard {
-        playerID
+        playerId
         points
       }
     }
@@ -72,7 +72,7 @@ export const EDIT_QUIZ = gql`
         _id
       }
       leaderboard {
-        playerID
+        playerId
         points
       }
     }
@@ -118,4 +118,21 @@ export const ADD_QUESTION = gql`
       }
       correctAnswer
     }
-  }`;
+  }
+`;
+
+export const ADD_LEADERBOARD = gql`
+  mutation addLeaderboard($quizId: ID!, $points: Int!) {
+    addLeaderboard(quizId: $quizId, points: $points) {
+      _id
+      quizAuthor
+      description
+      title
+      imageURL
+      leaderboard {
+        playerId
+        points
+      }
+    }
+  }
+`;
