@@ -95,8 +95,8 @@ export const EDIT_QUESTION = gql`
 `;
 
 export const ADD_QUIZ = gql`
-  mutation addQuiz($quizAuthor: ID!, $input: QuizInput!) {
-    addQuiz(quizAuthor: $quizAuthor, input: $input) {
+  mutation addQuiz( $input: QuizInput!) {
+    addQuiz( input: $input) {
       _id
       quizAuthor
       description
