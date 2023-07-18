@@ -1,32 +1,16 @@
-
 import React, { useState, useEffect } from 'react';
-import { Form, Modal, Button, Image, Col, Row } from 'antd';
+import { Form, Button, Image, Col, Row } from 'antd';
+import { EditOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
 import { useCreateQuizContext } from '../utils/CreateQuizContext';
 
-// IMG URLS NEED UPDATING
-// ADD CREATE QUIZ MUTATION ON SUBMIT
-// URL REROUTING NEEDS UPDATING
+// NEEDS TO UPDATE DATABASE!!!!!
 
-const CreateQuizDetails = () => {
+const EditQuizDetails = () => {
+    const { quizId, quizDetails, setQuizDetails } = useCreateQuizContext();
 
-    useEffect(() => {
-        setShowModal(true);
-    }, []);
-
-    const { quizId, setQuizId, quizDetails, setQuizDetails} = useCreateQuizContext();
-
-    // const [state, dispatch] = useReducer(reducer, initialState);
-
-    const [showModal, setShowModal] = useState(true);
-
-    // CHANGE!!!!!!!!!!!!!!!
-    const navigate = useNavigate();
-    const handleModalCancel = () => {
-        setShowModal(false);
-        navigate("/homepage");
-    };
+    const [isEdit, setToEdit] = useState(false);
 
     const handleQuizInputChange = (event) => {
         const { name, value } = event.target;
@@ -34,50 +18,32 @@ const CreateQuizDetails = () => {
 
     };
 
-    /// NEEDS UPDATING!!!!!
-    const handleQuizSubmit = async (event) => {
-        console.log("handleQuizSubmit");
-        // event.preventDefault();
-
-        // check if form has everything (as per react-bootstrap docs)
-        // const { Title, Description, Theme } = event.currentTarget;
-        // use EDIT Details mutation instead of loginUser function
-        // try {
-        //   const {data} = await loginUser({
-        //     variables: {...userFormData}
-        //   });
-        // } catch (e) {
-        //   console.error(e);
-        // //   setShowAlert(true);
-        // }
-
-        setShowModal(false);
-
-        setQuizId(12345);
-        console.log(quizId)
+    //UPDATE DATABASE & state??
+    const handleQuizDetailsUpdate = (event) => {
+        event.preventDefault();
+        setToEdit(false);
     };
+
+    console.log("heeeeeeeeeey");
+    console.log(quizId);
+
+    useEffect(() => {
+        // setShowModal(true);
+        console.log("state??");
+        console.log(quizId);
+
+    }, [quizId]);
 
     return (
         <>
-            <Modal
-                centered={true}
-                width={800}
-                open={showModal}
-                title="Create a Quiz"
-                onCancel={() => handleModalCancel()}
-                footer={[
-                    <Button key="submit" form="QuizDetails" htmlType="submit">
-                        Save
-                    </Button>,
-                ]}
-            >
+            {isEdit ? (
                 <Row>
                     <Col span={18}>
                         <Form
                             validateMessages={{ required: 'Fields cannot be empty' }}
-                            id="QuizDetails"
+                            id="UpdateQuizDetails"
                             span={18}
-                            onFinish={handleQuizSubmit}
+                        // onFinish={handleQuizSubmit}
                         >
                             <Form.Item
                                 label="Title"
@@ -126,16 +92,30 @@ const CreateQuizDetails = () => {
                                     <option value="./light">Light</option>
                                 </select>
                             </Form.Item>
+                            <Button 
+                            type="primary" 
+                            htmlType="submit"
+                            onClick= {handleQuizDetailsUpdate}
+                            >
+                                Save</Button>
                         </Form>
                     </Col>
                     <Col span={6}>
                         <Image src={quizDetails.imageURL} />
                     </Col>
                 </Row>
-
-            </Modal>
+            ) : (
+                <Row>
+                    {/* <Col span={18}> */}
+                    <p>Title: {quizDetails.title}</p>
+                    <p>Description: {quizDetails.description}</p>
+                    <p>Theme: {quizDetails.imageURL}</p>
+                    <EditOutlined onClick={() => setToEdit(true)}/>
+                    {/* </Col> */}
+                </Row>
+            )}
         </>
     );
 };
 
-export default CreateQuizDetails;
+export default EditQuizDetails;

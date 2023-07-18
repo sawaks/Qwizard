@@ -10,8 +10,16 @@ export default function CreateQuizProvider({ children }) {
 
     const [quizId, setQuizId] = useState(0);
 
+    const [quizDetails, setQuizDetails] = useState(
+        {
+            title: 'My Quiz',
+            description: 'Description',
+            imageURL: './logo512.png',
+        });
+
+
     return (
-        <CreateQuizContext.Provider value={{ quizId, setQuizId }}>
+        <CreateQuizContext.Provider value={{ quizId, setQuizId, quizDetails, setQuizDetails }}>
             {children}
         </CreateQuizContext.Provider>
     );

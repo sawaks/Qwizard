@@ -59,14 +59,16 @@ function App() {
       <Router>
         <>
           <Layout>
-            <Header className='header-style'><AppHeader /></Header>
+            <Header className='header-style' style={{height: 'fit-content'}}><AppHeader /></Header>
             <Routes>
               <Route
                 path='/homepage'
+                // path='/'
                 element={<HomePage />}
               />
               <Route
                 path='/'
+                // path='/createQuiz'
                 element={<CreateQuiz />}
               />
               <Route

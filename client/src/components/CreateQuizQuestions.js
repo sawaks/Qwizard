@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useReducer } from 'react';
-import { Form, Modal, Button, Alert } from 'antd';
+import React, { useState, useEffect } from 'react';
+// import { Form, Modal, Button, Alert } from 'antd';
 import { } from '../utils/mutations';
 
 import { useCreateQuizContext } from '../utils/CreateQuizContext';
@@ -8,7 +8,7 @@ import { useCreateQuizContext } from '../utils/CreateQuizContext';
 const CreateQuizQuestions = () => {
     const { quizId } = useCreateQuizContext();
 
-    console.log("heeeeeeeeeey");
+    console.log("create quiz questions");
     console.log(quizId);
 
     useEffect(() => {
