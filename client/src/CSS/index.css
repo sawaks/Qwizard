@@ -3,6 +3,10 @@
 
 }
 
+Button:hover {
+  opacity: 0.5;
+}
+
 .app-container {
   position: relative;
   min-height: 100vh;
@@ -12,7 +16,7 @@
 body {
   font-family: 'Rubik', sans-serif;
   position: relative;
-  max-width: 960px;
+  max-width: 100%;
 
 }
 
@@ -73,20 +77,21 @@ h6 {
 }
 
 .title-conatiner h2 {
-  width: 60%;
+  min-width: 60%;
   border: solid black 1px;
-  padding-left: 50px;
+
   background-color: #F4D160;
+  padding: 6px 0 6px 50px;
 
 }
 
 .icon-container {
-  width: 30px;
-  height: 30px;
+  width: 31px;
+  height: 31px;
   background-color: #76B39D;
   border: solid black 1px;
   position: absolute;
-  top: 5px;
+  top: 10px;
   left: -15px;
 }
 
@@ -144,14 +149,254 @@ h6 {
 /* userPage */
 .userPage-container {
   padding: 30px;
+  padding-bottom: 200px;
 }
+
+/* user Navi */
+.userPageNavi-container {
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+.userPageNavi-container Button:hover {
+  opacity: 1;
+}
+
+.creteQuizbtn-container {
+  position: relative;
+  display: inline-block;
+  /* margin: 1.5em 15px 1.5em 0; */
+  /* padding: 7px 10px; */
+  min-width: 70%;
+  max-width: 100%;
+  color: white;
+  font-size: 16px;
+  background: #FD5F00;
+  border: solid 1px #FD5F00;
+  border-radius: 10px;
+  height: 60px;
+  margin-top: 10px;
+
+}
+
+.creteQuizbtn-container:hover {
+  transform: translate(0, -5px);
+  box-shadow: 0 5px 10px #FD5F00;
+}
+
+.creteQuizbtn-container:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 99%;
+  margin-top: -15px;
+  border: 15px solid transparent;
+  border-left: 15px solid #FD5F00;
+
+}
+
+
+.creteQuizbtn-wrppaer {
+  position: relative;
+}
+
+.witch-container {
+  position: absolute;
+  top: -20px;
+  right: 8%;
+}
+
+.findQuizbtn-container {
+  position: relative;
+  display: inline-block;
+  /* margin: 1.5em 15px 1.5em 0; */
+  /* padding: 7px 10px; */
+  min-width: 70%;
+  max-width: 100%;
+  color: white;
+  font-size: 16px;
+  background: #05004E;
+  border: solid 1px #05004E;
+  border-radius: 10px;
+  height: 60px;
+  margin-top: 10px;
+
+}
+
+.findQuizbtn-container:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 99%;
+  margin-top: -15px;
+  border: 15px solid transparent;
+  border-left: 15px solid #05004E;
+
+}
+
+
+.findQuizbtn-container:hover {
+  transform: translate(0, -5px);
+  box-shadow: 0 5px 10px #05004E;
+}
+
 
 /* CreatedQuizList */
 .createdQuizList-Container {
   background-color: #76B39D;
+  padding: 20px;
 }
 
-/* PlayedQuizList */
-.playedQuizList-Container {
+.createdQuizCard-container {
+  width: 100%;
+  margin: 0 auto;
   background-color: #F9F8EB;
+  border: solid 1px black;
+
+}
+
+.createdImg-container {
+  text-align: start;
+  padding: 15px;
+
+}
+
+.createdImg-container img {
+  border: solid 1px black;
+  width: 200px;
+}
+
+.createdQuizText-container {
+  padding: 15px;
+
+}
+
+.createdQuizText-container Button {
+  margin-right: 5px;
+}
+
+.icon-created-container {
+  background-color: #F9F8EB;
+  text-align: center;
+  padding-right: 5px;
+}
+
+
+
+
+
+/* PlayedQuizList */
+
+.title-created-conatiner {
+  margin-left: 15px;
+
+}
+
+.title-created-conatiner .history {
+  background-color: #76B39D;
+  margin-top: -8px;
+}
+
+.playedQuizList-Container {
+  background-color: white;
+  padding: 20px;
+  margin-left: 10px;
+  border: #F4D160 solid 10px;
+}
+
+.linkBtn-container {
+  text-align: center;
+}
+
+
+.playedCard-container {
+  text-align: center;
+
+}
+
+.playedCard {
+  margin: 0 auto;
+  width: 80%;
+  background-color: #F9F8EB;
+  border-radius: 0;
+  border: solid 1px black;
+}
+
+.playedCard p {
+  margin-top: 10px;
+}
+
+.playedCard p span {
+  font-weight: bold;
+}
+
+.playedCard Button {
+  margin: 5px;
+  width: 200px;
+}
+
+
+@media (max-width: 758px) {
+
+  .findQuizbtn-container:before {
+    left: -30px;
+    border-right: 15px solid #05004E;
+    border-left: 15px solid white;
+  }
+
+  .findQuizbtn-wrapper {
+    margin-top: 10px;
+  }
+
+  .findQuizbtn-container {
+    margin-left: 30%;
+  }
+
+  .crystalBall-container {
+
+    left: 8%;
+  }
+
+  .createdQuizCard-container {
+    text-align: center;
+  }
+
+  .createdImg-container {
+    text-align: center;
+
+  }
+
+  .createdQuizText-container p {
+    text-align: start;
+    padding: 0 20px;
+  }
+
+  .createdImg-container img {
+    margin-top: 20px;
+    width: 90%;
+  }
+
+  .playedCard {
+    width: 90%;
+  }
+
+  .playedQuizList-Container {
+
+    margin-left: 0;
+    margin-top: 30px;
+
+  }
+
+
+}
+
+@media (max-width: 480px) {
+
+  .crystalBall-container {
+    left: 3%;
+  }
+
+  .witch-container {
+    right: 3%;
+  }
 }

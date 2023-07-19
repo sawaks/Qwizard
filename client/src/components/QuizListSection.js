@@ -20,6 +20,7 @@ const QuizListSection = ({ dbQuizzes, title }) => {
         <div className="quizList-container">
             <div className="title-conatiner">
                 <h2>{title}</h2>
+                <div className="icon-container"><img src={titleIcon} /></div>
             </div>
             <div className="row quizCards-container">
                 {dbQuizzes &&
