@@ -24,7 +24,7 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-    
+
         getQuizQuestions: async (parent, { quizId }, context) => {
             if (context.user) {
                 const quizData = await Quiz.find({ _id: quizId })
@@ -34,7 +34,7 @@ const resolvers = {
 
             throw new AuthenticationError('Not logged in');
         },
-    
+
         getPlayedQuizzes: async (parent, args, context) => {
             if (context.user) {
                 const quizData = await User.find({ _id: context.user._id })
@@ -106,22 +106,21 @@ const resolvers = {
         //     return updatedBookUser;
         // },
 
-   
+
         addQuiz: async (parent, { input }, context) => {
             if (context.user) {
-                const quiz = await Quiz.create(
-                    {   
-                        quizAuthor: context.user.username,
+                return await Quiz.create(
+                    {
+                        quizAuthor: context.user._id,
                         description: input.description,
                         title: input.title,
                         imgURL: input.imgURL,
                     });
 
-                return { quiz };
             }
             throw new AuthenticationError('You need to be logged in!');
         },
-    
+
         addQuestion: async (parent, { quizId, input }, context) => {
             if (context.user) {
                 const question = await Question.create(
