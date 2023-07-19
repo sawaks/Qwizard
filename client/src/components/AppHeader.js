@@ -23,7 +23,7 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar bg="white" data-bs-theme="light" expand='lg'>
+      <Navbar data-bs-theme="light" expand='lg' style={{ backgroundColor: "#F9F8EB" }}>
         <Container fluid >
           <Navbar.Brand className="logo-container" as={Link} to='/'>
             <Image src={logo} alt='logo' className='logo' />
@@ -39,7 +39,7 @@ const AppNavbar = () => {
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Button as={Link} to='/saved' type="primary" style={{ margin: "5px", background: "#76B39D", borderColor: "#76B39D" }} shape="round">
+                  <Button as={Link} to='/my-page' type="primary" style={{ margin: "5px", background: "#76B39D", borderColor: "#76B39D" }} shape="round">
                     User page
                   </Button>
                   <Button onClick={Auth.logout} type="primary" style={{ margin: "5px", background: "#05004E", borderColor: "#05004E" }} shape="round">Logout</Button>

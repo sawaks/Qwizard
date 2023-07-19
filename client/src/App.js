@@ -7,8 +7,6 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 
-
-
 import React from 'react';
 import {
   ApolloClient,
@@ -62,12 +60,12 @@ function App() {
         <div className="app-container">
           <AppHeader />
           <Routes>
-            {/* <Route
-              path='/'
-              element={<HomePage />}
-            /> */}
             <Route
               path='/'
+              element={<HomePage />}
+            />
+            <Route
+              path='/my-page'
               element={<UserPage />}
             />
             {/* <Route path='/saved' element={<SavedBooks />} /> */}
