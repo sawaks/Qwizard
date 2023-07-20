@@ -52,7 +52,6 @@ export const GET_QUIZ_QUESTIONS = gql`
     getQuizQuestions (quizId: $quizId) {
       _id
       questionText
-      questionType
       timeLimit
       correctAnswer
       answers {

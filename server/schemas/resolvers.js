@@ -126,7 +126,6 @@ const resolvers = {
                 const question = await Question.create(
                     {
                         questionText: input.questionText,
-                        questionType: input.questionType,
                         timeLimit: input.timeLimit,
                         correctAnswer: input.correctAnswer,
                         answers: input.answers
@@ -224,7 +223,6 @@ const resolvers = {
                     { _id: questionId },
                     {
                         questionText: input.questionText,
-                        questionType: input.questionType,
                         timeLimit: input.timeLimit,
                         answers: input.answers,
                         correctAnswer: input.correctAnswer,

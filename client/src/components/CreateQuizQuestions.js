@@ -1,26 +1,105 @@
-import React, { useEffect } from 'react';
-// import { Form, Modal, Button, Alert } from 'antd';
+import React, { useState } from 'react';
+import { Form, Button, Row, Col, Input } from 'antd';
 import { } from '../utils/mutations';
 
-import { useCreateQuizContext } from '../utils/CreateQuizContext';
+// import { useCreateQuizContext } from '../utils/CreateQuizContext';
 
 
 const CreateQuizQuestions = () => {
-    const { quizId } = useCreateQuizContext();
+    // const { quizId } = useCreateQuizContext();
 
-    console.log("create quiz questions");
-    console.log(quizId);
+    const [quizQuestions, setQuizQuestions] = useState([]);
 
-    useEffect(() => {
-        // setShowModal(true);
-        console.log("state??");
-        console.log(quizId);
+    const [thisQuestion, setThisQuestion] = useState([]);
 
-    }, [quizId]);
+    const handleQuestionInputChange = (event) => {
+        const { name, value } = event.target;
+        setThisQuestion({ [name]: value });
+
+        setQuizQuestions([...quizQuestions, thisQuestion]);
+    };
+
+    const openQuestion = (event) => {
+        console.log("openQuestion");
+        console.log(event.target.id);
+    };
+
+    const openNewQuestion = () => {
+        console.log("openNewQuestion");
+    };
 
     return (
         <div>
-            <h1>time to create for real for real</h1>
+            <Row>
+                <Col span={6}>
+                    {quizQuestions.length > 0 ? (
+                        quizQuestions.map((question) => {
+                            return (
+                                <Button
+                                    id={quizQuestions._id}
+                                    width='100%'
+                                    onClick={openQuestion}
+                                > Question {quizQuestions.indexOf(question) + 1}</Button>
+                            )
+                        })
+
+                    ) : (
+                        <></>
+                    )}
+                    <Button
+                        onClick={openNewQuestion}
+                    >Add Question</Button>
+                </Col>
+                <Col span={12}>
+                    <h1>Question</h1>
+                    <Form>
+                        <Form.Item
+                            label="Title"
+                            rules={[{ required: true, message: 'Please input your question!' }]}
+                        >
+                            <Input
+                                onChange={handleQuestionInputChange}
+                                name='quiestionText'
+                            />
+                        </Form.Item>
+                        <Row>
+                            <Col span={12}>
+                                <Form.Item
+                                    label="Answer 1"
+                                    rules={[{ required: true, message: 'Please input your answer!' }]}
+                                >
+                                    <Input
+                                        onChange={handleQuestionInputChange}
+                                        name='answerText'
+                                    />
+                                </Form.Item>
+
+                            </Col>
+                            <Col span={12}>
+                            <Form.Item
+                                    label="Answer 2"
+                                    rules={[{ required: true, message: 'Please input your answer!' }]}
+                                >
+                                    <Input
+                                        onChange={handleQuestionInputChange}
+                                        name='answerText'
+                                    />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col span={12}>
+                            </Col>
+                            <Col span={12}>
+                            </Col>
+                        </Row>
+                    </Form>
+                </Col>
+                <Col span={6}>
+                    <h1>Extra Details</h1>
+                </Col>
+            </Row>
+
 
         </div>
     );
