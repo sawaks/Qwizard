@@ -55,7 +55,7 @@ export const GET_QUIZ_QUESTIONS = gql`
       description
       title
       imgURL
-      questions: {
+      questions {
         _id
         questionText
         timeLimit
