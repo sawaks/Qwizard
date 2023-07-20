@@ -16,7 +16,7 @@ const CreateQuizDetails = () => {
         setShowModal(true);
     }, []);
 
-    const { quizId, setQuizId, quizDetails, setQuizDetails} = useCreateQuizContext();
+    const { setQuizId, quizDetails, setQuizDetails} = useCreateQuizContext();
 
     const [showModal, setShowModal] = useState(true);
 

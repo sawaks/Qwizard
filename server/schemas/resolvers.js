@@ -1,12 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//// NEEDS UPDATING!!!!!
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
 const { User, Quiz, Question } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 
@@ -87,25 +78,6 @@ const resolvers = {
 
             return { token, user };
         },
-
-
-        // saveBook: async (parent, { input }, context) => {
-        //     const updatedBookUser = await User.findOneAndUpdate(
-        //         { _id: context.user._id },
-        //         { $addToSet: { savedBooks: input } },
-        //         { new: true, runValidators: true }
-        //     );
-        //     return updatedBookUser;
-        // },
-        // removeBook: async (parent, { bookId }, context) => {
-        //     const updatedBookUser = await User.findOneAndUpdate(
-        //         { _id: context.user._id },
-        //         { $pull: { savedBooks: { bookId } } },
-        //         { new: true }
-        //     );
-        //     return updatedBookUser;
-        // },
-
 
         addQuiz: async (parent, { input }, context) => {
             if (context.user) {

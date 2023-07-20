@@ -51,12 +51,19 @@ export const GET_QUIZ_QUESTIONS = gql`
   query getQuizQuestions ($quizId: ID!) {
     getQuizQuestions (quizId: $quizId) {
       _id
-      questionText
-      timeLimit
-      correctAnswer
-      answers {
-        answerText
-      }
+      quizAuthor
+      description
+      title
+      imgURL
+      questions: {
+        _id
+        questionText
+        timeLimit
+        correctAnswer
+        answers {
+          answerText
+        }
+      } 
     }
   }`;
 
