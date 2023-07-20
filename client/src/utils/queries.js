@@ -22,6 +22,11 @@ export const GET_ME = gql`
         title
         imgURL
       }
+
+      leaderboard {
+        playerId
+        points
+      }
     }
   }
 `;
