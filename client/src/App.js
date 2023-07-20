@@ -60,14 +60,6 @@ function App() {
         <div className="app-container">
           <AppHeader />
           <Routes>
-<<<<<<< HEAD
-            <Route
-              path='/'
-              element={<HomePage />}
-            />
-            <Route
-              path='/my-page'
-=======
             <Route
               // path='/'
               path='/homepage'
@@ -81,8 +73,7 @@ function App() {
             <Route
               path='/createQuiz'
               // path='/'
->>>>>>> main
-              element={<UserPage />}
+              element={<CreateQuiz />}
             />
             {/* <Route path='/saved' element={<SavedBooks />} /> */}
             <Route
