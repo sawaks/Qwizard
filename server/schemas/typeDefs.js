@@ -23,7 +23,6 @@ const typeDefs = gql`
     type Question {
         _id: ID!
         questionText: String!
-        questionType: String!
         timeLimit: Int!
         correctAnswer: String!
         answers: [Answer]!
@@ -49,7 +48,6 @@ const typeDefs = gql`
 
     input QuestionInput {
         questionText: String!
-        questionType: String!
         timeLimit: Int!
         answers: [AnswerInput]!
         correctAnswer: String!

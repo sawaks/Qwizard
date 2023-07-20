@@ -49,8 +49,7 @@ export const REMOVE_QUESTION = gql`
   mutation removeQuestion($quizId: ID!, $questionId: ID!) {
     removeQuestion(quizId: $quizId, questionId: $questionId) {
       _id
-      questionText
-      questionType
+      questionText    
       timeLimit
       answers {
         answerText
@@ -84,7 +83,6 @@ export const EDIT_QUESTION = gql`
     editQuestion(questionId: $questionId, input: $input) {
       _id
       questionText
-      questionType
       timeLimit
       answers {
         answerText
@@ -110,7 +108,6 @@ export const ADD_QUESTION = gql`
     addQuestion(quizId: $quizId, input: $input) {
       _id
       questionText
-      questionType
       timeLimit
 
       answers {

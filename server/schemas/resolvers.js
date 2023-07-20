@@ -1,12 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//// NEEDS UPDATING!!!!!
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
 const { User, Quiz, Question } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 
@@ -88,25 +79,6 @@ const resolvers = {
             return { token, user };
         },
 
-
-        // saveBook: async (parent, { input }, context) => {
-        //     const updatedBookUser = await User.findOneAndUpdate(
-        //         { _id: context.user._id },
-        //         { $addToSet: { savedBooks: input } },
-        //         { new: true, runValidators: true }
-        //     );
-        //     return updatedBookUser;
-        // },
-        // removeBook: async (parent, { bookId }, context) => {
-        //     const updatedBookUser = await User.findOneAndUpdate(
-        //         { _id: context.user._id },
-        //         { $pull: { savedBooks: { bookId } } },
-        //         { new: true }
-        //     );
-        //     return updatedBookUser;
-        // },
-
-
         addQuiz: async (parent, { input }, context) => {
             if (context.user) {
                 return await Quiz.create(
@@ -126,7 +98,6 @@ const resolvers = {
                 const question = await Question.create(
                     {
                         questionText: input.questionText,
-                        questionType: input.questionType,
                         timeLimit: input.timeLimit,
                         correctAnswer: input.correctAnswer,
                         answers: input.answers
@@ -224,7 +195,6 @@ const resolvers = {
                     { _id: questionId },
                     {
                         questionText: input.questionText,
-                        questionType: input.questionType,
                         timeLimit: input.timeLimit,
                         answers: input.answers,
                         correctAnswer: input.correctAnswer,
