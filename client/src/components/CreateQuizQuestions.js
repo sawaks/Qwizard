@@ -88,9 +88,28 @@ const CreateQuizQuestions = () => {
                             </Col>
                         </Row>
                         <Row>
-                            <Col span={12}>
+                        <Col span={12}>
+                                <Form.Item
+                                    label="Answer 1"
+                                    rules={[{ required: true, message: 'Please input your answer!' }]}
+                                >
+                                    <Input
+                                        onChange={handleQuestionInputChange}
+                                        name='answerText'
+                                    />
+                                </Form.Item>
+
                             </Col>
                             <Col span={12}>
+                            <Form.Item
+                                    label="Answer 2"
+                                    rules={[{ required: true, message: 'Please input your answer!' }]}
+                                >
+                                    <Input
+                                        onChange={handleQuestionInputChange}
+                                        name='answerText'
+                                    />
+                                </Form.Item>
                             </Col>
                         </Row>
                     </Form>
