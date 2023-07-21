@@ -75,7 +75,6 @@ function App() {
               // path='/'
               element={<CreateQuiz />}
             />
-            {/* <Route path='/saved' element={<SavedBooks />} /> */}
             <Route
               path='*'
               element={<h1 className='display-2'>Wrong page!</h1>}

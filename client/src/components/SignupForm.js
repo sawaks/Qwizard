@@ -46,7 +46,7 @@ const SignupForm = () => {
     }
 
     try {
-      debugger;
+      // debugger;
       const { response } = await addUser({
         variables: {
           username: userFormData.username,

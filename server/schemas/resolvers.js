@@ -1,12 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//// NEEDS UPDATING!!!!!
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
 const { User, Quiz, Question } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 
@@ -88,28 +79,9 @@ const resolvers = {
             return { token, user };
         },
 
-
-        // saveBook: async (parent, { input }, context) => {
-        //     const updatedBookUser = await User.findOneAndUpdate(
-        //         { _id: context.user._id },
-        //         { $addToSet: { savedBooks: input } },
-        //         { new: true, runValidators: true }
-        //     );
-        //     return updatedBookUser;
-        // },
-        // removeBook: async (parent, { bookId }, context) => {
-        //     const updatedBookUser = await User.findOneAndUpdate(
-        //         { _id: context.user._id },
-        //         { $pull: { savedBooks: { bookId } } },
-        //         { new: true }
-        //     );
-        //     return updatedBookUser;
-        // },
-
-
         addQuiz: async (parent, { input }, context) => {
             if (context.user) {
-                return await Quiz.create(
+                const quiz =  await Quiz.create(
                     {
                         quizAuthor: context.user._id,
                         description: input.description,
@@ -117,6 +89,15 @@ const resolvers = {
                         imgURL: input.imgURL,
                     });
 
+                    await User.findOneAndUpdate(
+                        { _id: context.user._id },
+                        {
+                            $addToSet: { createdQuizzes: quiz._id },
+                        },
+                        { new: true }
+                    );
+
+                return quiz;
             }
             throw new AuthenticationError('You need to be logged in!');
         },
@@ -126,19 +107,20 @@ const resolvers = {
                 const question = await Question.create(
                     {
                         questionText: input.questionText,
-                        questionType: input.questionType,
                         timeLimit: input.timeLimit,
                         correctAnswer: input.correctAnswer,
                         answers: input.answers
                     });
 
-                return Quiz.findOneAndUpdate(
+                await Quiz.findOneAndUpdate(
                     { _id: quizId },
                     {
                         $addToSet: { questions: question._id },
                     },
                     { new: true }
                 );
+
+                return question;
             }
             throw new AuthenticationError('You need to be logged in!');
         },
@@ -224,7 +206,6 @@ const resolvers = {
                     { _id: questionId },
                     {
                         questionText: input.questionText,
-                        questionType: input.questionType,
                         timeLimit: input.timeLimit,
                         answers: input.answers,
                         correctAnswer: input.correctAnswer,
