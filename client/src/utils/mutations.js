@@ -109,7 +109,6 @@ export const ADD_QUESTION = gql`
       _id
       questionText
       timeLimit
-
       answers {
         answerText
       }

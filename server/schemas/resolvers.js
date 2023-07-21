@@ -81,7 +81,7 @@ const resolvers = {
 
         addQuiz: async (parent, { input }, context) => {
             if (context.user) {
-                return await Quiz.create(
+                const quiz =  await Quiz.create(
                     {
                         quizAuthor: context.user._id,
                         description: input.description,
@@ -89,6 +89,15 @@ const resolvers = {
                         imgURL: input.imgURL,
                     });
 
+                    await User.findOneAndUpdate(
+                        { _id: context.user._id },
+                        {
+                            $addToSet: { createdQuizzes: quiz._id },
+                        },
+                        { new: true }
+                    );
+
+                return quiz;
             }
             throw new AuthenticationError('You need to be logged in!');
         },
@@ -103,13 +112,15 @@ const resolvers = {
                         answers: input.answers
                     });
 
-                return Quiz.findOneAndUpdate(
+                await Quiz.findOneAndUpdate(
                     { _id: quizId },
                     {
                         $addToSet: { questions: question._id },
                     },
                     { new: true }
                 );
+
+                return question;
             }
             throw new AuthenticationError('You need to be logged in!');
         },
