@@ -1,38 +1,41 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Form, Button, Row, Col, Input, Select, Alert } from 'antd';
-import { ADD_QUESTION } from '../utils/mutations';
+import { ADD_QUESTION, EDIT_QUESTION } from '../utils/mutations';
 
 import { useCreateQuizContext } from '../utils/CreateQuizContext';
 
 
 const CreateQuizQuestions = () => {
+
     const { quizId } = useCreateQuizContext();
     const [missingFields, setMissingFields] = useState(false);
     const [AlertMessage, setAlertMessage] = useState("Please fill all form fields");
+    const [selectValue, setSelectValue] = useState(false);
 
     const [quizQuestions, setQuizQuestions] = useState([]);
 
-    const [thisQuestion, setThisQuestion] = useState({correctAnswer: "answer1"});
+    const [thisQuestion, setThisQuestion] = useState();
 
     const [addQuestion] = useMutation(ADD_QUESTION);
+    const [editQuestion] = useMutation(EDIT_QUESTION);
 
     const handleQuestionInputChange = async (event) => {
         const { name, value } = event.target;
         setThisQuestion({ ...thisQuestion, [name]: value });
-
-        console.log(thisQuestion);
     };
 
     const handleSelectChange = (value) => {
         setThisQuestion({ ...thisQuestion, correctAnswer: value });
-        console.log(thisQuestion);
+        setSelectValue(value);
     };
 
 
-    const openQuestion = (event) => {
+    const openQuestion = async (event) => {
         console.log("openQuestion");
-        console.log(event.target.id);
+        const question = quizQuestions.find(question => question.id === event.target.dataset.id);
+        setThisQuestion(question);
+        setSelectValue(question.correctAnswer);
     };
 
     const saveQuestion = async () => {
@@ -62,22 +65,27 @@ const CreateQuizQuestions = () => {
             setAlertMessage("Answer 4 is required");
             setMissingFields(true);
             return;
+        } else if (!thisQuestion.correctAnswer || thisQuestion.correctAnswer.length === 0) {
+            setAlertMessage("Correct Answer is required");
+            setMissingFields(true);
+            return;
         }
+
         setMissingFields(false);
         setAlertMessage("Please fill all form fields");
 
         let correctAnswer;
         switch (thisQuestion.correctAnswer) {
-            case "answer1":
+            case "0":
                 correctAnswer = thisQuestion.answer1;
                 break;
-            case "answer2":
+            case "1":
                 correctAnswer = thisQuestion.answer2;
                 break;
-            case "answer3":
+            case "2":
                 correctAnswer = thisQuestion.answer3;
                 break;
-            case "answer4":
+            case "3":
                 correctAnswer = thisQuestion.answer4;
                 break;
             default:
@@ -85,29 +93,131 @@ const CreateQuizQuestions = () => {
         }
 
         const questionInput = {
-                questionText: thisQuestion.questionText,
-                timeLimit: parseInt(thisQuestion.timeLimit),
-                correctAnswer: correctAnswer,
-                answers: [
-                    { answerText: thisQuestion.answer1 },
-                    { answerText: thisQuestion.answer2 },
-                    { answerText: thisQuestion.answer3 },
-                    { answerText: thisQuestion.answer4 }
-                ]
-            };
+            questionText: thisQuestion.questionText,
+            timeLimit: parseInt(thisQuestion.timeLimit),
+            correctAnswer: correctAnswer,
+            answers: [
+                { answerText: thisQuestion.answer1 },
+                { answerText: thisQuestion.answer2 },
+                { answerText: thisQuestion.answer3 },
+                { answerText: thisQuestion.answer4 }
+            ]
+        };
 
         const { data } = await addQuestion({
             variables: { quizId: quizId, input: questionInput }
         });
 
-        questionInput.questionId = data.addQuestion._id;
-        setQuizQuestions([...quizQuestions, questionInput]);
+        const currentQuestion = {
+            id: data.addQuestion._id,
+            questionText: data.addQuestion.questionText,
+            timeLimit: data.addQuestion.timeLimit,
+            answer1: questionInput.answers[0].answerText,
+            answer2: questionInput.answers[1].answerText,
+            answer3: questionInput.answers[2].answerText,
+            answer4: questionInput.answers[3].answerText,
+            correctAnswer: thisQuestion.correctAnswer
+        }
+        setThisQuestion(currentQuestion);
+
+        setQuizQuestions([...quizQuestions, currentQuestion]);
+
 
         console.log(quizQuestions);
     };
 
     const createNewQuestion = () => {
-        console.log("openNewQuestion");
+        console.log("createNewQuestion");
+        setThisQuestion();
+        setSelectValue(false);
+    };
+
+    const updateQuestion = async () => {
+        console.log("updateQuestion");
+        
+        if (!thisQuestion.timeLimit || isNaN(thisQuestion.timeLimit)) {
+            setAlertMessage("Time limit must be a number");
+            setMissingFields(true);
+            return;
+        } else if (!thisQuestion.questionText || thisQuestion.questionText.length === 0) {
+            setAlertMessage("Question is required");
+            setMissingFields(true);
+            return;
+        } else if (!thisQuestion.answer1 || thisQuestion.answer1.length === 0) {
+            setAlertMessage("Answer 1 is required");
+            setMissingFields(true);
+            return;
+        } else if (!thisQuestion.answer2 || thisQuestion.answer2.length === 0) {
+            setAlertMessage("Answer 2 is required");
+            setMissingFields(true);
+            return;
+        } else if (!thisQuestion.answer3 || thisQuestion.answer3.length === 0) {
+            setAlertMessage("Answer 3 is required");
+            setMissingFields(true);
+            return;
+        } else if (!thisQuestion.answer4 || thisQuestion.answer4.length === 0) {
+            setAlertMessage("Answer 4 is required");
+            setMissingFields(true);
+            return;
+        } else if (!thisQuestion.correctAnswer || thisQuestion.correctAnswer.length === 0) {
+            setAlertMessage("Correct Answer is required");
+            setMissingFields(true);
+            return;
+        }
+
+        setMissingFields(false);
+        setAlertMessage("Please fill all form fields");
+
+        let correctAnswer;
+        switch (thisQuestion.correctAnswer) {
+            case "0":
+                correctAnswer = thisQuestion.answer1;
+                break;
+            case "1":
+                correctAnswer = thisQuestion.answer2;
+                break;
+            case "2":
+                correctAnswer = thisQuestion.answer3;
+                break;
+            case "3":
+                correctAnswer = thisQuestion.answer4;
+                break;
+            default:
+                correctAnswer = thisQuestion.answer1;
+        }
+
+        const questionInput = {
+            questionText: thisQuestion.questionText,
+            timeLimit: parseInt(thisQuestion.timeLimit),
+            correctAnswer: correctAnswer,
+            answers: [
+                { answerText: thisQuestion.answer1 },
+                { answerText: thisQuestion.answer2 },
+                { answerText: thisQuestion.answer3 },
+                { answerText: thisQuestion.answer4 }
+            ]
+        };
+
+        const { data } = await editQuestion({
+            variables: { questionId: thisQuestion.id, input: questionInput }
+        });
+
+        const currentQuestion = {
+            id: data.editQuestion._id,
+            questionText: data.editQuestion.questionText,
+            timeLimit: data.editQuestion.timeLimit,
+            answer1: questionInput.answers[0].answerText,
+            answer2: questionInput.answers[1].answerText,
+            answer3: questionInput.answers[2].answerText,
+            answer4: questionInput.answers[3].answerText,
+            correctAnswer: thisQuestion.correctAnswer
+        }
+        setThisQuestion(currentQuestion);
+
+        const currentQuestions = quizQuestions.filter(question => question.id !== currentQuestion.id);
+        setQuizQuestions([...currentQuestions, currentQuestion]);
+
+        console.log(quizQuestions);
     };
 
     return (
@@ -118,10 +228,13 @@ const CreateQuizQuestions = () => {
                         quizQuestions.map((question) => {
                             return (
                                 <Button
-                                    id={quizQuestions._id}
+                                    data-id={question.id}
                                     width='100%'
                                     onClick={openQuestion}
-                                > Question {quizQuestions.indexOf(question) + 1}</Button>
+                                >
+                                    <span data-id={question.id}>
+                                        Question {quizQuestions.indexOf(question) + 1}
+                                    </span></Button>
                             )
                         })
 
@@ -152,6 +265,8 @@ const CreateQuizQuestions = () => {
                         >
                             <Input
                                 onChange={handleQuestionInputChange}
+                                value={thisQuestion?.questionText}
+                                placeholder='What is 1+1?'
                                 name='questionText'
                             />
                         </Form.Item>
@@ -164,6 +279,8 @@ const CreateQuizQuestions = () => {
                                     <Input
                                         onChange={handleQuestionInputChange}
                                         name='answer1'
+                                        value={thisQuestion?.answer1}
+                                        placeholder='1'
                                     />
                                 </Form.Item>
 
@@ -176,6 +293,8 @@ const CreateQuizQuestions = () => {
                                     <Input
                                         onChange={handleQuestionInputChange}
                                         name='answer2'
+                                        value={thisQuestion?.answer2}
+                                        placeholder='2'
                                     />
                                 </Form.Item>
                             </Col>
@@ -189,6 +308,8 @@ const CreateQuizQuestions = () => {
                                     <Input
                                         onChange={handleQuestionInputChange}
                                         name='answer3'
+                                        value={thisQuestion?.answer3}
+                                        placeholder='3'
                                     />
                                 </Form.Item>
 
@@ -201,6 +322,8 @@ const CreateQuizQuestions = () => {
                                     <Input
                                         onChange={handleQuestionInputChange}
                                         name='answer4'
+                                        value={thisQuestion?.answer4}
+                                        placeholder='4'
                                     />
                                 </Form.Item>
                             </Col>
@@ -210,9 +333,16 @@ const CreateQuizQuestions = () => {
                         <br></br>
                         <Row>
                             <Col>
-                                <Button
-                                    onClick={saveQuestion}
-                                >Save Question</Button>
+                                {thisQuestion?.id ? (
+                                    <Button
+                                        onClick={updateQuestion}
+                                        data-id={thisQuestion.id}
+                                    >Update Question</Button>
+                                ) : (
+                                    <Button
+                                        onClick={saveQuestion}
+                                    >Save Question</Button>
+                                )}
                             </Col>
                         </Row>
                     </Form>
@@ -225,25 +355,58 @@ const CreateQuizQuestions = () => {
                             name='correctAnswer'
 
                         >
-                            <Select
-                                onChange={handleSelectChange}
-                                // defaultValue="answer1"
-                                name='correctAnswer'
-                                key='correctAnswer'
-                            >
-                                <Select.Option value="answer1">Answer 1</Select.Option>
-                                <Select.Option value="answer2">Answer 2</Select.Option>
-                                <Select.Option value="answer3">Answer 3</Select.Option>
-                                <Select.Option value="answer4">Answer 4</Select.Option>
-                            </Select>
+                            {/* {selectValue ? (
+
+                                <Select
+                                    onChange={handleSelectChange}
+                                    // defaultValue={selectValue}
+                                    value={selectValue}
+                                    name='correctAnswer'
+                                    key='correctAnswer'
+                                    options={[
+                                        {value: "0", label: "Answer 1"},
+                                        {value: "1", label: "Answer 2"},
+                                        {value: "2", label: "Answer 3"},
+                                        {value: "3", label: "Answer 4"
+                                    }]}
+                                />
+                                   //  <Select.Option value="0">Answer 1</Select.Option>
+                                //     <Select.Option value="1">Answer 2</Select.Option>
+                                //     <Select.Option value="2">Answer 3</Select.Option>
+                                //     <Select.Option value="3">Answer 4</Select.Option>
+                                // </Select> 
+
+
+                            ) : ( */}
+                                <Select
+                                    onChange={handleSelectChange}
+                                    name='correctAnswer'
+                                    key='correctAnswer'
+                                    value={selectValue ? selectValue : undefined}
+                                    options={[
+                                        {value: "0", label: "Answer 1"},
+                                        {value: "1", label: "Answer 2"},
+                                        {value: "2", label: "Answer 3"},
+                                        {value: "3", label: "Answer 4"
+                                    }]}
+                                />
+                                    {/* // <Select.Option value="0">Answer 1</Select.Option>
+                                    // <Select.Option value="1">Answer 2</Select.Option>
+                                    // <Select.Option value="2" selected>Answer 3</Select.Option>
+                                    // <Select.Option value="3">Answer 4</Select.Option>
+                                // </Select>
+                            )} */}
+
                         </Form.Item>
                         <Form.Item
-                            label="Time Limit"
+                            label="Time Limit (seconds)"
                             rules={[{ required: true, message: 'Please input your answer!' }]}
                         >
                             <Input
                                 onChange={handleQuestionInputChange}
                                 name='timeLimit'
+                                value={thisQuestion?.timeLimit}
+                                placeholder='10'
                                 rules={[{ required: true, message: 'Please input a number!' },
                                 { type: 'number', min: 1 }]}
                             />
@@ -253,7 +416,7 @@ const CreateQuizQuestions = () => {
             </Row>
 
 
-        </div>
+        </div >
     );
 };
 
