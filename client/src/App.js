@@ -66,16 +66,15 @@ function App() {
               element={<HomePage />}
             />
             <Route
-              // path='/'
-              path='/myQuizzes'
+              path='/'
+              // path='/myQuizzes'
               element={<UserPage />}
             />
             <Route
-              // path='/createQuiz'
-              path='/'
+              path='/createQuiz'
+              // path='/'
               element={<CreateQuiz />}
             />
-            {/* <Route path='/saved' element={<SavedBooks />} /> */}
             <Route
               path='*'
               element={<h1 className='display-2'>Wrong page!</h1>}
