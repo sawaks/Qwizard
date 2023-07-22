@@ -60,28 +60,12 @@ function App() {
         <div className="app-container">
           <AppHeader />
           <Routes>
-<<<<<<< HEAD
             <Route
               path='/'
               element={<HomePage />}
             />
             <Route
               path='/my-page'
-=======
-            <Route
-              // path='/'
-              path='/homepage'
-              element={<HomePage />}
-            />
-            <Route
-              path='/'
-              // path='/myQuizzes'
-              element={<UserPage />}
-            />
-            <Route
-              path='/createQuiz'
-              // path='/'
->>>>>>> main
               element={<UserPage />}
             />
             {/* <Route path='/saved' element={<SavedBooks />} /> */}

@@ -47,7 +47,7 @@ const resolvers = {
 
         // gets a list of all quizes from the db
         dbQuizzes: async (parent, args, context) => {
-            const quizData = await Quiz.find({})
+            const quizData = await Quiz.find({}).populate('questions');
             return quizData;
         },
 
