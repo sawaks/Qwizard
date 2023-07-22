@@ -10,7 +10,7 @@ const UserPageNavi = () => {
         <div className="userPageNavi-container">
             <Row>
                 <Col xs={24} sm={24} md={12} lg={12} xl={12} className="creteQuizbtn-wrppaer">
-                    <Link to='/' ><Button className="creteQuizbtn-container">
+                    <Link to='/createQuiz' ><Button className="creteQuizbtn-container">
                         Create Your Quiz!
                     </Button ></Link>
                     <div className="witch-container"><img src={witch} style={{ width: "100px" }} alt="witch" /></div >

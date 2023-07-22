@@ -38,8 +38,8 @@ const LoginForm = () => {
     }
     // use LOGIN_USER mutation instead of loginUser function
     try {
-      const {data} = await loginUser({
-        variables: {...userFormData}
+      const { data } = await loginUser({
+        variables: { ...userFormData }
       });
 
       Auth.login(data.login.token);
@@ -62,7 +62,7 @@ const LoginForm = () => {
           Something went wrong with your login credentials!
         </Alert>
         <Form.Group>
-          <Form.Label htmlFor='email'>Email</Form.Label>
+          <Form.Label htmlFor='email' style={{ color: "white" }}>Email</Form.Label>
           <Form.Control
             type='text'
             placeholder='Your email'
@@ -71,11 +71,11 @@ const LoginForm = () => {
             value={userFormData.email}
             required
           />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+          <Form.Control.Feedback style={{ color: " #FD5F00" }} type='invalid'>Email is required!</Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group>
-          <Form.Label htmlFor='password'>Password</Form.Label>
+          <Form.Label style={{ color: "white" }} htmlFor='password'>Password</Form.Label>
           <Form.Control
             type='password'
             placeholder='Your password'
@@ -84,12 +84,14 @@ const LoginForm = () => {
             value={userFormData.password}
             required
           />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
+          <Form.Control.Feedback style={{ color: " #FD5F00" }} type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
         <Button
           disabled={!(userFormData.email && userFormData.password)}
           type='submit'
-          variant='success'>
+          variant='success'
+          style={{ borderRadius: "50px" }}
+        >
           Submit
         </Button>
       </Form>

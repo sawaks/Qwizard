@@ -42,7 +42,7 @@ const AppNavbar = () => {
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Link to="/my-page">
+                  <Link to="/myQuizzes">
                     <Button type="primary" style={{ margin: "5px", background: "#76B39D", borderColor: "#76B39D" }} shape="round">
                       My Quizzes
                     </Button>
