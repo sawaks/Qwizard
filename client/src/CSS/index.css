@@ -60,6 +60,12 @@ h6 {
   padding-top: 40px;
 }
 
+.modalHeader {
+  background-image: url(../images/star.png);
+  background-position: 20% 0%;
+
+}
+
 /* Homepage */
 .hero-container {
   width: 100%;
