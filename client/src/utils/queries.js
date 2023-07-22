@@ -21,6 +21,10 @@ export const GET_ME = gql`
         description
         title
         imgURL
+        leaderboard {
+          playerId
+          points
+        }
       }
 
       leaderboard {
