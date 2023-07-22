@@ -26,8 +26,8 @@ const CreateQuiz = () => {
             ) : (
                 <>
                     <CreateQuizDetails />
-                    <EditQuizDetails />
-                    <CreateQuizQuestions />
+                    <EditQuizDetails value={{ param: 0 }}/>
+                    <CreateQuizQuestions value={{ param: 0 }}/>
                 </>
 
             )}

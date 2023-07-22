@@ -10,30 +10,26 @@ import { useCreateQuizContext } from '../utils/CreateQuizContext';
 
 const EditQuizDetails = (props) => {
 
-    console.log(props)
+    // console.log(props)
     const { quizId, setQuizId, quizDetails, setQuizDetails } = useCreateQuizContext();
-    const { loading, data } = useQuery(GET_QUIZ_QUESTIONS, {
+    const { data } = useQuery(GET_QUIZ_QUESTIONS, {
         variables: { quizId: props.value.param }
     });
 
     useEffect(() => {
         setToEdit(false);
 
-        if (props.value.param && data) {
+        if (props.value.param !== 0 && data) {
             setQuizId(props.value.param);
-    
-    
-            console.log(data.getQuizQuestions)
-    
-    
+            // console.log(data.getQuizQuestions)
+
             setQuizDetails({
                 title: data.getQuizQuestions.title,
                 description: data.getQuizQuestions.description,
                 imgURL: data.getQuizQuestions.imgURL,
             });
-    
-    
         }
+
     }, [data, props.value.param, setQuizId, setQuizDetails]);
 
     const [isEdit, setToEdit] = useState(false);
