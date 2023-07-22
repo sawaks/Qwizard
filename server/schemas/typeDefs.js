@@ -12,7 +12,7 @@ const typeDefs = gql`
 
     type Quiz {
         _id: ID!
-        quizAuthor: ID!
+        quizAuthor: String!
         description: String!
         title: String!
         imgURL: String!
@@ -33,7 +33,7 @@ const typeDefs = gql`
     }
 
     type Leaderboard {
-        playerId: ID!
+        player: String!
         points: Int!
     }
 

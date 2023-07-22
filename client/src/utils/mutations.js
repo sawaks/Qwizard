@@ -38,7 +38,7 @@ export const REMOVE_QUIZ = gql`
         _id
       }
       leaderboard {
-        playerId
+        player
         points
       }
     }
@@ -71,7 +71,7 @@ export const EDIT_QUIZ = gql`
         _id
       }
       leaderboard {
-        playerId
+        player
         points
       }
     }
@@ -96,7 +96,7 @@ export const ADD_QUIZ = gql`
   mutation addQuiz( $input: QuizInput!) {
     addQuiz( input: $input) {
       _id
-      quizAuthor
+      quizAuthor 
       description
       title
       imgURL
@@ -126,7 +126,7 @@ export const ADD_LEADERBOARD = gql`
       title
       imgURL
       leaderboard {
-        playerId
+        player
         points
       }
     }

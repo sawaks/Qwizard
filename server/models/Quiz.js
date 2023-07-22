@@ -4,8 +4,7 @@ const Question = require('./Question');
 
 const quizSchema = new Schema({
   quizAuthor: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
+    type: String,
     required: true,
   },
   description: {
@@ -20,12 +19,18 @@ const quizSchema = new Schema({
     type: String,
     required: true,
   },
-  questions: [Question.schema],
+  // questions: [Question.schema],
+  questions: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Question',
+    }
+  ],
   leaderboard: [
     {
-      playerId: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
+      player: {
+        type: String,
+        required: true,
       },
       points: {
         type: Number,
