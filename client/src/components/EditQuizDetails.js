@@ -1,22 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Image, Col, Row } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
-// import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 
 import { EDIT_QUIZ } from '../utils/mutations';
+import { GET_QUIZ_QUESTIONS } from '../utils/queries';
 
 import { useCreateQuizContext } from '../utils/CreateQuizContext';
 
-// NEEDS TO UPDATE DATABASE!!!!!
+const EditQuizDetails = (props) => {
 
-const EditQuizDetails = () => {
-    
+    console.log(props)
+    const { quizId, setQuizId, quizDetails, setQuizDetails } = useCreateQuizContext();
+    const { loading, data } = useQuery(GET_QUIZ_QUESTIONS, {
+        variables: { quizId: props.value.param }
+    });
+
     useEffect(() => {
         setToEdit(false);
-    }, []);
+
+        if (props.value.param && data) {
+            setQuizId(props.value.param);
     
-    const { quizId, quizDetails, setQuizDetails } = useCreateQuizContext();
+    
+            console.log(data.getQuizQuestions)
+    
+    
+            setQuizDetails({
+                title: data.getQuizQuestions.title,
+                description: data.getQuizQuestions.description,
+                imgURL: data.getQuizQuestions.imgURL,
+            });
+    
+    
+        }
+    }, [data, props.value.param, setQuizId, setQuizDetails]);
 
     const [isEdit, setToEdit] = useState(false);
     const [editQuiz] = useMutation(EDIT_QUIZ);
@@ -93,7 +111,7 @@ const EditQuizDetails = () => {
                                 <select
                                     id="QuizTheme"
                                     name="imgURL"
-                                    value={quizDetails.theme}
+                                    value={quizDetails.imgURL}
                                     onChange={handleQuizInputChange}
                                 >
                                     <option value="./default">Default</option>
@@ -110,7 +128,7 @@ const EditQuizDetails = () => {
                         </Form>
                     </Col>
                     <Col span={6}>
-                        <Image src={quizDetails.imageURL} />
+                        <Image src={quizDetails.imgURL} />
                     </Col>
                 </Row>
             ) : (
@@ -118,7 +136,7 @@ const EditQuizDetails = () => {
                     {/* <Col span={18}> */}
                     <p>Title: {quizDetails.title}</p>
                     <p>Description: {quizDetails.description}</p>
-                    <p>Theme: {quizDetails.imageURL}</p>
+                    <p>Theme: {quizDetails.imgURL}</p>
                     <EditOutlined onClick={() => setToEdit(true)} />
                     {/* </Col> */}
                 </Row>

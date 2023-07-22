@@ -18,9 +18,10 @@ const resolvers = {
 
         getQuizQuestions: async (parent, { quizId }, context) => {
             if (context.user) {
-                const quizData = await Quiz.find({ _id: quizId })
+                const quizData = await Quiz.findOne({ _id: quizId })
                     .populate('questions');
-                return quizData;
+                
+                    return quizData;
             }
 
             throw new AuthenticationError('Not logged in');
@@ -28,7 +29,7 @@ const resolvers = {
 
         getPlayedQuizzes: async (parent, args, context) => {
             if (context.user) {
-                const quizData = await User.find({ _id: context.user._id })
+                const quizData = await User.findOne({ _id: context.user._id })
                     .populate('playedQuizzes');
                 return quizData;
             }
@@ -38,13 +39,13 @@ const resolvers = {
 
         // gets a list of all quizes from the db
         dbQuizzes: async (parent, args, context) => {
-            const quizData = await Quiz.find({}).populate('questions');
+            const quizData = await Quiz.findOne({}).populate('questions');
             return quizData;
         },
 
         getLeaderboard: async (parent, { quizId }, context) => {
             if (context.user) {
-                const quizData = await Quiz.find({ _id: quizId })
+                const quizData = await Quiz.findOne({ _id: quizId })
                     .populate('leaderboard');
                 return quizData;
             }

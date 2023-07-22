@@ -76,6 +76,11 @@ function App() {
               element={<CreateQuiz />}
             />
             <Route
+              path='/editQuiz/:quizId'
+              // path='/'
+              element={<CreateQuiz />}
+            />
+            <Route
               path='*'
               element={<h1 className='display-2'>Wrong page!</h1>}
             />

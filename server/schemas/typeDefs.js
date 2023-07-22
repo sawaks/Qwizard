@@ -63,16 +63,16 @@ const typeDefs = gql`
         me: User
         dbQuizzes: [Quiz]
         
-        getQuizQuestions(quizID: ID!): Quiz
+        getQuizQuestions(quizId: ID!): Quiz
         getPlayedQuizzes: [Quiz]
 
-        getLeaderboard(quizID: ID!): Quiz
+        getLeaderboard(quizId: ID!): Quiz
     }
 
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addLeaderboard(playerId: ID!, points: Int!): Quiz
+        addLeaderboard(quizId: ID!, points: Int!): Quiz
 
         addQuiz( input: QuizInput!): Quiz
         addQuestion(quizId: ID!, input: QuestionInput!): Question
