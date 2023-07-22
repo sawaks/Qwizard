@@ -16,7 +16,7 @@ const CreateQuizDetails = () => {
         setShowModal(true);
     }, []);
 
-    const { quizId, setQuizId, quizDetails, setQuizDetails} = useCreateQuizContext();
+    const { setQuizId, quizDetails, setQuizDetails} = useCreateQuizContext();
 
     const [showModal, setShowModal] = useState(true);
 
@@ -112,7 +112,7 @@ const CreateQuizDetails = () => {
                             <Form.Item label="Theme">
                                 <select
                                     id="QuizTheme"
-                                    name="imageURL"
+                                    name="imgURL"
                                     value={quizDetails.theme}
                                     onChange={handleQuizInputChange}
                                 >
@@ -124,7 +124,7 @@ const CreateQuizDetails = () => {
                         </Form>
                     </Col>
                     <Col span={6}>
-                        <Image src={quizDetails.imageURL} />
+                        <Image src={quizDetails.imgURL} />
                     </Col>
                 </Row>
 

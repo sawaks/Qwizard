@@ -23,7 +23,6 @@ const typeDefs = gql`
     type Question {
         _id: ID!
         questionText: String!
-        questionType: String!
         timeLimit: Int!
         correctAnswer: String!
         answers: [Answer]!
@@ -49,7 +48,6 @@ const typeDefs = gql`
 
     input QuestionInput {
         questionText: String!
-        questionType: String!
         timeLimit: Int!
         answers: [AnswerInput]!
         correctAnswer: String!
@@ -77,7 +75,7 @@ const typeDefs = gql`
         addLeaderboard(playerId: ID!, points: Int!): Quiz
 
         addQuiz( input: QuizInput!): Quiz
-        addQuestion(quizId: ID!, input: QuestionInput!): Quiz
+        addQuestion(quizId: ID!, input: QuestionInput!): Question
 
         removeQuiz(quizId: ID!): Quiz
         removeQuestion(quizId: ID!, questionId: ID!): Quiz

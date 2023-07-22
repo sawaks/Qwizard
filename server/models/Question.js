@@ -5,10 +5,6 @@ const questionSchema = new Schema({
         type: String,
         required: true,
     },
-    questionType: {
-        type: String,
-        required: true,
-    },
     timeLimit: {
         type: Number,
         required: true,
