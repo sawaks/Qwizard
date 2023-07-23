@@ -22,6 +22,7 @@ const CreateQuizQuestions = (props) => {
 
     const [thisQuestion, setThisQuestion] = useState();
 
+    // if editing quiz, set quizId and quizQuestions
     useEffect(() => {
         if (props.value.param !== 0 && data) {
             setQuizId(props.value.param);
@@ -42,6 +43,8 @@ const CreateQuizQuestions = (props) => {
                 setQuestionNumber(data.getQuizQuestions.questions.length + 1);
             }
         }
+ 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
     const [addQuestion] = useMutation(ADD_QUESTION);
@@ -69,56 +72,15 @@ const CreateQuizQuestions = (props) => {
     const saveQuestion = async () => {
         console.log("saveQuestion");
         console.log(thisQuestion);
-        if (!thisQuestion.timeLimit || isNaN(thisQuestion.timeLimit)) {
-            setAlertMessage("Time limit must be a number");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.questionText || thisQuestion.questionText.length === 0) {
-            setAlertMessage("Question is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.answer1 || thisQuestion.answer1.length === 0) {
-            setAlertMessage("Answer 1 is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.answer2 || thisQuestion.answer2.length === 0) {
-            setAlertMessage("Answer 2 is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.answer3 || thisQuestion.answer3.length === 0) {
-            setAlertMessage("Answer 3 is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.answer4 || thisQuestion.answer4.length === 0) {
-            setAlertMessage("Answer 4 is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.correctAnswer || thisQuestion.correctAnswer.length === 0) {
-            setAlertMessage("Correct Answer is required");
-            setMissingFields(true);
+
+        if (isThisInputInvalid()) {
             return;
         }
 
         setMissingFields(false);
         setAlertMessage("Please fill all form fields");
 
-        let correctAnswer;
-        switch (thisQuestion.correctAnswer) {
-            case "0":
-                correctAnswer = thisQuestion.answer1;
-                break;
-            case "1":
-                correctAnswer = thisQuestion.answer2;
-                break;
-            case "2":
-                correctAnswer = thisQuestion.answer3;
-                break;
-            case "3":
-                correctAnswer = thisQuestion.answer4;
-                break;
-            default:
-                correctAnswer = thisQuestion.answer1;
-        }
+        let correctAnswer = saveCorrectAnswer(thisQuestion, thisQuestion.correctAnswer);
 
         const questionInput = {
             questionText: thisQuestion.questionText,
@@ -163,56 +125,15 @@ const CreateQuizQuestions = (props) => {
     const updateQuestion = async () => {
         console.log("updateQuestion");
 
-        if (!thisQuestion.timeLimit || isNaN(thisQuestion.timeLimit)) {
-            setAlertMessage("Time limit must be a number");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.questionText || thisQuestion.questionText.length === 0) {
-            setAlertMessage("Question is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.answer1 || thisQuestion.answer1.length === 0) {
-            setAlertMessage("Answer 1 is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.answer2 || thisQuestion.answer2.length === 0) {
-            setAlertMessage("Answer 2 is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.answer3 || thisQuestion.answer3.length === 0) {
-            setAlertMessage("Answer 3 is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.answer4 || thisQuestion.answer4.length === 0) {
-            setAlertMessage("Answer 4 is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.correctAnswer || thisQuestion.correctAnswer.length === 0) {
-            setAlertMessage("Correct Answer is required");
-            setMissingFields(true);
+        if (isThisInputInvalid()) {
             return;
         }
 
         setMissingFields(false);
         setAlertMessage("Please fill all form fields");
 
-        let correctAnswer;
-        switch (thisQuestion.correctAnswer) {
-            case "0":
-                correctAnswer = thisQuestion.answer1;
-                break;
-            case "1":
-                correctAnswer = thisQuestion.answer2;
-                break;
-            case "2":
-                correctAnswer = thisQuestion.answer3;
-                break;
-            case "3":
-                correctAnswer = thisQuestion.answer4;
-                break;
-            default:
-                correctAnswer = thisQuestion.answer1;
-        }
+        let correctAnswer = saveCorrectAnswer(thisQuestion, thisQuestion.correctAnswer);
+
 
         const questionInput = {
             questionText: thisQuestion.questionText,
@@ -247,6 +168,63 @@ const CreateQuizQuestions = (props) => {
 
         console.log(quizQuestions);
     };
+
+    const isThisInputInvalid = () => {
+        if (!thisQuestion.timeLimit || isNaN(thisQuestion.timeLimit)) {
+            setAlertMessage("Time limit must be a number");
+            setMissingFields(true);
+            return true;
+        } else if (!thisQuestion.questionText || thisQuestion.questionText.length === 0) {
+            setAlertMessage("Question is required");
+            setMissingFields(true);
+            return true;
+        } else if (!thisQuestion.answer1 || thisQuestion.answer1.length === 0) {
+            setAlertMessage("Answer 1 is required");
+            setMissingFields(true);
+            return true;
+        } else if (!thisQuestion.answer2 || thisQuestion.answer2.length === 0) {
+            setAlertMessage("Answer 2 is required");
+            setMissingFields(true);
+            return true;
+        } else if (!thisQuestion.answer3 || thisQuestion.answer3.length === 0) {
+            setAlertMessage("Answer 3 is required");
+            setMissingFields(true);
+            return true;
+        } else if (!thisQuestion.answer4 || thisQuestion.answer4.length === 0) {
+            setAlertMessage("Answer 4 is required");
+            setMissingFields(true);
+            return true;
+        } else if (!thisQuestion.correctAnswer || thisQuestion.correctAnswer.length === 0) {
+            setAlertMessage("Correct Answer is required");
+            setMissingFields(true);
+            return true;
+        }
+
+        return false;
+    }
+
+    const saveCorrectAnswer = (question, select) => {
+        let correctAnswer;
+
+        switch (select) {
+            case "0":
+                correctAnswer = question.answer1;
+                break;
+            case "1":
+                correctAnswer = question.answer2;
+                break;
+            case "2":
+                correctAnswer = question.answer3;
+                break;
+            case "3":
+                correctAnswer = question.answer4;
+                break;
+            default:
+                correctAnswer = question.answer1;
+        }
+
+        return correctAnswer;
+    }
 
     return (
         <div>
