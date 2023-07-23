@@ -1,5 +1,5 @@
 import React from 'react'
-import titleIcon from "../images/magic-wand.png";
+import titleIcon from "../images/magic-wand3.png";
 // import quizImg from "../images/quizImg.png";
 import { Button, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
@@ -38,20 +38,28 @@ const CreatedQuizList = ({ userData }) => {
         <div className="createdQuizList-Container">
             <div className="title-conatiner title-created-conatiner">
                 <h2>Your Created Quiz</h2>
-                <div className="icon-container icon-created-container"><img src={titleIcon} /></div>
+                <div className="icon-container icon-created-container">
+                    <img src={titleIcon} alt="magic wand" />
+                </div>
             </div>
             {userData &&
                 userData.map((userData) => (
                     <Row key={userData.createdQuizzes._id} justify="space-between" className="createdQuizCard-container">
                         <Col xs={24} sm={24} md={10} lg={10} xl={10} className="createdImg-container">
-                            <img src={userData.createdQuizzes.imageURL} />
+                            <img src={userData.createdQuizzes.imageURL} alt="quiz" />
                         </Col>
                         <Col xs={24} sm={24} md={14} lg={14} xl={14} className="createdQuizText-container">
                             <h4>{userData.createdQuizzes.title}</h4>
                             <p>{userData.createdQuizzes.description}</p>
-                            <Button as={Link} to="/" type="primary" style={{ backgroundColor: "#FD5F00", border: "solid 1px #FD5F00" }} shape="round" >Update</Button>
-                            <Button as={Link} to="/" type="primary" style={{ backgroundColor: "#05004E", border: "solid 1px #05004E" }} shape="round" >Leaderboard</Button>
-                            <Button type="primary" danger shape="round" onClick={() => handleDeleteQuestion(userData.createdQuizzes._Id)}>Delete</Button>
+                            <Link to="/">
+                                <Button type="primary" style={{ backgroundColor: "#FD5F00", border: "solid 1px #FD5F00" }} shape="round" >Update</Button>
+                            </Link>
+                            <Link to="/">
+                                <Button type="primary" style={{ backgroundColor: "#05004E", border: "solid 1px #05004E" }} shape="round" >Leaderboard</Button>
+                            </Link>
+                            <Link to="/my-page">
+                                <Button type="primary" danger shape="round" onClick={() => handleDeleteQuestion(userData.createdQuizzes._Id)}>Delete</Button>
+                            </Link>
                         </Col>
                     </Row>
                 ))}

@@ -23,11 +23,14 @@ const SignupForm = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   const [addUser] = useMutation(ADD_USER,
-    { onCompleted: (data) => { console.log(data) 
-      // debugger;
-    const token = data.addUser.token;
-    Auth.login(token);
-    } }
+    {
+      onCompleted: (data) => {
+        console.log(data)
+        // debugger;
+        const token = data.addUser.token;
+        Auth.login(token);
+      }
+    }
   );
 
   const handleInputChange = (event) => {
@@ -46,7 +49,7 @@ const SignupForm = () => {
     }
 
     try {
-      debugger;
+      // debugger;
       const { response } = await addUser({
         variables: {
           username: userFormData.username,
@@ -80,7 +83,7 @@ const SignupForm = () => {
         </Alert>
 
         <Form.Group>
-          <Form.Label htmlFor='username'>Username</Form.Label>
+          <Form.Label htmlFor='username' style={{ color: "white" }}>Username</Form.Label>
           <Form.Control
             type='text'
             placeholder='Your username'
@@ -89,11 +92,11 @@ const SignupForm = () => {
             value={userFormData.username}
             required
           />
-          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
+          <Form.Control.Feedback type='invalid' style={{ color: " #FD5F00" }}>Username is required!</Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group>
-          <Form.Label htmlFor='email'>Email</Form.Label>
+          <Form.Label htmlFor='email' style={{ color: "white" }}>Email</Form.Label>
           <Form.Control
             type='email'
             placeholder='Your email address'
@@ -102,11 +105,11 @@ const SignupForm = () => {
             value={userFormData.email}
             required
           />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+          <Form.Control.Feedback type='invalid' style={{ color: " #FD5F00" }}>Email is required!</Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group>
-          <Form.Label htmlFor='password'>Password</Form.Label>
+          <Form.Label htmlFor='password' style={{ color: "white" }}>Password</Form.Label>
           <Form.Control
             type='password'
             placeholder='Your password'
@@ -115,12 +118,14 @@ const SignupForm = () => {
             value={userFormData.password}
             required
           />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
+          <Form.Control.Feedback type='invalid' style={{ color: " #FD5F00" }}>Password is required!</Form.Control.Feedback>
         </Form.Group>
         <Button
           disabled={!(userFormData.username && userFormData.email && userFormData.password)}
           type='submit'
-          variant='success'>
+          variant='success'
+          style={{ borderRadius: "50px" }}
+        >
           Submit
         </Button>
       </Form>

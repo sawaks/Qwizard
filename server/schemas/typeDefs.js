@@ -12,7 +12,7 @@ const typeDefs = gql`
 
     type Quiz {
         _id: ID!
-        quizAuthor: ID!
+        quizAuthor: String!
         description: String!
         title: String!
         imgURL: String!
@@ -23,7 +23,6 @@ const typeDefs = gql`
     type Question {
         _id: ID!
         questionText: String!
-        questionType: String!
         timeLimit: Int!
         correctAnswer: String!
         answers: [Answer]!
@@ -34,7 +33,7 @@ const typeDefs = gql`
     }
 
     type Leaderboard {
-        playerId: ID!
+        player: String!
         points: Int!
     }
 
@@ -49,7 +48,6 @@ const typeDefs = gql`
 
     input QuestionInput {
         questionText: String!
-        questionType: String!
         timeLimit: Int!
         answers: [AnswerInput]!
         correctAnswer: String!
@@ -65,19 +63,19 @@ const typeDefs = gql`
         me: User
         dbQuizzes: [Quiz]
         
-        getQuizQuestions(quizID: ID!): Quiz
+        getQuizQuestions(quizId: ID!): Quiz
         getPlayedQuizzes: [Quiz]
 
-        getLeaderboard(quizID: ID!): Quiz
+        getLeaderboard(quizId: ID!): Quiz
     }
 
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addLeaderboard(playerId: ID!, points: Int!): Quiz
+        addLeaderboard(quizId: ID!, points: Int!): Quiz
 
         addQuiz( input: QuizInput!): Quiz
-        addQuestion(quizId: ID!, input: QuestionInput!): Quiz
+        addQuestion(quizId: ID!, input: QuestionInput!): Question
 
         removeQuiz(quizId: ID!): Quiz
         removeQuestion(quizId: ID!, questionId: ID!): Quiz

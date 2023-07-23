@@ -22,8 +22,21 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    createdQuizzes: [Quiz.schema],
-    playedQuizzes: [Quiz.schema],
+    // createdQuizzes: [Quiz.schema],
+    // playedQuizzes: [Quiz.schema],
+    createdQuizzes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Quiz',
+      }
+    ],
+    playedQuizzes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Quiz',
+      }
+    ],
+    
 
   },
 

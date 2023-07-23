@@ -60,11 +60,142 @@ h6 {
   padding-top: 40px;
 }
 
+.modalHeader {
+  background-image: url(../images/star.png);
+  background-position: 20% 0%;
+
+}
+
 /* Homepage */
 .hero-container {
   width: 100%;
   background-color: #76B39D;
 
+
+}
+
+.heroTxt-container {
+  margin-left: 50px;
+  margin-top: 45px;
+}
+
+.wichies-container {
+  margin-left: 10%;
+  margin-top: 20px;
+}
+
+.wichies-container img {
+  width: 200px
+}
+
+.hero-button-contaienr {
+  margin-left: 8%;
+  margin-top: 50px;
+}
+
+
+.hero-button {
+  position: relative;
+  display: inline-block;
+  /* margin: 1.5em 15px 1.5em 0; */
+  /* padding: 7px 10px; */
+  min-width: 70%;
+  max-width: 100%;
+  color: white;
+  font-size: 16px;
+  background: #FD5F00;
+  border: solid 1px #FD5F00;
+  border-radius: 10px;
+  height: 60px;
+  margin-top: 10px;
+
+}
+
+.hero-button:hover {
+  transform: translate(0, -5px);
+
+}
+
+.hero-button:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -27px;
+  margin-top: -15px;
+  border: 15px solid transparent;
+  border-right: 15px solid #FD5F00;
+
+}
+
+.hero-wizard {
+  margin-left: 100px;
+}
+
+.right-hero {
+  padding-top: 40px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  /* text-align: center; */
+
+
+}
+
+.hero-txt-big-container,
+.hero-txt-sml-container {
+  position: relative;
+  text-align: center;
+  margin-bottom: 24px;
+
+}
+
+.hero-txt-big-container {
+  margin-left: 20%;
+}
+
+.hero-txt-big-container h3 {
+  width: 270px;
+  border: solid black 1px;
+  background-color: #F4D160;
+  padding: 6px 0 6px 60px;
+  font-weight: bold;
+
+}
+
+.hero-txt-sml-container h4 {
+  width: 220px;
+  border: solid black 1px;
+  background-color: #F4D160;
+  padding: 6px 0 6px 20px;
+  font-weight: bold;
+
+}
+
+/* .sml-right-txt {
+  padding-left: -10px;
+} */
+
+.hero-icon-big-container {
+  width: 50px;
+  height: 50px;
+  background-color: #F9F8EB;
+  border: solid black 1px;
+  position: absolute;
+  top: 15px;
+  left: -25px;
+}
+
+.hero-icon-sml-container {
+  width: 45px;
+  height: 45px;
+  background-color: #F9F8EB;
+  border: solid black 1px;
+  position: absolute;
+  top: 13px;
+  left: -23px;
+}
+
+.star-container {
+  text-align: right;
 }
 
 /* quizList */
@@ -86,13 +217,13 @@ h6 {
 }
 
 .icon-container {
-  width: 31px;
-  height: 31px;
-  background-color: #76B39D;
+  width: 40px;
+  height: 40px;
+  background-color: #F9F8EB;
   border: solid black 1px;
   position: absolute;
-  top: 10px;
-  left: -15px;
+  top: 6px;
+  left: -20px;
 }
 
 .quizList-container {
@@ -276,9 +407,14 @@ h6 {
 }
 
 .icon-created-container {
-  background-color: #F9F8EB;
+
   text-align: center;
   padding-right: 5px;
+}
+
+.icon-created-container img {
+  width: 35px;
+  margin-top: 3px;
 }
 
 
@@ -335,8 +471,68 @@ h6 {
   width: 200px;
 }
 
+@media (max-width: 960px) {
+  .wichies-container img {
+    width: 150px
+  }
+
+  .hero-txt-big-container,
+  .hero-txt-sml-container {
+
+    margin-bottom: 34px;
+
+  }
+
+  .hero-txt-big-container h3 {
+    width: 200px;
+    padding: 6px 0 6px 10px;
+    font-size: 20px;
+  }
+
+  .hero-txt-sml-container h4 {
+    width: 180px;
+    font-size: 20px;
+  }
+
+  .hero-icon-big-container {
+    width: 50px;
+    height: 50px;
+    top: 5px;
+
+  }
+
+  .hero-icon-sml-container {
+    width: 45px;
+    height: 45px;
+    top: 8px;
+
+  }
+
+  .wichies-container {
+    margin-left: 5%;
+
+  }
+
+
+}
+
+
 
 @media (max-width: 758px) {
+  .hero-button-contaienr {
+    margin-left: 10%;
+
+  }
+
+  .wichies-container {
+    margin-left: 10%;
+
+  }
+
+  .right-hero {
+    padding-left: 20%;
+  }
+
 
   .findQuizbtn-container:before {
     left: -30px;
@@ -398,5 +594,9 @@ h6 {
 
   .witch-container {
     right: 3%;
+  }
+
+  .right-hero {
+    padding-left: 10%;
   }
 }

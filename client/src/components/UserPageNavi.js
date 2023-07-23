@@ -10,16 +10,16 @@ const UserPageNavi = () => {
         <div className="userPageNavi-container">
             <Row>
                 <Col xs={24} sm={24} md={12} lg={12} xl={12} className="creteQuizbtn-wrppaer">
-                    <Button as={Link} to='/' className="creteQuizbtn-container">
+                    <Link to='/createQuiz' ><Button className="creteQuizbtn-container">
                         Create Your Quiz!
-                    </Button >
-                    <div className="witch-container"><img src={witch} style={{ width: "100px" }} /></div >
+                    </Button ></Link>
+                    <div className="witch-container"><img src={witch} style={{ width: "100px" }} alt="witch" /></div >
                 </Col>
                 <Col xs={24} sm={24} md={12} lg={12} xl={12} className="findQuizbtn-wrapper creteQuizbtn-wrppaer">
-                    <Button as={Link} to='/' className="findQuizbtn-container">
+                    <Link to='/' ><Button className="findQuizbtn-container">
                         Find and Play Quiz!
-                    </Button>
-                    <div className="crystalBall-container witch-container"><img src={crystalBall} style={{ width: "100px" }} /></div>
+                    </Button></Link>
+                    <div className="crystalBall-container witch-container"><img src={crystalBall} style={{ width: "100px" }} alt="crystal ball" /></div>
                 </Col>
 
             </Row>

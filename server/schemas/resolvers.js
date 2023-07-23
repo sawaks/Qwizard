@@ -1,12 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//// NEEDS UPDATING!!!!!
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
 const { User, Quiz, Question } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 
@@ -16,7 +7,7 @@ const resolvers = {
     Query: {
         me: async (parent, args, context) => {
             if (context.user) {
-                return User.findOne({ _id: context.user._id })
+                return await User.findOne({ _id: context.user._id })
                     .populate('createdQuizzes')
                     .populate('playedQuizzes');
             }
@@ -27,9 +18,10 @@ const resolvers = {
 
         getQuizQuestions: async (parent, { quizId }, context) => {
             if (context.user) {
-                const quizData = await Quiz.find({ _id: quizId })
+                const quizData = await Quiz.findOne({ _id: quizId })
                     .populate('questions');
-                return quizData;
+                
+                    return quizData;
             }
 
             throw new AuthenticationError('Not logged in');
@@ -37,7 +29,7 @@ const resolvers = {
 
         getPlayedQuizzes: async (parent, args, context) => {
             if (context.user) {
-                const quizData = await User.find({ _id: context.user._id })
+                const quizData = await User.findOne({ _id: context.user._id })
                     .populate('playedQuizzes');
                 return quizData;
             }
@@ -47,13 +39,13 @@ const resolvers = {
 
         // gets a list of all quizes from the db
         dbQuizzes: async (parent, args, context) => {
-            const quizData = await Quiz.find({})
+            const quizData = await Quiz.findOne({}).populate('questions');
             return quizData;
         },
 
         getLeaderboard: async (parent, { quizId }, context) => {
             if (context.user) {
-                const quizData = await Quiz.find({ _id: quizId })
+                const quizData = await Quiz.findOne({ _id: quizId })
                     .populate('leaderboard');
                 return quizData;
             }
@@ -88,35 +80,25 @@ const resolvers = {
             return { token, user };
         },
 
-
-        // saveBook: async (parent, { input }, context) => {
-        //     const updatedBookUser = await User.findOneAndUpdate(
-        //         { _id: context.user._id },
-        //         { $addToSet: { savedBooks: input } },
-        //         { new: true, runValidators: true }
-        //     );
-        //     return updatedBookUser;
-        // },
-        // removeBook: async (parent, { bookId }, context) => {
-        //     const updatedBookUser = await User.findOneAndUpdate(
-        //         { _id: context.user._id },
-        //         { $pull: { savedBooks: { bookId } } },
-        //         { new: true }
-        //     );
-        //     return updatedBookUser;
-        // },
-
-
         addQuiz: async (parent, { input }, context) => {
             if (context.user) {
-                return await Quiz.create(
+                const quiz = await Quiz.create(
                     {
-                        quizAuthor: context.user._id,
+                        quizAuthor: context.user.username,
                         description: input.description,
                         title: input.title,
                         imgURL: input.imgURL,
                     });
 
+                await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    {
+                        $addToSet: { createdQuizzes: quiz._id },
+                    },
+                    { new: true }
+                );
+
+                return quiz;
             }
             throw new AuthenticationError('You need to be logged in!');
         },
@@ -125,27 +107,29 @@ const resolvers = {
             if (context.user) {
                 const question = await Question.create(
                     {
+                        quizId: quizId,
                         questionText: input.questionText,
-                        questionType: input.questionType,
                         timeLimit: input.timeLimit,
                         correctAnswer: input.correctAnswer,
                         answers: input.answers
                     });
 
-                return Quiz.findOneAndUpdate(
+                await Quiz.findOneAndUpdate(
                     { _id: quizId },
                     {
                         $addToSet: { questions: question._id },
                     },
                     { new: true }
                 );
+
+                return question;
             }
             throw new AuthenticationError('You need to be logged in!');
         },
 
         addLeaderboard: async (parent, { quizId, points }, context) => {
             if (context.user) {
-                User.findOneAndUpdate(
+                await User.findOneAndUpdate(
                     { _id: context.user._id },
                     { $addToSet: { playedQuizzes: quizId } },
                     {
@@ -153,11 +137,14 @@ const resolvers = {
                         runValidators: true,
                     }
                 )
-                return Quiz.findOneAndUpdate(
+                return await Quiz.findOneAndUpdate(
                     { _id: quizId },
                     {
                         $addToSet: {
-                            leaderboard: { points, playerId: context.user._id },
+                            leaderboard: {
+                                points, 
+                                player: context.user.username
+                            },
                         },
                     },
                     {
@@ -171,17 +158,17 @@ const resolvers = {
 
         removeQuiz: async (parent, { quizId }, context) => {
             if (context.user) {
-                User.findOneAndUpdate(
+                await User.findOneAndUpdate(
                     { _id: context.user._id },
                     { $pull: { createdQuizzes: quizId } }
                 );
 
-                User.findSeveralAndUpdate(
+                await User.findSeveralAndUpdate(
                     { playedQuizzes: quizId },
                     { $pull: { playedQuizzes: quizId } }
                 );
 
-                Question.deleteMany({ quizId });
+                await Question.deleteMany({ quizId });
 
                 return Quiz.findOneAndDelete({ _id: quizId });
             }
@@ -191,9 +178,9 @@ const resolvers = {
         removeQuestion: async (parent, { quizId, questionId }, context) => {
             if (context.user) {
 
-                Question.findOneAndDelete({ _id: questionId });
+                await Question.findOneAndDelete({ _id: questionId });
 
-                return Quiz.findOneAndUpdate(
+                return await Quiz.findOneAndUpdate(
                     { _id: quizId },
                     { $pull: { questions: { _id: questionId } } },
                     { new: true }
@@ -204,7 +191,7 @@ const resolvers = {
 
         editQuizDetails: async (parent, { quizId, input }, context) => {
             if (context.user) {
-                return Quiz.findOneAndUpdate(
+                return await Quiz.findOneAndUpdate(
                     { _id: quizId },
                     {
                         title: input.title,
@@ -224,7 +211,6 @@ const resolvers = {
                     { _id: questionId },
                     {
                         questionText: input.questionText,
-                        questionType: input.questionType,
                         timeLimit: input.timeLimit,
                         answers: input.answers,
                         correctAnswer: input.correctAnswer,

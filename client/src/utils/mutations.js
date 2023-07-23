@@ -38,7 +38,7 @@ export const REMOVE_QUIZ = gql`
         _id
       }
       leaderboard {
-        playerId
+        player
         points
       }
     }
@@ -50,7 +50,6 @@ export const REMOVE_QUESTION = gql`
     removeQuestion(quizId: $quizId, questionId: $questionId) {
       _id
       questionText
-      questionType
       timeLimit
       answers {
         answerText
@@ -72,7 +71,7 @@ export const EDIT_QUIZ = gql`
         _id
       }
       leaderboard {
-        playerId
+        player
         points
       }
     }
@@ -84,7 +83,6 @@ export const EDIT_QUESTION = gql`
     editQuestion(questionId: $questionId, input: $input) {
       _id
       questionText
-      questionType
       timeLimit
       answers {
         answerText
@@ -98,7 +96,7 @@ export const ADD_QUIZ = gql`
   mutation addQuiz( $input: QuizInput!) {
     addQuiz( input: $input) {
       _id
-      quizAuthor
+      quizAuthor 
       description
       title
       imgURL
@@ -110,9 +108,7 @@ export const ADD_QUESTION = gql`
     addQuestion(quizId: $quizId, input: $input) {
       _id
       questionText
-      questionType
       timeLimit
-
       answers {
         answerText
       }
@@ -130,7 +126,7 @@ export const ADD_LEADERBOARD = gql`
       title
       imgURL
       leaderboard {
-        playerId
+        player
         points
       }
     }

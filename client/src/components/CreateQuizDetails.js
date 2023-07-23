@@ -7,20 +7,24 @@ import { useMutation } from '@apollo/client';
 import { useCreateQuizContext } from '../utils/CreateQuizContext';
 
 import { ADD_QUIZ } from '../utils/mutations';
+
+
 // IMG URLS NEED UPDATING
 // URL REROUTING NEEDS UPDATING
 
 const CreateQuizDetails = () => {
 
+
     useEffect(() => {
         setShowModal(true);
     }, []);
 
-    const { quizId, setQuizId, quizDetails, setQuizDetails} = useCreateQuizContext();
-
+    const { setQuizId, quizDetails, setQuizDetails} = useCreateQuizContext();
+    
     const [showModal, setShowModal] = useState(true);
 
     const [addQuiz] = useMutation(ADD_QUIZ);
+
 
     // CHANGE!!!!!!!!!!!!!!!
     const navigate = useNavigate();
@@ -112,7 +116,7 @@ const CreateQuizDetails = () => {
                             <Form.Item label="Theme">
                                 <select
                                     id="QuizTheme"
-                                    name="imageURL"
+                                    name="imgURL"
                                     value={quizDetails.theme}
                                     onChange={handleQuizInputChange}
                                 >
@@ -124,7 +128,7 @@ const CreateQuizDetails = () => {
                         </Form>
                     </Col>
                     <Col span={6}>
-                        <Image src={quizDetails.imageURL} />
+                        <Image src={quizDetails.imgURL} />
                     </Col>
                 </Row>
 
