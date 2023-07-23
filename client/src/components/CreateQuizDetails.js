@@ -7,20 +7,24 @@ import { useMutation } from '@apollo/client';
 import { useCreateQuizContext } from '../utils/CreateQuizContext';
 
 import { ADD_QUIZ } from '../utils/mutations';
+
+
 // IMG URLS NEED UPDATING
 // URL REROUTING NEEDS UPDATING
 
 const CreateQuizDetails = () => {
+
 
     useEffect(() => {
         setShowModal(true);
     }, []);
 
     const { setQuizId, quizDetails, setQuizDetails} = useCreateQuizContext();
-
+    
     const [showModal, setShowModal] = useState(true);
 
     const [addQuiz] = useMutation(ADD_QUIZ);
+
 
     // CHANGE!!!!!!!!!!!!!!!
     const navigate = useNavigate();

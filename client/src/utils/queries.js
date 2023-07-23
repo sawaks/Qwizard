@@ -9,10 +9,14 @@ export const GET_ME = gql`
       
       createdQuizzes {
         _id
-        quizAuthor
+        quizAuthor 
         description
         title
         imgURL
+        leaderboard {
+          player
+          points
+        }
       }
 
       playedQuizzes {
@@ -22,15 +26,12 @@ export const GET_ME = gql`
         title
         imgURL
         leaderboard {
-          playerId
+          player
           points
         }
       }
 
-      leaderboard {
-        playerId
-        points
-      }
+
     }
   }
 `;
@@ -44,7 +45,7 @@ export const GET_DB_QUIZZES = gql`
       title
       imgURL
       leaderboard {
-        playerId
+        player
         points
       }
     }
@@ -80,7 +81,7 @@ export const GET_PLAYED_QUIZZES = gql`
       title
       imgURL
       leaderboard {
-        playerId
+        player
         points
       }
     }
@@ -91,12 +92,12 @@ export const GET_LEADERBOARD = gql`
   query getLeaderboard ($quizId: ID!) {
     getLeaderboard (quizId: $quizId) {
       _id
-      quizAuthor
+      quizAuthor 
       description
       title
       imgURL
       leaderboard {
-        playerId
+        player 
         points
       }
     }
