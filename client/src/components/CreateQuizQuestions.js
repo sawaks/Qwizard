@@ -20,7 +20,7 @@ const CreateQuizQuestions = (props) => {
 
     const [quizQuestions, setQuizQuestions] = useState([]);
 
-    const [thisQuestion, setThisQuestion] = useState();
+    const [thisQuestion, setThisQuestion] = useState({});
 
     // if editing quiz, set quizId and quizQuestions
     useEffect(() => {
