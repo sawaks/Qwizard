@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Image, Col, Row } from 'antd';
+import { Form, Button, Image, Col, Row, Alert } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import { useMutation, useQuery } from '@apollo/client';
 
@@ -44,6 +44,10 @@ const EditQuizDetails = (props) => {
 
     const handleQuizDetailsUpdate = async (event) => {
         console.log("handleQuizDetailsUpdate");
+
+        if (!quizDetails.title || !quizDetails.description) {
+            return;
+        }
 
         try {
             await editQuiz({
