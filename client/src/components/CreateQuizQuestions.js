@@ -16,7 +16,7 @@ const CreateQuizQuestions = (props) => {
     const { quizId, setQuizId } = useCreateQuizContext();
     const [missingFields, setMissingFields] = useState(false);
     const [AlertMessage, setAlertMessage] = useState("Please fill all form fields");
-    const [selectValue, setSelectValue] = useState(false);
+    const [selectValue, setSelectValue] = useState(null);
 
     const [quizQuestions, setQuizQuestions] = useState([]);
 
@@ -36,15 +36,15 @@ const CreateQuizQuestions = (props) => {
                 answer2: question.answers[1].answerText,
                 answer3: question.answers[2].answerText,
                 answer4: question.answers[3].answerText,
-                correctAnswer: question.correctAnswer
+                correctAnswer: saveCorrectSelect(question, question.correctAnswer)
             })));
 
             if (!thisQuestion?.id) {
                 setQuestionNumber(data.getQuizQuestions.questions.length + 1);
             }
         }
- 
-       // eslint-disable-next-line react-hooks/exhaustive-deps
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
     const [addQuestion] = useMutation(ADD_QUESTION);
@@ -117,8 +117,8 @@ const CreateQuizQuestions = (props) => {
 
     const createNewQuestion = () => {
         console.log("createNewQuestion");
-        setThisQuestion();
-        setSelectValue(false);
+        setThisQuestion({});
+        setSelectValue(null);
         setQuestionNumber(quizQuestions.length + 1);
     };
 
@@ -225,6 +225,30 @@ const CreateQuizQuestions = (props) => {
 
         return correctAnswer;
     }
+
+    const saveCorrectSelect = (question, correctAnswer) => {
+        let selectAnswer;
+
+        switch (correctAnswer) {
+            case question.answers[0].answerText:
+                selectAnswer = "0";
+                break;
+            case question.answers[1].answerText:
+                selectAnswer = "1";
+                break;
+            case question.answers[2].answerText:
+                selectAnswer = "2";
+                break;
+            case question.answers[3].answerText:
+                selectAnswer = "3";
+                break;
+            default:
+                selectAnswer = "";
+        }
+
+        return selectAnswer;
+    }
+
 
     return (
         <div>
@@ -365,53 +389,20 @@ const CreateQuizQuestions = (props) => {
                         <Form>
                             <Form.Item
                                 label="Correct Answer"
-                                name='correctAnswer'
-
                             >
-                                {/* {selectValue ? (
-
                                 <Select
                                     onChange={handleSelectChange}
-                                    // defaultValue={selectValue}
+                                    name='correctAnswer'
+                                    key='correctAnswer'
                                     value={selectValue}
-                                    name='correctAnswer'
-                                    key='correctAnswer'
-                                    options={[
-                                        {value: "0", label: "Answer 1"},
-                                        {value: "1", label: "Answer 2"},
-                                        {value: "2", label: "Answer 3"},
-                                        {value: "3", label: "Answer 4"
-                                    }]}
-                                />
-                                   //  <Select.Option value="0">Answer 1</Select.Option>
-                                //     <Select.Option value="1">Answer 2</Select.Option>
-                                //     <Select.Option value="2">Answer 3</Select.Option>
-                                //     <Select.Option value="3">Answer 4</Select.Option>
-                                // </Select> 
-
-
-                            ) : ( */}
-                                <Select
-                                    onChange={handleSelectChange}
-                                    name='correctAnswer'
-                                    key='correctAnswer'
-                                    value={selectValue ? selectValue : undefined}
-                                    defaultValue={selectValue ? selectValue : undefined}
                                     placeholder='Select Correct Answer'
-                                    options={[
-                                        { value: "0", label: "Answer 1" },
-                                        { value: "1", label: "Answer 2" },
-                                        { value: "2", label: "Answer 3" },
-                                        {
-                                            value: "3", label: "Answer 4"
-                                        }]}
-                                />
-                                {/* // <Select.Option value="0">Answer 1</Select.Option>
-                                    // <Select.Option value="1">Answer 2</Select.Option>
-                                    // <Select.Option value="2" selected>Answer 3</Select.Option>
-                                    // <Select.Option value="3">Answer 4</Select.Option>
-                                // </Select>
-                            )} */}
+                                >
+                                <Select.Option value="0" className = "answerbtn">Answer 1</Select.Option>
+                                    <Select.Option value="1" className = "answerbtn">Answer 2</Select.Option>
+                                    <Select.Option value="2" className = "answerbtn">Answer 3</Select.Option>
+                                    <Select.Option value="3" className = "answerbtn">Answer 4</Select.Option>
+                                </Select>
+
 
                             </Form.Item>
                             <Form.Item
