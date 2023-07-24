@@ -3,11 +3,13 @@ import titleIcon from "../images/crystal-ball2.png";
 import quizImg from "../images/quizImg.png";
 import { Button, Card } from 'antd';
 import { Link } from 'react-router-dom';
+import { useUserPageContext } from '../utils/userPageContext';
 
 const { Meta } = Card;
 
-const PlayedQuizList = ({ userData }) => {
-    if (!userData.length) {
+const PlayedQuizList = () => {
+    const {userData2} = useUserPageContext();
+    if (!userData2.length) {
         return (
             <div className="playedQuizList-Container">
                 <div className="title-conatiner title-created-conatiner">
@@ -27,8 +29,8 @@ const PlayedQuizList = ({ userData }) => {
                 </div>
             </div>
             <div className="playedCard-container">
-                {userData &&
-                    userData.map((userData) => (
+                {userData2 &&
+                    userData2.map((userData) => (
                         <Card
                             key={userData._id}
                             className="playedCard"

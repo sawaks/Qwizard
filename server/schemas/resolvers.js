@@ -167,12 +167,7 @@ const resolvers = {
                     { $pull: { createdQuizzes: quizId } }
                 );
 
-                // await User.findSeveralAndUpdate(
-                //     { playedQuizzes: quizId },
-                //     { $pull: { playedQuizzes: quizId } }
-                // );
-
-                await User.findOneAndUpdate(
+                await User.updateMany(
                     { playedQuizzes: quizId },
                     { $pull: { playedQuizzes: quizId } }
                 );
