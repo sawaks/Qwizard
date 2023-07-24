@@ -11,6 +11,7 @@ import Auth from '../utils/auth';
 
 const HomePage = () => {
     const { loading, data } = useQuery(GET_DB_QUIZZES);
+    console.log(data);
     const dbQuizzes = data?.dbQuizzes || [];
     return (
 

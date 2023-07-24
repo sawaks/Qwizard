@@ -15,7 +15,8 @@ import { Helmet } from 'react-helmet-async';
 const Userpage = () => {
     const { loading, data } = useQuery(GET_ME);
     console.log(data)
-    const userData = data?.me || {};
+    const userData = data?.me.createdQuizzes || {};
+    const userData2 = data?.me.playedQuizzes || {};
 
 
     return (
@@ -33,7 +34,7 @@ const Userpage = () => {
                         <CreatedQuizList userData={userData} />
                     </Col>
                     <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-                        <PlayedQuizList userData={userData} />
+                        <PlayedQuizList userData={userData2} />
                     </Col>
                 </Row>
             )}

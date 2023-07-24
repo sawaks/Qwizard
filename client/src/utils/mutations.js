@@ -41,6 +41,7 @@ export const REMOVE_QUIZ = gql`
         player
         points
       }
+
     }
   }
 `;
