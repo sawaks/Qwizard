@@ -42,6 +42,11 @@ const CreateQuizDetails = () => {
     const handleQuizSubmit = async (event) => {
         console.log("handleQuizSubmit");
 
+
+        if (!quizDetails.title || !quizDetails.description) {
+            return;
+        }
+        
         try {
           const {data} = await addQuiz({
             variables: {  input: { ...quizDetails} }
