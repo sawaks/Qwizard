@@ -3,7 +3,6 @@ import titleIcon from "../images/magic-wand3.png";
 // import quizImg from "../images/quizImg.png";
 import { Button, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
-import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { REMOVE_QUIZ } from '../utils/mutations';
 
@@ -14,13 +13,10 @@ const CreatedQuizList = () => {
 
     const { userData, setUserData } = useUserPageContext();
     console.log('userData in createdQuizes', userData)
+
     const [removeQuiz] = useMutation(REMOVE_QUIZ);
 
     const handleDeleteQuestion = async (event) => {
-        // const token = Auth.loggedIn() ? Auth.getToken() : null;
-        // if (!token) {
-        //     return false;
-        // }
 
         const quizId = event.target.dataset.id;
 
@@ -70,10 +66,14 @@ const CreatedQuizList = () => {
                             <Link to={`/Leaderboard/${userData._id}`}>
                                 <Button type="primary" style={{ backgroundColor: "#05004E", border: "solid 1px #05004E" }} shape="round" >Leaderboard</Button>
                             </Link>
-                            <Link to="/">
-                                <Button type="primary" danger shape="round" data-id={userData._id} onClick={handleDeleteQuestion}>Delete</Button>
+                            {/* <Link to="/myQuizzes"> */}
+                            <Button type="primary" danger shape="round" data-id={userData._id} onClick={handleDeleteQuestion}>
+                                <span data-id={userData._id}>
+                                    Delete
+                                </span>
+                            </Button>
 
-                            </Link>
+                            {/* </Link> */}
                         </Col>
                     </Row>
                 ))}
