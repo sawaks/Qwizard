@@ -12,7 +12,7 @@ const Quiz = () => {
     const { loading, data } = useQuery(GET_QUIZ_QUESTIONS, {
         variables: { quizId },
     });
-
+    const [intro, setIntro] = useState(true);
     const [questionIndex, setQuestionIndex] = useState(0);
     const [quizQuestions, setQuizQuestions] = useState([]);
     const [activeQuestion, setActiveQuestion] = useState(quizQuestions[0]);
@@ -40,19 +40,20 @@ const Quiz = () => {
     }, [data]);
 
     useEffect(() => {
-
-        if (quizQuestions.length > 0) {
-            if (questionIndex >= quizQuestions.length) {
-                setEnd(true);
-                setActiveQuestion(null);
-                setTimer(0);
-                submitLeaderboard();
-                return;
+        if (intro === false) {
+            if (quizQuestions.length > 0) {
+                if (questionIndex >= quizQuestions.length) {
+                    setEnd(true);
+                    setActiveQuestion(null);
+                    setTimer(0);
+                    submitLeaderboard();
+                    return;
+                }
+                startTimer(quizQuestions[questionIndex].timeLimit);
+                setActiveQuestion(quizQuestions[questionIndex]);
             }
-            startTimer(quizQuestions[questionIndex].timeLimit);
-            setActiveQuestion(quizQuestions[questionIndex]);
         }
-    }, [quizQuestions, questionIndex]);
+    }, [quizQuestions, questionIndex, intro]);
 
     function checkAnswer(event) {
         if (event.target.dataset.id === activeQuestion.correctAnswer) {
@@ -109,61 +110,70 @@ const Quiz = () => {
 
     return (
         <div className="master-div">
-            {loading ? (
-                <h1>Loading...</h1>
+            {intro ? (
+                <>
+                    <Button onClick={() => setIntro(false)}>Ready?</Button>
+                </>
             ) : (
-                <div className="quiz-container">
-                    <h1>{data.getQuizQuestions.title}</h1>
-                    <div className="quiz-card">
-                        {activeQuestion && timer ? (
-                            <>
-                                <h2>{activeQuestion.questionText}</h2>
-                                <h2 className="timer">Time Left:{timer} </h2>
-                                <div className="answer-card">
 
-                                    <Button data-id={activeQuestion.answer1} value={activeQuestion.answer1} onClick={checkAnswer}>
-                                        <span data-id={activeQuestion.answer1}>
-                                            {activeQuestion.answer1}
-                                        </span>
-                                    </Button>
-                                    <Button data-id={activeQuestion.answer2} value={activeQuestion.answer2} onClick={checkAnswer}>
-                                        <span data-id={activeQuestion.answer2}>
-                                            {activeQuestion.answer2}
-                                        </span>
-                                    </Button>
-                                    <Button data-id={activeQuestion.answer3} value={activeQuestion.answer3} onClick={checkAnswer}>
-                                        <span data-id={activeQuestion.answer3}>
-                                            {activeQuestion.answer3}
-                                        </span>
-                                    </Button>
-                                    <Button data-id={activeQuestion.answer4} value={activeQuestion.answer4} onClick={checkAnswer}>
-                                        <span data-id={activeQuestion.answer4}>
-                                            {activeQuestion.answer4}
-                                        </span>
-                                    </Button>
-
-                                </div>
-                            </>
-                        ) : (
-                            <>
-                                {end ? (
+                <div>
+                    {loading ? (
+                        <h1>Loading...</h1>
+                    ) : (
+                        <div className="quiz-container">
+                            <h1>{data.getQuizQuestions.title}</h1>
+                            <div className="quiz-card">
+                                {activeQuestion && timer ? (
                                     <>
-                                        <h1>Quiz Completed</h1>
-                                        <h1>Score:{result}</h1>
-                                        <Button href="/">Go Back</Button>
-                                        <Button href={`/leaderboard/${quizId}`}>Leaderboard</Button>
+                                        <h2>{activeQuestion.questionText}</h2>
+                                        <h2 className="timer">Time Left:{timer} </h2>
+                                        <div className="answer-card">
+
+                                            <Button data-id={activeQuestion.answer1} value={activeQuestion.answer1} onClick={checkAnswer}>
+                                                <span data-id={activeQuestion.answer1}>
+                                                    {activeQuestion.answer1}
+                                                </span>
+                                            </Button>
+                                            <Button data-id={activeQuestion.answer2} value={activeQuestion.answer2} onClick={checkAnswer}>
+                                                <span data-id={activeQuestion.answer2}>
+                                                    {activeQuestion.answer2}
+                                                </span>
+                                            </Button>
+                                            <Button data-id={activeQuestion.answer3} value={activeQuestion.answer3} onClick={checkAnswer}>
+                                                <span data-id={activeQuestion.answer3}>
+                                                    {activeQuestion.answer3}
+                                                </span>
+                                            </Button>
+                                            <Button data-id={activeQuestion.answer4} value={activeQuestion.answer4} onClick={checkAnswer}>
+                                                <span data-id={activeQuestion.answer4}>
+                                                    {activeQuestion.answer4}
+                                                </span>
+                                            </Button>
+
+                                        </div>
                                     </>
                                 ) : (
                                     <>
-                                        <h1>Loading...</h1>
+                                        {end ? (
+                                            <>
+                                                <h1>Quiz Completed</h1>
+                                                <h1>Score:{result}</h1>
+                                                <Button href="/">Go Back</Button>
+                                                <Button href={`/leaderboard/${quizId}`}>Leaderboard</Button>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <h1>Loading...</h1>
+                                            </>
+                                        )}
                                     </>
                                 )}
-                            </>
-                        )}
 
-                    </div>
+                            </div>
+                        </div>
+
+                    )}
                 </div>
-
             )}
         </div>
     );

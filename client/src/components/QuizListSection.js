@@ -31,15 +31,15 @@ const QuizListSection = ({ dbQuizzes, title }) => {
                     dbQuizzes.map((dbQuiz) => (
                         <div className="col-md-4">
                             <div key={dbQuiz._id} className="card card-style">
-                                <img className="card-img-top quiz-img" src={dbQuiz.imageURL} alt="quiz Img" />
+                                <img className="card-img-top quiz-img" src={dbQuiz.imgURL} alt="quiz Img" />
                                 <div className="card-body">
                                     <h5 className="card-title">{dbQuiz.title}</h5>
                                     <p className="card-text">{dbQuiz.description}</p>
                                     <div className='linkBtn-container'>
                                         {Auth.loggedIn() ? (
                                             <>
-                                                <Button as={Link} to='/' type="primary" style={{ margin: "5px", width: "200px", background: "#FD5F00", borderColor: "#FD5F00" }} shape="round" >Play</Button>
-                                                <Button as={Link} to='/' type="primary" style={{ margin: "5px", width: "200px", background: "#05004E", borderColor: "#05004E" }} shape="round">See Leaderboard</Button>
+                                                <Button as={Link} to={`/Quiz/${dbQuiz._id}`} type="primary" style={{ margin: "5px", width: "200px", background: "#FD5F00", borderColor: "#FD5F00" }} shape="round" >Play</Button>
+                                                <Button as={Link} to={`/Leaderboard/${dbQuiz._id}`} type="primary" style={{ margin: "5px", width: "200px", background: "#05004E", borderColor: "#05004E" }} shape="round">See Leaderboard</Button>
                                             </>
 
                                         ) : (
