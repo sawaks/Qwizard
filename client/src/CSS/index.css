@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round&family=Lato:wght@400;900&display=swap');
+
 * {
   box-sizing: border-box;
 
@@ -14,7 +16,7 @@ Button:hover {
 }
 
 body {
-  font-family: 'Rubik', sans-serif;
+  /* font-family: 'Rubik', sans-serif; */
   position: relative;
   max-width: 100%;
 
@@ -26,7 +28,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Rubik Mono One', sans-serif;
+  font-family: 'Crete Round', serif;
+
 }
 
 .small {
@@ -381,6 +384,7 @@ h6 {
 .createdQuizCard-container {
   width: 100%;
   margin: 0 auto;
+  margin-bottom: 10px;
   background-color: #F9F8EB;
   border: solid 1px black;
 
@@ -400,10 +404,11 @@ h6 {
 .createdQuizText-container {
   padding: 15px;
 
+
 }
 
 .createdQuizText-container Button {
-  margin-right: 5px;
+  margin: 0 5px 5px 0;
 }
 
 .icon-created-container {
