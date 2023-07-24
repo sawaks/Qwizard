@@ -32,7 +32,6 @@ const QuizListSection = ({ dbQuizzes, title }) => {
                         <div className="col-md-4">
                             <div key={dbQuiz._id} className="card card-style">
                                 <img className="card-img-top quiz-img" src={dbQuiz.imgURL} alt="quiz Img" />
-                                <img className="card-img-top quiz-img" src={dbQuiz.imgURL} alt="quiz Img" />
                                 <div className="card-body">
                                     <h5 className="card-title">{dbQuiz.title}</h5>
                                     <p className="card-text">{dbQuiz.description}</p>
