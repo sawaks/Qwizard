@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round&family=Lato:wght@400;900&display=swap');
+
 * {
   box-sizing: border-box;
 
@@ -14,7 +16,7 @@ Button:hover {
 }
 
 body {
-  font-family: 'Rubik', sans-serif;
+  /* font-family: 'Rubik', sans-serif; */
   position: relative;
   max-width: 100%;
 
@@ -26,7 +28,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Rubik Mono One', sans-serif;
+  font-family: 'Crete Round', serif;
+
 }
 
 .small {
