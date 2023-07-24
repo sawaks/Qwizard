@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'antd';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 
 import { GET_QUIZ_QUESTIONS } from '../utils/queries';
-
+import { ADD_LEADERBOARD } from '../utils/mutations';
 
 const Quiz = () => {
 
@@ -20,7 +20,7 @@ const Quiz = () => {
     const [result, setResult] = useState(0);
     const [end, setEnd] = useState(false);
     const [intervalId, setIntervalId] = useState(null);
-
+    const [addLeaderboard] = useMutation(ADD_LEADERBOARD);
     useEffect(() => {
         if (data) {
             setQuizQuestions([]);
@@ -46,6 +46,7 @@ const Quiz = () => {
                 setEnd(true);
                 setActiveQuestion(null);
                 setTimer(0);
+                submitLeaderboard();
                 return;
             }
             startTimer(quizQuestions[questionIndex].timeLimit);
@@ -89,7 +90,22 @@ const Quiz = () => {
         // setTimer(0);
         clearInterval(intervalId);
         setQuestionIndex(questionIndex + 1);
-    }
+    };
+
+    const submitLeaderboard = async (event) => {
+        try {
+            const { data } = await addLeaderboard({
+                variables: {
+                    quizId,
+                    points: result
+                }
+            });
+            console.log(data);
+
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
     return (
         <div className="master-div">
