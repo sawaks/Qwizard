@@ -1,26 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import titleIcon from "../images/magic-wand3.png";
 // import quizImg from "../images/quizImg.png";
 import { Button, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
-import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { REMOVE_QUIZ } from '../utils/mutations';
 
 import { useUserPageContext } from '../utils/userPageContext';
 
 const CreatedQuizList = () => {
-    // const [removeQuiz] = useMutation(REMOVE_QUIZ);
 
-    const { userData, setUserData } = useUserPageContext();
+    const { userData, setUserData, refetch } = useUserPageContext();
     console.log('userData in createdQuizes', userData)
+
+    useEffect(() => {
+        refetch();
+    }, [])
+
     const [removeQuiz] = useMutation(REMOVE_QUIZ);
 
     const handleDeleteQuestion = async (event) => {
-        // const token = Auth.loggedIn() ? Auth.getToken() : null;
-        // if (!token) {
-        //     return false;
-        // }
 
         const quizId = event.target.dataset.id;
 

@@ -10,7 +10,7 @@ export const useUserPageContext = () => useContext(userPageContext);
 
 export default function UserPageProvider({ children }) {
 
-    const { data } = useQuery(GET_ME);
+    const { data, refetch } = useQuery(GET_ME);
     console.log(data)
     const [userData, setUserData] = useState([]);
     const [userData2, setUserData2] = useState([]);
@@ -23,9 +23,10 @@ export default function UserPageProvider({ children }) {
     }, [data])
 
 
+
     return (
 
-        <userPageContext.Provider value={{ userData, userData2, setUserData }}>
+        <userPageContext.Provider value={{ userData, userData2, setUserData, setUserData2, refetch }}>
             {children}
         </userPageContext.Provider>
 

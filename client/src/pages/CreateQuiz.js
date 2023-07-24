@@ -6,7 +6,6 @@ import CreateQuizQuestions from '../components/CreateQuizQuestions';
 import EditQuizDetails from '../components/EditQuizDetails';
 
 import CreateQuizProvider from '../utils/CreateQuizContext';
-// import { useCreateQuizContext } from '../utils/CreateQuizContext';
 
 import { Helmet } from 'react-helmet-async';
 
@@ -36,8 +35,9 @@ const CreateQuiz = () => {
                     <CreateQuizQuestions value={{ param: 0 }} />
                 </>
 
-            )}
-        </CreateQuizProvider>
+            )
+            }
+        </CreateQuizProvider >
     );
 };
 
