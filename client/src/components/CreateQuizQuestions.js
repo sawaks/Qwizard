@@ -397,10 +397,10 @@ const CreateQuizQuestions = (props) => {
                                     value={selectValue}
                                     placeholder='Select Correct Answer'
                                 >
-                                <Select.Option value="0" className = "answerbtn">Answer 1</Select.Option>
-                                    <Select.Option value="1" className = "answerbtn">Answer 2</Select.Option>
-                                    <Select.Option value="2" className = "answerbtn">Answer 3</Select.Option>
-                                    <Select.Option value="3" className = "answerbtn">Answer 4</Select.Option>
+                                    <Select.Option value="0" className="answerbtn">Answer 1</Select.Option>
+                                    <Select.Option value="1" className="answerbtn">Answer 2</Select.Option>
+                                    <Select.Option value="2" className="answerbtn">Answer 3</Select.Option>
+                                    <Select.Option value="3" className="answerbtn">Answer 4</Select.Option>
                                 </Select>
 
 

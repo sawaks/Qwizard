@@ -1,0 +1,19 @@
+#QuizDetails {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+    padding: 10px;
+}
+
+.mode .ant-modal-title {
+    text-align: center;
+    font-size: 200%;
+}
+#themeIMG {
+ padding: 5px;
+}
+
+ .ant-form-item-label {
+    /* font-size: 200%; */
+    font-weight: bold;
+}

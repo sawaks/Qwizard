@@ -39,7 +39,7 @@ const AppNavbar = () => {
                   Home
                 </Button>
               </Link>
-              {/* if user is logged in show saved books and logout */}
+              {/* if user is logged in show homepage and logout */}
               {Auth.loggedIn() ? (
                 <>
                   <Link to="/myQuizzes">
