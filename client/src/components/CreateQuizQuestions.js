@@ -5,6 +5,7 @@ import { ADD_QUESTION, EDIT_QUESTION } from '../utils/mutations';
 import { GET_QUIZ_QUESTIONS } from '../utils/queries';
 
 import { useCreateQuizContext } from '../utils/CreateQuizContext';
+import '../CSS/createDetails.css'
 
 const CreateQuizQuestions = (props) => {
 
@@ -255,8 +256,8 @@ const CreateQuizQuestions = (props) => {
             {loading ? (
                 <h1>Loading...</h1>
             ) : (
-                <Row>
-                    <Col span={6}>
+                <Row id="QuestionCreate">
+                    <Col span={4} id="questionCreateBtns">
                         {quizQuestions.length > 0 ? (
                             quizQuestions.map((question) => {
                                 return (
@@ -264,6 +265,7 @@ const CreateQuizQuestions = (props) => {
                                         data-id={question.id}
                                         width='100%'
                                         onClick={openQuestion}
+                                        block
                                     >
                                         <span data-id={question.id}>
                                             Question {quizQuestions.indexOf(question) + 1}
@@ -275,10 +277,11 @@ const CreateQuizQuestions = (props) => {
                             <></>
                         )}
                         <Button
+                            block
                             onClick={createNewQuestion}
                         >Add Question</Button>
                     </Col>
-                    <Col span={12}>
+                    <Col span={14} id="questionCreateBody">
                         <h1>Question #
                             <span>
                                 {questionNumber}
@@ -312,6 +315,7 @@ const CreateQuizQuestions = (props) => {
                                     <Form.Item
                                         label="Answer 1"
                                         rules={[{ required: true, message: 'Please input your answer!' }]}
+                                        className='createAnwerLeft'
                                     >
                                         <Input
                                             onChange={handleQuestionInputChange}
@@ -326,6 +330,7 @@ const CreateQuizQuestions = (props) => {
                                     <Form.Item
                                         label="Answer 2"
                                         rules={[{ required: true, message: 'Please input your answer!' }]}
+                                        className='createAnwerRight'
                                     >
                                         <Input
                                             onChange={handleQuestionInputChange}
@@ -341,6 +346,7 @@ const CreateQuizQuestions = (props) => {
                                     <Form.Item
                                         label="Answer 3"
                                         rules={[{ required: true, message: 'Please input your answer!' }]}
+                                        className='createAnwerLeft'
                                     >
                                         <Input
                                             onChange={handleQuestionInputChange}
@@ -351,10 +357,11 @@ const CreateQuizQuestions = (props) => {
                                     </Form.Item>
 
                                 </Col>
-                                <Col span={12}>
+                                <Col span={12} >
                                     <Form.Item
                                         label="Answer 4"
                                         rules={[{ required: true, message: 'Please input your answer!' }]}
+                                        className='createAnwerRight'
                                     >
                                         <Input
                                             onChange={handleQuestionInputChange}
@@ -369,14 +376,16 @@ const CreateQuizQuestions = (props) => {
                             <br></br>
                             <br></br>
                             <Row>
-                                <Col>
+                                <Col span={24}>
                                     {thisQuestion?.id ? (
                                         <Button
+                                            block
                                             onClick={updateQuestion}
                                             data-id={thisQuestion.id}
                                         >Update Question</Button>
                                     ) : (
                                         <Button
+                                            block
                                             onClick={saveQuestion}
                                         >Save Question</Button>
                                     )}
@@ -384,7 +393,7 @@ const CreateQuizQuestions = (props) => {
                             </Row>
                         </Form>
                     </Col>
-                    <Col span={6}>
+                    <Col span={6} id="questionCreateDetails">
                         <h1>Extra Details</h1>
                         <Form>
                             <Form.Item

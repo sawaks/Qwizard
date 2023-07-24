@@ -140,11 +140,11 @@ const EditQuizDetails = (props) => {
                     </Col>
                 </Row>
             ) : (
-                <Row align={"middle"} >
-                    <Col span={4} align={"middle"} >
+                <Row align={"middle"} id="QdetailsContainer">
+                    <Col span={2} align={"middle"} >
                         <Image alt="theme img" id="themeIMG3" src={quizDetails.imgURL} />
                     </Col>
-                    <Col span={18} align={"middle"} id="quizDetails" >
+                    <Col span={20} id="quizDetails" >
                         <h4>{quizDetails.title}</h4>
                         <h6>{quizDetails.description}</h6>
                     </Col>
