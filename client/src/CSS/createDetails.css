@@ -9,11 +9,33 @@
     text-align: center;
     font-size: 200%;
 }
-#themeIMG {
+#themeIMG, 
+#themeIMg2 {
  padding: 5px;
 }
 
- .ant-form-item-label {
-    /* font-size: 200%; */
+.ant-form-item-label {
     font-weight: bold;
+}
+
+#UpdateQuizDetails {
+    padding: 40px;
+}
+
+#themeIMG2 {
+    width: 70%;
+}
+
+#imgContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#themeIMG3 {
+    width: 40%;
+}
+
+#quizDetails {
+    padding: 20px;
 }

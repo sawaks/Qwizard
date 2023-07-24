@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Image, Col, Row } from 'antd';
+import { Form, Button, Image, Col, Row, Input, Select } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import { useMutation, useQuery } from '@apollo/client';
 
@@ -7,6 +7,8 @@ import { EDIT_QUIZ } from '../utils/mutations';
 import { GET_QUIZ_QUESTIONS } from '../utils/queries';
 
 import { useCreateQuizContext } from '../utils/CreateQuizContext';
+import '../CSS/createDetails.css'
+const { TextArea } = Input;
 
 const EditQuizDetails = (props) => {
 
@@ -40,6 +42,11 @@ const EditQuizDetails = (props) => {
         const { name, value } = event.target;
         setQuizDetails({ ...quizDetails, [name]: value });
 
+    };
+
+    const handleSelectChange = (value) => {
+        console.log(`selected ${value}`);
+        setQuizDetails({ ...quizDetails, imgURL: value });
     };
 
     const handleQuizDetailsUpdate = async (event) => {
@@ -80,7 +87,7 @@ const EditQuizDetails = (props) => {
                                     },
                                 ]}
                             >
-                                <input
+                                <Input
                                     type="text"
                                     id="QuizTitle"
                                     name="title"
@@ -97,7 +104,7 @@ const EditQuizDetails = (props) => {
                                         required: true,
                                     },
                                 ]}>
-                                <textarea
+                                <TextArea
                                     type="text"
                                     id="QuizDescription"
                                     name="description"
@@ -108,37 +115,42 @@ const EditQuizDetails = (props) => {
                                 />
                             </Form.Item>
                             <Form.Item label="Theme">
-                                <select
+                                <Select
                                     id="QuizTheme"
                                     name="imgURL"
                                     value={quizDetails.imgURL}
-                                    onChange={handleQuizInputChange}
+                                    onChange={handleSelectChange}
                                 >
-                                    <option value="./default">Default</option>
-                                    <option value="./dark">Dark</option>
-                                    <option value="./light">Light</option>
-                                </select>
+                                    <Select.Option value="./logo512.png">Default</Select.Option>
+                                    <Select.Option value="./logo512.png1">Dark</Select.Option>
+                                    <Select.Option value="./logo512.png3">Light</Select.Option>
+                                </Select>
                             </Form.Item>
                             <Button
                                 type="primary"
                                 htmlType="submit"
                                 onClick={handleQuizDetailsUpdate}
+                                block
                             >
                                 Save</Button>
                         </Form>
                     </Col>
-                    <Col span={6}>
-                        <Image src={quizDetails.imgURL} />
+                    <Col span={6} id="imgContainer">
+                        <Image alt="theme img" id="themeIMG2" src={quizDetails.imgURL} />
                     </Col>
                 </Row>
             ) : (
-                <Row>
-                    {/* <Col span={18}> */}
-                    <p>Title: {quizDetails.title}</p>
-                    <p>Description: {quizDetails.description}</p>
-                    <p>Theme: {quizDetails.imgURL}</p>
-                    <EditOutlined onClick={() => setToEdit(true)} />
-                    {/* </Col> */}
+                <Row align={"middle"} >
+                    <Col span={4} align={"middle"} >
+                        <Image alt="theme img" id="themeIMG3" src={quizDetails.imgURL} />
+                    </Col>
+                    <Col span={18} align={"middle"} id="quizDetails" >
+                        <h4>{quizDetails.title}</h4>
+                        <h6>{quizDetails.description}</h6>
+                    </Col>
+                    <Col span={2} align={"start"} >
+                        <EditOutlined style={{ fontSize: '45px', color: '#FD5F00' }} onClick={() => setToEdit(true)} />
+                    </Col>
                 </Row>
             )}
         </>
