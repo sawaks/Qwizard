@@ -92,7 +92,7 @@ const LoginForm = () => {
           variant='success'
           style={{ borderRadius: "50px" }}
         >
-          Submit
+          Login
         </Button>
       </Form>
     </>
