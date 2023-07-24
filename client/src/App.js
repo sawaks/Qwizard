@@ -64,13 +64,13 @@ function App() {
           <HelmetProvider>
             <Routes>
               <Route
-                // path='/'
-                path='/homepage'
+                path='/'
+                // path='/homepage'
                 element={<HomePage />}
               />
               <Route
-                path='/'
-                // path='/myQuizzes'
+                // path='/'
+                path='/myQuizzes'
                 element={<UserPage />}
               />
               <Route

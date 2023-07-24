@@ -60,8 +60,8 @@ const CreatedQuizList = ({ userData }) => {
                 userData.map((userData) => (
                     <Row key={userData._id} justify="space-between" className="createdQuizCard-container">
                         <Col xs={24} sm={24} md={10} lg={10} xl={10} className="createdImg-container">
-                            {/* <img src={userData.imageURL} alt="quiz" /> */}
-                            <div style={{ width: "100px", backgroundImage: `url(${userData.imgURL})` }}></div>
+                            <img src={userData.imgURL} alt="quiz" />
+                            {/* <div style={{ width: "100px", backgroundImage: `url(${userData.imgURL})` }}></div> */}
                         </Col>
                         <Col xs={24} sm={24} md={14} lg={14} xl={14} className="createdQuizText-container">
                             <h4>{userData.title}</h4>
@@ -69,7 +69,7 @@ const CreatedQuizList = ({ userData }) => {
                             <Link to={`/editQuiz/${userData._id}`}>
                                 <Button type="primary" style={{ backgroundColor: "#FD5F00", border: "solid 1px #FD5F00" }} shape="round" >Update</Button>
                             </Link>
-                            <Link to="/">
+                            <Link to={`/Leaderboard/${userData._id}`}>
                                 <Button type="primary" style={{ backgroundColor: "#05004E", border: "solid 1px #05004E" }} shape="round" >Leaderboard</Button>
                             </Link>
                             <Link to="/">
