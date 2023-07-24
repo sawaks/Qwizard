@@ -13,7 +13,7 @@ const HomePage = () => {
     return (
         <div>
 
-            {Auth.loggedIn() ? (<Hero style={{ dysplay: "none" }} />) : (<Hero />)}
+            {Auth.loggedIn() ? ('') : (<Hero />)}
 
             {loading ? (
                 <div>Loading...</div>

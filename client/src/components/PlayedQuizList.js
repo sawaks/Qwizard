@@ -36,10 +36,10 @@ const PlayedQuizList = ({ userData }) => {
                         >
                             <Meta title={userData.playedQuizzes.title} />
                             <p style={{ textAlign: "center" }}><span style={{ fontWeight: "bold" }}>Point:</span>{userData.playedQuizzes.leaderboard.point}</p>
-                            <Link to="/">
+                            <Link to={`/playQuiz/${userData.playedQuizzes._id}`}>
                                 <Button type="primary" style={{ backgroundColor: "#FD5F00", border: "solid 1px #FD5F00" }} shape="round" >Replay</Button>
                             </Link>
-                            <Link to="/">
+                            <Link to={`/leaderboard/${userData.playedQuizzes._id}`}>
                                 <Button type="primary" style={{ backgroundColor: "#05004E", border: "solid 1px #05004E" }} shape="round" >Leaderboard</Button>
                             </Link>
                         </Card>
