@@ -64,16 +64,18 @@ const CreatedQuizList = () => {
                         <Col xs={24} sm={24} md={14} lg={14} xl={14} className="createdQuizText-container">
                             <h4>{userData.title}</h4>
                             <p>{userData.description}</p>
-                            <Link to={`/editQuiz/${userData._id}`}>
-                                <Button type="primary" style={{ backgroundColor: "#FD5F00", border: "solid 1px #FD5F00" }} shape="round" >Update</Button>
-                            </Link>
-                            <Link to={`/Leaderboard/${userData._id}`}>
-                                <Button type="primary" style={{ backgroundColor: "#05004E", border: "solid 1px #05004E" }} shape="round" >Leaderboard</Button>
-                            </Link>
-                            <Link to="/">
-                                <Button type="primary" danger shape="round" data-id={userData._id} onClick={handleDeleteQuestion}>Delete</Button>
+                            <div className='created-card-button-container'>
+                                <Link to={`/editQuiz/${userData._id}`}>
+                                    <Button type="primary" style={{ backgroundColor: "#FD5F00", border: "solid 1px #FD5F00" }} shape="round" >Update</Button>
+                                </Link>
+                                <Link to={`/Leaderboard/${userData._id}`}>
+                                    <Button type="primary" style={{ backgroundColor: "#05004E", border: "solid 1px #05004E" }} shape="round" >Leaderboard</Button>
+                                </Link>
+                                <Link to="/">
+                                    <Button type="primary" danger shape="round" data-id={userData._id} onClick={handleDeleteQuestion}>Delete</Button>
 
-                            </Link>
+                                </Link>
+                            </div>
                         </Col>
                     </Row>
                 ))}
