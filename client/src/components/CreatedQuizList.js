@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import titleIcon from "../images/magic-wand3.png";
 // import quizImg from "../images/quizImg.png";
 import { Button, Row, Col } from 'antd';
@@ -9,10 +9,13 @@ import { REMOVE_QUIZ } from '../utils/mutations';
 import { useUserPageContext } from '../utils/userPageContext';
 
 const CreatedQuizList = () => {
-    // const [removeQuiz] = useMutation(REMOVE_QUIZ);
 
-    const { userData, setUserData } = useUserPageContext();
+    const { userData, setUserData, refetch } = useUserPageContext();
     console.log('userData in createdQuizes', userData)
+
+    useEffect(() => {
+        refetch();
+    }, [])
 
     const [removeQuiz] = useMutation(REMOVE_QUIZ);
 
