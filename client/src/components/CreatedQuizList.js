@@ -51,13 +51,13 @@ const CreatedQuizList = ({ userData }) => {
                         <Col xs={24} sm={24} md={14} lg={14} xl={14} className="createdQuizText-container">
                             <h4>{userData.createdQuizzes.title}</h4>
                             <p>{userData.createdQuizzes.description}</p>
-                            <Link to="/">
+                            <Link to={`/editQuiz/${userData.createdQuizzes._id}`}>
                                 <Button type="primary" style={{ backgroundColor: "#FD5F00", border: "solid 1px #FD5F00" }} shape="round" >Update</Button>
                             </Link>
                             <Link to="/">
                                 <Button type="primary" style={{ backgroundColor: "#05004E", border: "solid 1px #05004E" }} shape="round" >Leaderboard</Button>
                             </Link>
-                            <Link to="/my-page">
+                            <Link to="/">
                                 <Button type="primary" danger shape="round" onClick={() => handleDeleteQuestion(userData.createdQuizzes._Id)}>Delete</Button>
                             </Link>
                         </Col>
