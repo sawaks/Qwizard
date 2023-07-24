@@ -14,7 +14,7 @@ const PlayedQuizList = () => {
             <div className="playedQuizList-Container">
                 <div className="title-conatiner title-created-conatiner">
                     <h2 className="history">Play History</h2>
-                    <div className="icon-container icon-created-container"><img src={titleIcon} /></div>
+                    <div className="icon-container icon-created-container"><img src={titleIcon} alt="crystalball"/></div>
                 </div>
                 <h3>Not Played Quiz Yet</h3>
             </div>
