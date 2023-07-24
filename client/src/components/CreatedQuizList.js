@@ -12,7 +12,7 @@ import { useUserPageContext } from '../utils/userPageContext';
 const CreatedQuizList = () => {
     // const [removeQuiz] = useMutation(REMOVE_QUIZ);
 
-    const {userData, setUserData } = useUserPageContext();
+    const { userData, setUserData } = useUserPageContext();
     console.log('userData in createdQuizes', userData)
     const [removeQuiz] = useMutation(REMOVE_QUIZ);
 
@@ -58,8 +58,8 @@ const CreatedQuizList = () => {
                 userData.map((userData) => (
                     <Row key={userData._id} justify="space-between" className="createdQuizCard-container">
                         <Col xs={24} sm={24} md={10} lg={10} xl={10} className="createdImg-container">
-                            {/* <img src={userData.imgURL} alt="quiz" /> */}
-                            <div style={{ width: "100px", backgroundImage: `url(${userData.imgURL})` }}></div>
+                            <img src={userData.imgURL} alt="quiz" />
+                            {/* <div style={{ width: "100px", backgroundImage: `url(${userData.imgURL})` }}></div> */}
                         </Col>
                         <Col xs={24} sm={24} md={14} lg={14} xl={14} className="createdQuizText-container">
                             <h4>{userData.title}</h4>
