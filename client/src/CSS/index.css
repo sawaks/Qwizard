@@ -47,6 +47,34 @@ h6 {
   width: 180px;
 }
 
+.home-button,
+.userPage-button,
+.logout-button,
+.login-button {
+  width: 90%;
+  margin: 5px;
+}
+
+.home-button {
+  background: #FD5F00;
+  border-color: #FD5F00;
+}
+
+.userPage-button {
+  background: #76B39D;
+  border-color: #76B39D;
+}
+
+.logout-button {
+  background: #05004E;
+  border-color: #05004E;
+}
+
+.login-button {
+  background: #05004E;
+  border-color: #05004E;
+}
+
 .footer-style {
   background-color: #05004E;
   color: white;
@@ -403,7 +431,8 @@ h6 {
 
 .createdQuizText-container {
   padding: 15px;
-
+  display: flex;
+  flex-direction: column;
 
 }
 
@@ -422,7 +451,9 @@ h6 {
   margin-top: 3px;
 }
 
-
+.created-card-button-container {
+  margin-top: auto;
+}
 
 
 
@@ -477,6 +508,10 @@ h6 {
 }
 
 @media (max-width: 960px) {
+  .header-button-container Button {
+    width: 100%;
+  }
+
   .wichies-container img {
     width: 150px
   }
@@ -536,6 +571,10 @@ h6 {
 
   .right-hero {
     padding-left: 20%;
+  }
+
+  .card-style-container {
+    margin-bottom: 20px;
   }
 
 
