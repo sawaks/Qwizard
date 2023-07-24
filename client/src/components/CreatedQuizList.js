@@ -6,33 +6,31 @@ import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { REMOVE_QUIZ } from '../utils/mutations';
-import { GET_ME } from '../utils/queries';
 
-const CreatedQuizList = ({ userData }) => {
+import { useUserPageContext } from '../utils/userPageContext';
+
+const CreatedQuizList = () => {
     // const [removeQuiz] = useMutation(REMOVE_QUIZ);
 
-    const [removeQuiz] = useMutation(REMOVE_QUIZ, {
-        update(cache, { data: { removeQuiz } }) {
-            try {
-                cache.writeQuery({
-                    query: GET_ME,
-                    data: { me: removeQuiz },
-                });
-            } catch (e) {
-                console.error(e);
-            }
-        },
-    });
+    const { userData, setUserData } = useUserPageContext();
+    console.log('userData in createdQuizes', userData)
+    const [removeQuiz] = useMutation(REMOVE_QUIZ);
 
-    const handleDeleteQuestion = async (quizId) => {
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
-        if (!token) {
-            return false;
-        }
+    const handleDeleteQuestion = async (event) => {
+        // const token = Auth.loggedIn() ? Auth.getToken() : null;
+        // if (!token) {
+        //     return false;
+        // }
+
+        const quizId = event.target.dataset.id;
+
         try {
             await removeQuiz({
                 variables: { quizId },
             });
+
+            const filteredQuizzes = userData.filter((quiz) => quiz._id !== quizId);
+            setUserData(filteredQuizzes);
         } catch (err) {
             console.error(err);
         }
@@ -73,7 +71,7 @@ const CreatedQuizList = ({ userData }) => {
                                 <Button type="primary" style={{ backgroundColor: "#05004E", border: "solid 1px #05004E" }} shape="round" >Leaderboard</Button>
                             </Link>
                             <Link to="/">
-                                <Button type="primary" danger shape="round" onClick={() => handleDeleteQuestion(userData._id)}>Delete</Button>
+                                <Button type="primary" danger shape="round" data-id={userData._id} onClick={handleDeleteQuestion}>Delete</Button>
 
                             </Link>
                         </Col>

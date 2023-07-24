@@ -1,14 +1,15 @@
 
 import React, { useState, useEffect } from 'react';
-import { Form, Modal, Button, Image, Col, Row } from 'antd';
+import { Form, Modal, Button, Image, Col, Row, Input, Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 import { useCreateQuizContext } from '../utils/CreateQuizContext';
 
 import { ADD_QUIZ } from '../utils/mutations';
+import '../CSS/createDetails.css'
 
-
+const { TextArea } = Input;
 // IMG URLS NEED UPDATING
 // URL REROUTING NEEDS UPDATING
 
@@ -19,8 +20,8 @@ const CreateQuizDetails = () => {
         setShowModal(true);
     }, []);
 
-    const { setQuizId, quizDetails, setQuizDetails} = useCreateQuizContext();
-    
+    const { setQuizId, quizDetails, setQuizDetails } = useCreateQuizContext();
+
     const [showModal, setShowModal] = useState(true);
 
     const [addQuiz] = useMutation(ADD_QUIZ);
@@ -39,6 +40,11 @@ const CreateQuizDetails = () => {
 
     };
 
+    const handleSelectChange = (value) => {
+        console.log(`selected ${value}`);
+        setQuizDetails({ ...quizDetails, imgURL: value });
+    };
+
     const handleQuizSubmit = async (event) => {
         console.log("handleQuizSubmit");
 
@@ -46,31 +52,32 @@ const CreateQuizDetails = () => {
         if (!quizDetails.title || !quizDetails.description) {
             return;
         }
-        
+
         try {
-          const {data} = await addQuiz({
-            variables: {  input: { ...quizDetails} }
-          });
+            const { data } = await addQuiz({
+                variables: { input: { ...quizDetails } }
+            });
 
             setQuizId(data.addQuiz._id);
             setShowModal(false);
         } catch (e) {
-          console.error(e);
+            console.error(e);
         }
-    
+
         // console.log(quizId);
     };
 
     return (
         <>
             <Modal
+                className="mode"
                 centered={true}
                 width={800}
                 open={showModal}
                 title="Create a Quiz"
                 onCancel={() => handleModalCancel()}
                 footer={[
-                    <Button key="submit" form="QuizDetails" htmlType="submit">
+                    <Button block key="submit" form="QuizDetails" htmlType="submit">
                         Save
                     </Button>,
                 ]}
@@ -91,7 +98,7 @@ const CreateQuizDetails = () => {
                                     },
                                 ]}
                             >
-                                <input
+                                <Input
                                     type="text"
                                     id="QuizTitle"
                                     name="title"
@@ -108,7 +115,7 @@ const CreateQuizDetails = () => {
                                         required: true,
                                     },
                                 ]}>
-                                <textarea
+                                <TextArea
                                     type="text"
                                     id="QuizDescription"
                                     name="description"
@@ -118,22 +125,25 @@ const CreateQuizDetails = () => {
                                     required
                                 />
                             </Form.Item>
-                            <Form.Item label="Theme">
-                                <select
+                            <Form.Item className="mode-label"label="Theme">
+                                <Select
                                     id="QuizTheme"
-                                    name="imgURL"
-                                    value={quizDetails.theme}
-                                    onChange={handleQuizInputChange}
+                                    onChange={handleSelectChange}
+                                    name='imgURL'
+                                    key='imgURL'
+                                    placeholder="Select a theme"
+                                    value={quizDetails.imgURL? quizDetails.imgURL : './logo512.png'}
+
                                 >
-                                    <option value='./logo512.png'>Default</option>
-                                    <option value='./logo512.png'>Dark</option>
-                                    <option value='./logo512.png'>Light</option>
-                                </select>
+                                    <Select.Option value='./logo512.png'>Default</Select.Option>
+                                    <Select.Option value='./logo512.png2'>Dark</Select.Option>
+                                    <Select.Option value='./logo512.png3'>Light</Select.Option>
+                                </Select>
                             </Form.Item>
                         </Form>
                     </Col>
                     <Col span={6}>
-                        <Image src={quizDetails.imgURL} />
+                        <Image id="themeIMG"alt="theme" src={quizDetails.imgURL} />
                     </Col>
                 </Row>
 
