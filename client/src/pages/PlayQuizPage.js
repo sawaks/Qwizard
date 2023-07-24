@@ -129,22 +129,30 @@ const Quiz = () => {
                                         <h2 className="timer">Time Left:{timer} </h2>
                                         <div className="answer-card">
 
-                                            <Button data-id={activeQuestion.answer1} value={activeQuestion.answer1} onClick={checkAnswer}>
+                                            <Button data-id={activeQuestion.answer1}
+                                                value={activeQuestion.answer1}
+                                                onClick={checkAnswer} >
                                                 <span data-id={activeQuestion.answer1}>
                                                     {activeQuestion.answer1}
                                                 </span>
                                             </Button>
-                                            <Button data-id={activeQuestion.answer2} value={activeQuestion.answer2} onClick={checkAnswer}>
+                                            <Button data-id={activeQuestion.answer2}
+                                                value={activeQuestion.answer2}
+                                                onClick={checkAnswer}>
                                                 <span data-id={activeQuestion.answer2}>
                                                     {activeQuestion.answer2}
                                                 </span>
                                             </Button>
-                                            <Button data-id={activeQuestion.answer3} value={activeQuestion.answer3} onClick={checkAnswer}>
+                                            <Button data-id={activeQuestion.answer3}
+                                                value={activeQuestion.answer3}
+                                                onClick={checkAnswer}>
                                                 <span data-id={activeQuestion.answer3}>
                                                     {activeQuestion.answer3}
                                                 </span>
                                             </Button>
-                                            <Button data-id={activeQuestion.answer4} value={activeQuestion.answer4} onClick={checkAnswer}>
+                                            <Button data-id={activeQuestion.answer4}
+                                                value={activeQuestion.answer4}
+                                                onClick={checkAnswer}>
                                                 <span data-id={activeQuestion.answer4}>
                                                     {activeQuestion.answer4}
                                                 </span>
