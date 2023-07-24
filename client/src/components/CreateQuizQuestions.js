@@ -16,12 +16,13 @@ const CreateQuizQuestions = (props) => {
     const { quizId, setQuizId } = useCreateQuizContext();
     const [missingFields, setMissingFields] = useState(false);
     const [AlertMessage, setAlertMessage] = useState("Please fill all form fields");
-    const [selectValue, setSelectValue] = useState(false);
+    const [selectValue, setSelectValue] = useState(null);
 
     const [quizQuestions, setQuizQuestions] = useState([]);
 
-    const [thisQuestion, setThisQuestion] = useState();
+    const [thisQuestion, setThisQuestion] = useState({});
 
+    // if editing quiz, set quizId and quizQuestions
     useEffect(() => {
         if (props.value.param !== 0 && data) {
             setQuizId(props.value.param);
@@ -35,13 +36,15 @@ const CreateQuizQuestions = (props) => {
                 answer2: question.answers[1].answerText,
                 answer3: question.answers[2].answerText,
                 answer4: question.answers[3].answerText,
-                correctAnswer: question.correctAnswer
+                correctAnswer: saveCorrectSelect(question, question.correctAnswer)
             })));
 
             if (!thisQuestion?.id) {
                 setQuestionNumber(data.getQuizQuestions.questions.length + 1);
             }
         }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
     const [addQuestion] = useMutation(ADD_QUESTION);
@@ -69,56 +72,15 @@ const CreateQuizQuestions = (props) => {
     const saveQuestion = async () => {
         console.log("saveQuestion");
         console.log(thisQuestion);
-        if (!thisQuestion.timeLimit || isNaN(thisQuestion.timeLimit)) {
-            setAlertMessage("Time limit must be a number");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.questionText || thisQuestion.questionText.length === 0) {
-            setAlertMessage("Question is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.answer1 || thisQuestion.answer1.length === 0) {
-            setAlertMessage("Answer 1 is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.answer2 || thisQuestion.answer2.length === 0) {
-            setAlertMessage("Answer 2 is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.answer3 || thisQuestion.answer3.length === 0) {
-            setAlertMessage("Answer 3 is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.answer4 || thisQuestion.answer4.length === 0) {
-            setAlertMessage("Answer 4 is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.correctAnswer || thisQuestion.correctAnswer.length === 0) {
-            setAlertMessage("Correct Answer is required");
-            setMissingFields(true);
+
+        if (isThisInputInvalid()) {
             return;
         }
 
         setMissingFields(false);
         setAlertMessage("Please fill all form fields");
 
-        let correctAnswer;
-        switch (thisQuestion.correctAnswer) {
-            case "0":
-                correctAnswer = thisQuestion.answer1;
-                break;
-            case "1":
-                correctAnswer = thisQuestion.answer2;
-                break;
-            case "2":
-                correctAnswer = thisQuestion.answer3;
-                break;
-            case "3":
-                correctAnswer = thisQuestion.answer4;
-                break;
-            default:
-                correctAnswer = thisQuestion.answer1;
-        }
+        let correctAnswer = saveCorrectAnswer(thisQuestion, thisQuestion.correctAnswer);
 
         const questionInput = {
             questionText: thisQuestion.questionText,
@@ -155,64 +117,23 @@ const CreateQuizQuestions = (props) => {
 
     const createNewQuestion = () => {
         console.log("createNewQuestion");
-        setThisQuestion();
-        setSelectValue(false);
+        setThisQuestion({});
+        setSelectValue(null);
         setQuestionNumber(quizQuestions.length + 1);
     };
 
     const updateQuestion = async () => {
         console.log("updateQuestion");
 
-        if (!thisQuestion.timeLimit || isNaN(thisQuestion.timeLimit)) {
-            setAlertMessage("Time limit must be a number");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.questionText || thisQuestion.questionText.length === 0) {
-            setAlertMessage("Question is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.answer1 || thisQuestion.answer1.length === 0) {
-            setAlertMessage("Answer 1 is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.answer2 || thisQuestion.answer2.length === 0) {
-            setAlertMessage("Answer 2 is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.answer3 || thisQuestion.answer3.length === 0) {
-            setAlertMessage("Answer 3 is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.answer4 || thisQuestion.answer4.length === 0) {
-            setAlertMessage("Answer 4 is required");
-            setMissingFields(true);
-            return;
-        } else if (!thisQuestion.correctAnswer || thisQuestion.correctAnswer.length === 0) {
-            setAlertMessage("Correct Answer is required");
-            setMissingFields(true);
+        if (isThisInputInvalid()) {
             return;
         }
 
         setMissingFields(false);
         setAlertMessage("Please fill all form fields");
 
-        let correctAnswer;
-        switch (thisQuestion.correctAnswer) {
-            case "0":
-                correctAnswer = thisQuestion.answer1;
-                break;
-            case "1":
-                correctAnswer = thisQuestion.answer2;
-                break;
-            case "2":
-                correctAnswer = thisQuestion.answer3;
-                break;
-            case "3":
-                correctAnswer = thisQuestion.answer4;
-                break;
-            default:
-                correctAnswer = thisQuestion.answer1;
-        }
+        let correctAnswer = saveCorrectAnswer(thisQuestion, thisQuestion.correctAnswer);
+
 
         const questionInput = {
             questionText: thisQuestion.questionText,
@@ -247,6 +168,87 @@ const CreateQuizQuestions = (props) => {
 
         console.log(quizQuestions);
     };
+
+    const isThisInputInvalid = () => {
+        if (!thisQuestion.timeLimit || isNaN(thisQuestion.timeLimit)) {
+            setAlertMessage("Time limit must be a number");
+            setMissingFields(true);
+            return true;
+        } else if (!thisQuestion.questionText || thisQuestion.questionText.length === 0) {
+            setAlertMessage("Question is required");
+            setMissingFields(true);
+            return true;
+        } else if (!thisQuestion.answer1 || thisQuestion.answer1.length === 0) {
+            setAlertMessage("Answer 1 is required");
+            setMissingFields(true);
+            return true;
+        } else if (!thisQuestion.answer2 || thisQuestion.answer2.length === 0) {
+            setAlertMessage("Answer 2 is required");
+            setMissingFields(true);
+            return true;
+        } else if (!thisQuestion.answer3 || thisQuestion.answer3.length === 0) {
+            setAlertMessage("Answer 3 is required");
+            setMissingFields(true);
+            return true;
+        } else if (!thisQuestion.answer4 || thisQuestion.answer4.length === 0) {
+            setAlertMessage("Answer 4 is required");
+            setMissingFields(true);
+            return true;
+        } else if (!thisQuestion.correctAnswer || thisQuestion.correctAnswer.length === 0) {
+            setAlertMessage("Correct Answer is required");
+            setMissingFields(true);
+            return true;
+        }
+
+        return false;
+    }
+
+    const saveCorrectAnswer = (question, select) => {
+        let correctAnswer;
+
+        switch (select) {
+            case "0":
+                correctAnswer = question.answer1;
+                break;
+            case "1":
+                correctAnswer = question.answer2;
+                break;
+            case "2":
+                correctAnswer = question.answer3;
+                break;
+            case "3":
+                correctAnswer = question.answer4;
+                break;
+            default:
+                correctAnswer = question.answer1;
+        }
+
+        return correctAnswer;
+    }
+
+    const saveCorrectSelect = (question, correctAnswer) => {
+        let selectAnswer;
+
+        switch (correctAnswer) {
+            case question.answers[0].answerText:
+                selectAnswer = "0";
+                break;
+            case question.answers[1].answerText:
+                selectAnswer = "1";
+                break;
+            case question.answers[2].answerText:
+                selectAnswer = "2";
+                break;
+            case question.answers[3].answerText:
+                selectAnswer = "3";
+                break;
+            default:
+                selectAnswer = "";
+        }
+
+        return selectAnswer;
+    }
+
 
     return (
         <div>
@@ -387,53 +389,20 @@ const CreateQuizQuestions = (props) => {
                         <Form>
                             <Form.Item
                                 label="Correct Answer"
-                                name='correctAnswer'
-
                             >
-                                {/* {selectValue ? (
-
                                 <Select
                                     onChange={handleSelectChange}
-                                    // defaultValue={selectValue}
+                                    name='correctAnswer'
+                                    key='correctAnswer'
                                     value={selectValue}
-                                    name='correctAnswer'
-                                    key='correctAnswer'
-                                    options={[
-                                        {value: "0", label: "Answer 1"},
-                                        {value: "1", label: "Answer 2"},
-                                        {value: "2", label: "Answer 3"},
-                                        {value: "3", label: "Answer 4"
-                                    }]}
-                                />
-                                   //  <Select.Option value="0">Answer 1</Select.Option>
-                                //     <Select.Option value="1">Answer 2</Select.Option>
-                                //     <Select.Option value="2">Answer 3</Select.Option>
-                                //     <Select.Option value="3">Answer 4</Select.Option>
-                                // </Select> 
-
-
-                            ) : ( */}
-                                <Select
-                                    onChange={handleSelectChange}
-                                    name='correctAnswer'
-                                    key='correctAnswer'
-                                    value={selectValue ? selectValue : undefined}
-                                    defaultValue={selectValue ? selectValue : undefined}
                                     placeholder='Select Correct Answer'
-                                    options={[
-                                        { value: "0", label: "Answer 1" },
-                                        { value: "1", label: "Answer 2" },
-                                        { value: "2", label: "Answer 3" },
-                                        {
-                                            value: "3", label: "Answer 4"
-                                        }]}
-                                />
-                                {/* // <Select.Option value="0">Answer 1</Select.Option>
-                                    // <Select.Option value="1">Answer 2</Select.Option>
-                                    // <Select.Option value="2" selected>Answer 3</Select.Option>
-                                    // <Select.Option value="3">Answer 4</Select.Option>
-                                // </Select>
-                            )} */}
+                                >
+                                <Select.Option value="0" className = "answerbtn">Answer 1</Select.Option>
+                                    <Select.Option value="1" className = "answerbtn">Answer 2</Select.Option>
+                                    <Select.Option value="2" className = "answerbtn">Answer 3</Select.Option>
+                                    <Select.Option value="3" className = "answerbtn">Answer 4</Select.Option>
+                                </Select>
+
 
                             </Form.Item>
                             <Form.Item

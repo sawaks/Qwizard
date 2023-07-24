@@ -45,6 +45,10 @@ const EditQuizDetails = (props) => {
     const handleQuizDetailsUpdate = async (event) => {
         console.log("handleQuizDetailsUpdate");
 
+        if (!quizDetails.title || !quizDetails.description) {
+            return;
+        }
+
         try {
             await editQuiz({
                 variables: { quizId, input: { ...quizDetails } }

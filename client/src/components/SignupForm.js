@@ -126,7 +126,7 @@ const SignupForm = () => {
           variant='success'
           style={{ borderRadius: "50px" }}
         >
-          Submit
+          Sign up
         </Button>
       </Form>
     </>
