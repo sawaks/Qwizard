@@ -20,10 +20,11 @@ import { HelmetProvider } from 'react-helmet-async';
 // import { Layout } from 'antd';
 import AppHeader from './components/AppHeader';
 import AppFooter from './components/AppFooter';
-
+import Leaderboard from './pages/Leaderboard';
 import HomePage from './pages/Homepage';
 import UserPage from './pages/Userpage';
 import CreateQuiz from './pages/CreateQuiz';
+import PlayQuizPage from './pages/PlayQuizPage';
 // import SearchBooks from './pages/SearchBooks';
 // import SavedBooks from './pages/SavedBooks';
 
@@ -82,6 +83,17 @@ function App() {
                 // path='/'
                 element={<CreateQuiz />}
               />
+              <Route
+                path='/Quiz/:quizId'
+                // path='/'
+                element={<PlayQuizPage />}
+              />
+              <Route
+                path='/Leaderboard/:quizId'
+                // path='/'
+                element={<Leaderboard />}
+              />
+              {/* <Route path='/saved' element={<SavedBooks />} /> */}
               <Route
                 path='*'
                 element={<h1 className='display-2'>Wrong page!</h1>}
