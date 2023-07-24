@@ -151,7 +151,7 @@ const Quiz = () => {
                                         <h1>Quiz Completed</h1>
                                         <h1>Score:{result}</h1>
                                         <Button href="/">Go Back</Button>
-                                        <Button href="/leaderboard">Leaderboard</Button>
+                                        <Button href={`/leaderboard/${quizId}`}>Leaderboard</Button>
                                     </>
                                 ) : (
                                     <>
