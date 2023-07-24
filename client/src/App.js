@@ -82,7 +82,7 @@ function App() {
               element={<CreateQuiz />}
             />
             <Route
-              path='/Quiz'
+              path='/Quiz/:quizId'
               // path='/'
               element={<PlayQuizPage />}
             />

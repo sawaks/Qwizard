@@ -63,20 +63,12 @@ export const GET_QUIZ_QUESTIONS = gql`
       questions {
         _id
         questionText
-<<<<<<< HEAD
-        questionType
-=======
->>>>>>> main
         timeLimit
         correctAnswer
         answers {
           answerText
         }
-<<<<<<< HEAD
-      }
-=======
       } 
->>>>>>> main
     }
   }`;
 
