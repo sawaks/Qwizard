@@ -47,9 +47,9 @@ const AppNavbar = () => {
                       My Quizzes
                     </Button>
                   </Link>
-                  <Link to="/">
-                    <Button onClick={Auth.logout} type="primary" style={{ margin: "5px", background: "#05004E", borderColor: "#05004E" }} shape="round">Logout</Button>
-                  </Link>
+
+                  <Button onClick={Auth.logout} type="primary" style={{ margin: "5px", background: "#05004E", borderColor: "#05004E" }} shape="round">Logout</Button>
+
                 </>
               ) : (
                 <Button onClick={() => setShowModal(true)} type="primary" style={{ margin: "5px", background: "#05004E", borderColor: "#05004E" }} shape="round"> Login/Sign Up</Button>
