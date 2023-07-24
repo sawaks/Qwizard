@@ -70,10 +70,11 @@ const CreatedQuizList = () => {
                                 <Link to={`/Leaderboard/${userData._id}`}>
                                     <Button type="primary" style={{ backgroundColor: "#05004E", border: "solid 1px #05004E" }} shape="round" >Leaderboard</Button>
                                 </Link>
-                                <Link to="/">
-                                    <Button type="primary" danger shape="round" data-id={userData._id} onClick={handleDeleteQuestion}>Delete</Button>
-
-                                </Link>
+                                <Button type="primary" danger shape="round" data-id={userData._id} onClick={handleDeleteQuestion}>
+                                    <span data-id={userData._id}>
+                                        Delete
+                                    </span>
+                                </Button>
                             </div>
                         </Col>
                     </Row>
