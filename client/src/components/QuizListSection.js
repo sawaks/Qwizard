@@ -29,20 +29,20 @@ const QuizListSection = ({ dbQuizzes, title }) => {
             <div className="row quizCards-container">
                 {dbQuizzes &&
                     dbQuizzes.map((dbQuiz) => (
-                        <div className="col-md-4">
-                            <div key={dbQuiz._id} className="card card-style">
+                        <div className="col-md-4 card-style-container">
+                            <div key={dbQuiz._id} className="card h-100 card-style">
                                 <img className="card-img-top quiz-img" src={dbQuiz.imgURL} alt="quiz Img" />
-                                <div className="card-body">
+                                <div className="d-flex flex-column card-body">
                                     <h5 className="card-title">{dbQuiz.title}</h5>
                                     <p className="card-text">{dbQuiz.description}</p>
-                                    <div className='linkBtn-container'>
+                                    <div className='linkBtn-container mt-auto'>
                                         {Auth.loggedIn() ? (
                                             <>
                                                 <Link to={`/Quiz/${dbQuiz._id}`}>
-                                                    <Button type="primary" style={{ margin: "5px", width: "200px", background: "#FD5F00", borderColor: "#FD5F00" }} shape="round" >Play</Button>
+                                                    <Button type="primary" style={{ margin: "5px", width: "100%", background: "#FD5F00", borderColor: "#FD5F00" }} shape="round" >Play</Button>
                                                 </Link>
                                                 <Link to={`/Leaderboard/${dbQuiz._id}`}>
-                                                    <Button type="primary" style={{ margin: "5px", width: "200px", background: "#05004E", borderColor: "#05004E" }} shape="round">See Leaderboard</Button>
+                                                    <Button type="primary" style={{ margin: "5px", width: "100%", background: "#05004E", borderColor: "#05004E" }} shape="round">See Leaderboard</Button>
                                                 </Link>
                                             </>
 
