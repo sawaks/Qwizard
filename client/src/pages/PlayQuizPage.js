@@ -16,9 +16,10 @@ const Quiz = () => {
     const [questionIndex, setQuestionIndex] = useState(0);
     const [quizQuestions, setQuizQuestions] = useState([]);
     const [activeQuestion, setActiveQuestion] = useState(quizQuestions[0]);
-    const [timer, setTimer] = useState(0);
+    const [timer, setTimer] = useState();
     const [result, setResult] = useState(0);
-
+    const [end, setEnd] = useState(false);
+    const [intervalId, setIntervalId] = useState(null);
 
     useEffect(() => {
         if (data) {
@@ -41,21 +42,30 @@ const Quiz = () => {
     useEffect(() => {
 
         if (quizQuestions.length > 0) {
-            setActiveQuestion(quizQuestions[questionIndex]);
-            setTimer(quizQuestions[questionIndex].timeLimit);
+            if (questionIndex >= quizQuestions.length) {
+                setEnd(true);
+                setActiveQuestion(null);
+                setTimer(0);
+                return;
+            }
             startTimer(quizQuestions[questionIndex].timeLimit);
+            setActiveQuestion(quizQuestions[questionIndex]);
         }
     }, [quizQuestions, questionIndex]);
 
     function checkAnswer(event) {
         if (event.target.dataset.id === activeQuestion.correctAnswer) {
-            setResult(result + 1);
-            setQuestionIndex(questionIndex + 1);
-            alert("correct");
+            setResult((result + 1) * (timer + 1));
+            setTimeout(() => {
+                endTimer();
+            }, 1000);
+            // add CSS to show correct answer
         }
         else {
-            alert("wrong");
-
+            // add CSS to show wrong answer
+            setTimeout(() => {
+                endTimer();
+            }, 1000);
             return;
         }
 
@@ -63,15 +73,23 @@ const Quiz = () => {
     };
 
     const startTimer = (Time) => {
+        setTimer(Time--);
         const questionTimer = setInterval(() => {
             if (Time > 0) {
                 setTimer(Time--)
             } else if (Time === 0) {
-                clearInterval(questionTimer);
-                setQuestionIndex(questionIndex + 1);
+                endTimer();
             }
         }, 1000);
+
+        setIntervalId(questionTimer);
     };
+
+    const endTimer = () => {
+        // setTimer(0);
+        clearInterval(intervalId);
+        setQuestionIndex(questionIndex + 1);
+    }
 
     return (
         <div className="master-div">
@@ -81,7 +99,7 @@ const Quiz = () => {
                 <div className="quiz-container">
                     <h1>{data.getQuizQuestions.title}</h1>
                     <div className="quiz-card">
-                        {activeQuestion ? (
+                        {activeQuestion && timer ? (
                             <>
                                 <h2>{activeQuestion.questionText}</h2>
                                 <h2 className="timer">Time Left:{timer} </h2>
@@ -112,12 +130,22 @@ const Quiz = () => {
                             </>
                         ) : (
                             <>
-                                <h1>Loading...</h1>
+                                {end ? (
+                                    <>
+                                        <h1>Quiz Completed</h1>
+                                        <h1>Score:{result}</h1>
+                                        <Button href="/">Go Back</Button>
+                                        <Button href="/leaderboard">Leaderboard</Button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <h1>Loading...</h1>
+                                    </>
+                                )}
                             </>
                         )}
 
                     </div>
-                    <p className="score-card">score:{result}</p>
                 </div>
 
             )}
