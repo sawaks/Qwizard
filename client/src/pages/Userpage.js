@@ -8,15 +8,23 @@ import { Col, Row } from 'antd';
 
 import { GET_ME } from '../utils/queries';
 
+import { Helmet } from 'react-helmet-async';
+
+
 
 const Userpage = () => {
     const { loading, data } = useQuery(GET_ME);
     console.log(data)
-    const userData = data?.me || {};
+    const userData = data?.me.createdQuizzes || {};
+    const userData2 = data?.me.playedQuizzes || {};
 
 
     return (
         <div className="userPage-container">
+            <Helmet>
+                <title>Qwizard | My Quizzies</title>
+                <meta name="description" content="This is the user page. You can see the Lists about created quizzes and played quizzes." />
+            </Helmet>
             <Navbar />
             {loading ? (
                 <div>Loading...</div>
@@ -26,7 +34,7 @@ const Userpage = () => {
                         <CreatedQuizList userData={userData} />
                     </Col>
                     <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-                        <PlayedQuizList userData={userData} />
+                        <PlayedQuizList userData={userData2} />
                     </Col>
                 </Row>
             )}

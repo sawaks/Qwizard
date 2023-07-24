@@ -2,6 +2,8 @@ const { Schema, model } = require('mongoose');
 
 const Question = require('./Question');
 
+// const User = require('./User');
+
 const quizSchema = new Schema({
   quizAuthor: {
     type: String,
@@ -38,6 +40,10 @@ const quizSchema = new Schema({
       },
     }
   ],
+  // user: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'User'
+  // }
 });
 
 const Quiz = model('Quiz', quizSchema);

@@ -16,6 +16,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 // import { Layout } from 'antd';
 import AppHeader from './components/AppHeader';
 import AppFooter from './components/AppFooter';
@@ -58,43 +59,45 @@ function App() {
       <Router>
         <div className="app-container">
           <AppHeader />
-          <Routes>
-            <Route
-              // path='/'
-              path='/homepage'
-              element={<HomePage />}
-            />
-            <Route
-              path='/'
-              // path='/myQuizzes'
-              element={<UserPage />}
-            />
-            <Route
-              path='/createQuiz'
-              // path='/'
-              element={<CreateQuiz />}
-            />
-            <Route
-              path='/editQuiz/:quizId'
-              // path='/'
-              element={<CreateQuiz />}
-            />
-            <Route
-              path='/Quiz/:quizId'
-              // path='/'
-              element={<PlayQuizPage />}
-            />
-            <Route
-              path='/Leaderboard/:quizId'
-              // path='/'
-              element={<Leaderboard />}
-            />
-            {/* <Route path='/saved' element={<SavedBooks />} /> */}
-            <Route
-              path='*'
-              element={<h1 className='display-2'>Wrong page!</h1>}
-            />
-          </Routes>
+          <HelmetProvider>
+            <Routes>
+              <Route
+                // path='/'
+                path='/homepage'
+                element={<HomePage />}
+              />
+              <Route
+                path='/'
+                // path='/myQuizzes'
+                element={<UserPage />}
+              />
+              <Route
+                path='/createQuiz'
+                // path='/'
+                element={<CreateQuiz />}
+              />
+              <Route
+                path='/editQuiz/:quizId'
+                // path='/'
+                element={<CreateQuiz />}
+              />
+              <Route
+                path='/Quiz/:quizId'
+                // path='/'
+                element={<PlayQuizPage />}
+              />
+              <Route
+                path='/Leaderboard/:quizId'
+                // path='/'
+                element={<Leaderboard />}
+              />
+              {/* <Route path='/saved' element={<SavedBooks />} /> */}
+              <Route
+                path='*'
+                element={<h1 className='display-2'>Wrong page!</h1>}
+              />
+            </Routes>
+          </HelmetProvider>
           < AppFooter />
 
         </div>

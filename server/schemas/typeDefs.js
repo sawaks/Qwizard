@@ -18,6 +18,7 @@ const typeDefs = gql`
         imgURL: String!
         questions: [Question]
         leaderboard: [Leaderboard]
+        # user:[User]
     }
 
     type Question {

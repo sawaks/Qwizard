@@ -20,8 +20,8 @@ const resolvers = {
             if (context.user) {
                 const quizData = await Quiz.findOne({ _id: quizId })
                     .populate('questions');
-                
-                    return quizData;
+
+                return quizData;
             }
 
             throw new AuthenticationError('Not logged in');
@@ -38,9 +38,13 @@ const resolvers = {
         },
 
         // gets a list of all quizes from the db
-        dbQuizzes: async (parent, args, context) => {
-            const quizData = await Quiz.findOne({}).populate('questions');
-            return quizData;
+        // dbQuizzes: async (parent, args, context) => {
+        //     const quizData = await Quiz.findOne({}).populate('questions');
+        //     return quizData;
+        // },
+        dbQuizzes: async (parent) => {
+            return Quiz.find().populate('questions');
+
         },
 
         getLeaderboard: async (parent, { quizId }, context) => {
@@ -142,7 +146,7 @@ const resolvers = {
                     {
                         $addToSet: {
                             leaderboard: {
-                                points, 
+                                points,
                                 player: context.user.username
                             },
                         },
@@ -163,7 +167,12 @@ const resolvers = {
                     { $pull: { createdQuizzes: quizId } }
                 );
 
-                await User.findSeveralAndUpdate(
+                // await User.findSeveralAndUpdate(
+                //     { playedQuizzes: quizId },
+                //     { $pull: { playedQuizzes: quizId } }
+                // );
+
+                await User.findOneAndUpdate(
                     { playedQuizzes: quizId },
                     { $pull: { playedQuizzes: quizId } }
                 );

@@ -8,6 +8,8 @@ import EditQuizDetails from '../components/EditQuizDetails';
 import CreateQuizProvider from '../utils/CreateQuizContext';
 // import { useCreateQuizContext } from '../utils/CreateQuizContext';
 
+import { Helmet } from 'react-helmet-async';
+
 
 const CreateQuiz = () => {
 
@@ -18,6 +20,10 @@ const CreateQuiz = () => {
 
     return (
         <CreateQuizProvider>
+            <Helmet>
+                <title>Qwizard | Create Quiz</title>
+                <meta name="description" content="Create and update your own quiz!" />
+            </Helmet>
             {quizId ? (
                 <>
                     <EditQuizDetails value={{ param: quizId }} />
@@ -26,8 +32,8 @@ const CreateQuiz = () => {
             ) : (
                 <>
                     <CreateQuizDetails />
-                    <EditQuizDetails value={{ param: 0 }}/>
-                    <CreateQuizQuestions value={{ param: 0 }}/>
+                    <EditQuizDetails value={{ param: 0 }} />
+                    <CreateQuizQuestions value={{ param: 0 }} />
                 </>
 
             )}
