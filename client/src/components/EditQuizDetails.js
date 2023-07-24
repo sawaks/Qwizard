@@ -149,7 +149,7 @@ const EditQuizDetails = (props) => {
                         <h6>{quizDetails.description}</h6>
                     </Col>
                     <Col span={2} align={"start"} >
-                        <Image style={{ fontSize: '45px', color: '#FD5F00' }} src={EditImage} alt="edit" onClick={() => setToEdit(true)} />
+                        <img style={{ fontSize: '45px', color: '#FD5F00' }} src={EditImage} alt="edit" onClick={() => setToEdit(true)} />
                     </Col>
                 </Row>
             )}
