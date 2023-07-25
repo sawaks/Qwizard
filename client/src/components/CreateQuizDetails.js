@@ -77,7 +77,11 @@ const CreateQuizDetails = () => {
                 title="Create a Quiz"
                 onCancel={() => handleModalCancel()}
                 footer={[
-                    <Button block key="submit" form="QuizDetails" htmlType="submit">
+                    <Button 
+                    className="orangeBtn"
+                    block key="submit" 
+                    form="QuizDetails" 
+                    htmlType="submit">
                         Save
                     </Button>,
                 ]}

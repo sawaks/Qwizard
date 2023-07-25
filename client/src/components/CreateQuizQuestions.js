@@ -4,6 +4,8 @@ import { Form, Button, Row, Col, Input, Select, Alert } from 'antd';
 import { ADD_QUESTION, EDIT_QUESTION } from '../utils/mutations';
 import { GET_QUIZ_QUESTIONS } from '../utils/queries';
 
+import sword from '../images/sword.png'
+
 import { useCreateQuizContext } from '../utils/CreateQuizContext';
 import '../CSS/createDetails.css'
 
@@ -266,6 +268,7 @@ const CreateQuizQuestions = (props) => {
                                         width='100%'
                                         onClick={openQuestion}
                                         block
+                                        className='blueBtn'
                                     >
                                         <span data-id={question.id}>
                                             Question {quizQuestions.indexOf(question) + 1}
@@ -277,12 +280,15 @@ const CreateQuizQuestions = (props) => {
                             <></>
                         )}
                         <Button
+                            className="orangeBtn"
                             block
                             onClick={createNewQuestion}
                         >Add Question</Button>
                     </Col>
                     <Col span={14} id="questionCreateBody">
-                        <h1>Question #
+                        <h1>
+                        <img src={sword} alt="magic wand" id='editSword'/>
+                            Question #
                             <span>
                                 {questionNumber}
                             </span>
@@ -379,12 +385,14 @@ const CreateQuizQuestions = (props) => {
                                 <Col span={24}>
                                     {thisQuestion?.id ? (
                                         <Button
+                                            className='orangeBtn'
                                             block
                                             onClick={updateQuestion}
                                             data-id={thisQuestion.id}
                                         >Update Question</Button>
                                     ) : (
                                         <Button
+                                            className='orangeBtn'
                                             block
                                             onClick={saveQuestion}
                                         >Save Question</Button>
@@ -397,6 +405,7 @@ const CreateQuizQuestions = (props) => {
                         <h1>Extra Details</h1>
                         <Form>
                             <Form.Item
+                                className='extraDetailsTitle'
                                 label="Correct Answer"
                             >
                                 <Select
@@ -416,6 +425,7 @@ const CreateQuizQuestions = (props) => {
                             </Form.Item>
                             <Form.Item
                                 label="Time Limit (seconds)"
+                                className='extraDetailsTitle'
                                 rules={[{ required: true, message: 'Please input your answer!' }]}
                             >
                                 <Input

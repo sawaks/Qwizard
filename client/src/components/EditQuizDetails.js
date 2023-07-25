@@ -3,11 +3,14 @@ import { Form, Button, Image, Col, Row, Input, Select } from 'antd';
 import { useMutation, useQuery } from '@apollo/client';
 import EditImage from '../images/edit.png'
 
+import witchHat from '../images/witch-hat2.png'
+
 import { EDIT_QUIZ } from '../utils/mutations';
 import { GET_QUIZ_QUESTIONS } from '../utils/queries';
 
 import { useCreateQuizContext } from '../utils/CreateQuizContext';
 import '../CSS/createDetails.css'
+import { Link } from 'react-router-dom';
 const { TextArea } = Input;
 
 const EditQuizDetails = (props) => {
@@ -69,9 +72,9 @@ const EditQuizDetails = (props) => {
     };
 
     return (
-        <>
+        <div >
             {isEdit ? (
-                <Row>
+                <Row className='editQuestionComp'>
                     <Col span={18}>
                         <Form
                             validateMessages={{ required: 'Fields cannot be empty' }}
@@ -131,6 +134,7 @@ const EditQuizDetails = (props) => {
                                 htmlType="submit"
                                 onClick={handleQuizDetailsUpdate}
                                 block
+                                className='orangeBtn'
                             >
                                 Save</Button>
                         </Form>
@@ -140,20 +144,23 @@ const EditQuizDetails = (props) => {
                     </Col>
                 </Row>
             ) : (
-                <Row align={"middle"} id="QdetailsContainer">
-                    <Col span={2} align={"middle"} >
+                <Row align={"middle"} id="QdetailsContainer" className='editQuestionComp'>
+                    <Col span={2} align={"middle"}>
                         <Image alt="theme img" id="themeIMG3" src={quizDetails.imgURL} />
                     </Col>
                     <Col span={20} id="quizDetails" >
+                        <img id="witchHat-edit" src={witchHat} alt="witch hat" />
                         <h4>{quizDetails.title}</h4>
                         <h6>{quizDetails.description}</h6>
                     </Col>
                     <Col span={2} align={"start"} >
-                        <img style={{ fontSize: '45px', color: '#FD5F00' }} src={EditImage} alt="edit" onClick={() => setToEdit(true)} />
+                        <Link onClick={() => setToEdit(true)}>
+                        <img id="edit-quiz-Icon" src={EditImage} alt="edit" onClick={() => setToEdit(true)} />
+                        </Link>
                     </Col>
                 </Row>
             )}
-        </>
+        </div>
     );
 };
 
