@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import titleIcon from "../images/magic-wand3.png";
 // import quizImg from "../images/quizImg.png";
+import DesignedTitle from './DesignedTitle';
 import { Button, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
@@ -38,21 +39,13 @@ const CreatedQuizList = () => {
     if (!userData.length) {
         return (
             <div className="createdQuizList-Container">
-                <div className="title-conatiner title-created-conatiner">
-                    <h2>Your Created Quiz</h2>
-                    <div className="icon-container icon-created-container"><img src={titleIcon} /></div>
-                </div>
+                <DesignedTitle title="Your Created Quiz" src={titleIcon} />
                 <h3>Not Created Quiz Yet</h3>
             </div>)
     }
     return (
         <div className="createdQuizList-Container">
-            <div className="title-conatiner title-created-conatiner">
-                <h2>Your Created Quiz</h2>
-                <div className="icon-container icon-created-container">
-                    <img src={titleIcon} alt="magic wand" />
-                </div>
-            </div>
+            <DesignedTitle title="Your Created Quiz" src={titleIcon} />
             {userData &&
                 userData.map((userData) => (
                     <Row key={userData._id} justify="space-between" className="createdQuizCard-container">

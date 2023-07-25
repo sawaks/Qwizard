@@ -1,6 +1,7 @@
 import React from 'react';
 import titleIcon from "../images/crystal-ball2.png";
-// import quizImg from "../images/quizImg.png";
+import DesignedTitle from './DesignedTitle';
+
 import { Button, Card } from 'antd';
 import { Link } from 'react-router-dom';
 import { useUserPageContext } from '../utils/userPageContext';
@@ -12,22 +13,25 @@ const PlayedQuizList = () => {
     if (!userData2.length) {
         return (
             <div className="playedQuizList-Container">
-                <div className="title-conatiner title-created-conatiner">
+                {/* <div className="title-conatiner title-created-conatiner">
                     <h2 className="history">Play History</h2>
                     <div className="icon-container icon-created-container"><img src={titleIcon} alt="crystalball"/></div>
-                </div>
+                </div> */}
+                <DesignedTitle title="Play History" color="#76B39D" src={titleIcon} />
                 <h3>Not Played Quiz Yet</h3>
             </div>
         )
     }
     return (
         <div className="playedQuizList-Container">
-            <div className="title-conatiner title-created-conatiner">
+            {/* <div className="title-conatiner title-created-conatiner">
                 <h2 className="history">Play History</h2>
                 <div className="icon-container icon-created-container">
                     <img src={titleIcon} alt="crystal ball" />
                 </div>
-            </div>
+            </div> */}
+            <DesignedTitle title="Play History" color="#76B39D" src={titleIcon} />
+
             <div className="playedCard-container">
                 {userData2 &&
                     userData2.map((userData) => (
