@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'antd';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
-
+import '../CSS/leaderboard.css';
 import { GET_LEADERBOARD } from '../utils/queries';
 
+import { Helmet } from 'react-helmet-async';
 
 const Leaderboard = () => {
     const { quizId } = useParams();
@@ -24,20 +25,20 @@ const Leaderboard = () => {
         }
     }, [data]);
     return (
-        <div className="container">
+        <div className="leaderboard-container">
             {loading ? (
                 <h1>Loading...</h1>
             ) : (
                 <div className="leaderboard">
+                    <div className="leaderboard-header">
                     <h1>Leaderboard</h1>
+                    </div>
                     {leaderboard?.length > 0 ? (
-                        <ol className="list">
+                        <ol className="leaderboard-list">
                             {leaderboard.map((leaderboard) => {
                                 return (
-
-                                    <li>
-                                        player: {leaderboard.player}:
-                                        points: {leaderboard.points}
+                                    <li className= "leaderboard-li">
+                                        {leaderboard.player}: {leaderboard.points}
                                     </li>
                                 )
 
@@ -54,7 +55,7 @@ const Leaderboard = () => {
                     </>
                     )}
 
-                    <Button href="/">Go Back</Button>
+                    <Button href="/" className="leaderboard-btn">Go Back</Button>
                 </div>
 
 
