@@ -6,7 +6,6 @@ import CreateQuizQuestions from '../components/CreateQuizQuestions';
 import EditQuizDetails from '../components/EditQuizDetails';
 
 import CreateQuizProvider from '../utils/CreateQuizContext';
-import UserPageProvider from '../utils/userPageContext';
 
 import { Helmet } from 'react-helmet-async';
 
@@ -31,9 +30,7 @@ const CreateQuiz = () => {
                 </>
             ) : (
                 <>
-                    <UserPageProvider>
-                        <CreateQuizDetails />
-                    </UserPageProvider>
+                    <CreateQuizDetails />
                     <EditQuizDetails value={{ param: 0 }} />
                     <CreateQuizQuestions value={{ param: 0 }} />
                 </>

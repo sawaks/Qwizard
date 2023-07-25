@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Image, Col, Row, Input, Select } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
 import { useMutation, useQuery } from '@apollo/client';
+import EditImage from '../images/edit.png'
 
 import { EDIT_QUIZ } from '../utils/mutations';
 import { GET_QUIZ_QUESTIONS } from '../utils/queries';
@@ -149,7 +149,7 @@ const EditQuizDetails = (props) => {
                         <h6>{quizDetails.description}</h6>
                     </Col>
                     <Col span={2} align={"start"} >
-                        <EditOutlined style={{ fontSize: '45px', color: '#FD5F00' }} onClick={() => setToEdit(true)} />
+                        <img style={{ fontSize: '45px', color: '#FD5F00' }} src={EditImage} alt="edit" onClick={() => setToEdit(true)} />
                     </Col>
                 </Row>
             )}

@@ -32,10 +32,11 @@ const AppNavbar = () => {
 
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
-            <Nav className='ml-auto'>
+            <Nav className='ml-auto header-button-container'>
 
               <Link to="/">
-                <Button type="primary" style={{ margin: "5px", background: "#FD5F00", borderColor: "#FD5F00" }} shape="round">
+                <Button className="home-button" type="primary"
+                  shape="round">
                   Home
                 </Button>
               </Link>
@@ -43,16 +44,19 @@ const AppNavbar = () => {
               {Auth.loggedIn() ? (
                 <>
                   <Link to="/myQuizzes">
-                    <Button type="primary" style={{ margin: "5px", background: "#76B39D", borderColor: "#76B39D" }} shape="round">
+                    <Button className="userPage-button" type="primary"
+                      shape="round">
                       My Quizzes
                     </Button>
                   </Link>
 
-                  <Button onClick={Auth.logout} type="primary" style={{ margin: "5px", background: "#05004E", borderColor: "#05004E" }} shape="round">Logout</Button>
+                  <Button className="logout-button" onClick={Auth.logout} type="primary"
+                    shape="round">Logout</Button>
 
                 </>
               ) : (
-                <Button onClick={() => setShowModal(true)} type="primary" style={{ margin: "5px", background: "#05004E", borderColor: "#05004E" }} shape="round"> Login/Sign Up</Button>
+                <Button className="login-button" onClick={() => setShowModal(true)} type="primary"
+                  shape="round"> Login/Sign Up</Button>
               )}
             </Nav>
           </Navbar.Collapse>
