@@ -28,7 +28,7 @@ const HomePage = () => {
             ) : (
                 <QuizListSection
                     dbQuizzes={dbQuizzes}
-                    title="Quiz List"
+
                 />
             )}
 
