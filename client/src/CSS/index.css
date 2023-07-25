@@ -232,6 +232,7 @@ h6 {
 /* quizList */
 .title-conatiner {
   position: relative;
+  margin-left: 10px;
 }
 
 .title-conatiner img {
@@ -261,6 +262,8 @@ h6 {
   padding: 50px;
   padding-bottom: 200px;
 }
+
+
 
 /* .quizCards-container {
   display: grid;
@@ -302,10 +305,25 @@ h6 {
   margin-top: 30px;
   border: solid black 1px;
   background-color: #F9F8EB;
+  position: relative;
 
   box-shadow: 9px 5px 23px -5px rgba(241, 175, 98, 0.75);
   -webkit-box-shadow: 9px 5px 23px -5px rgba(241, 175, 98, 0.75);
   -moz-box-shadow: 9px 5px 23px -5px rgba(241, 175, 98, 0.75);
+}
+
+.playedQuizMark {
+  color: red;
+  border: red 5px solid;
+  background-color: #F9F8EB;
+  ;
+  border-radius: 10px;
+  font-weight: bold;
+  width: 80px;
+  position: absolute;
+  top: 14px;
+  left: 8px;
+
 }
 
 /* userPage */
@@ -488,6 +506,7 @@ h6 {
 
 .playedCard {
   margin: 0 auto;
+  margin-bottom: 10px;
   width: 80%;
   background-color: #F9F8EB;
   border-radius: 0;
