@@ -33,7 +33,8 @@
 }
 
 #themeIMG3 {
-    /* width: 40%; */
+   padding: 5px;
+   left: -7px;
 }
 
 #quizDetails {
@@ -81,11 +82,10 @@
     padding-bottom: 100px;
     margin-bottom: -50px;
     padding-right: 10px;
-    color: white;
 }
 
-.extraDetailsTitle .ant-form-item-label  {
-    color: white;
+.extraDetailsBody {
+    padding-top: 20px;
 }
 
 .createAnwerRight {
@@ -101,9 +101,10 @@
 }
 
 #edit-quiz-Icon {
-    padding: 10px;
-    width: 80%;
-    object-fit: contain;
+    width: 30%;
+    position: absolute;
+    top: -130px;
+    right: -10px;
 }
 
 #witchHat-edit {

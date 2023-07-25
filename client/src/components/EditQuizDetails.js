@@ -145,15 +145,15 @@ const EditQuizDetails = (props) => {
                 </Row>
             ) : (
                 <Row align={"middle"} id="QdetailsContainer" className='editQuestionComp'>
-                    <Col span={2} align={"middle"}>
+                    <Col span={4} align={"middle"}>
                         <Image alt="theme img" id="themeIMG3" src={quizDetails.imgURL} />
                     </Col>
-                    <Col span={20} id="quizDetails" >
+                    <Col span={16} id="quizDetails" >
                         <img id="witchHat-edit" src={witchHat} alt="witch hat" />
                         <h4>{quizDetails.title}</h4>
                         <h6>{quizDetails.description}</h6>
                     </Col>
-                    <Col span={2} align={"start"} >
+                    <Col span={4} align={"start"} >
                         <Link onClick={() => setToEdit(true)}>
                         <img id="edit-quiz-Icon" src={EditImage} alt="edit" onClick={() => setToEdit(true)} />
                         </Link>

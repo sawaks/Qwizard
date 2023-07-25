@@ -3,7 +3,9 @@ import { useMutation, useQuery } from '@apollo/client';
 import { Form, Button, Row, Col, Input, Select, Alert } from 'antd';
 import { ADD_QUESTION, EDIT_QUESTION } from '../utils/mutations';
 import { GET_QUIZ_QUESTIONS } from '../utils/queries';
+import DesignedTitle from './DesignedTitle';
 
+import spellbook from '../images/magic-book.png'
 import sword from '../images/sword.png'
 
 import { useCreateQuizContext } from '../utils/CreateQuizContext';
@@ -402,11 +404,12 @@ const CreateQuizQuestions = (props) => {
                         </Form>
                     </Col>
                     <Col span={6} id="questionCreateDetails">
-                        <h1>Extra Details</h1>
+                        <DesignedTitle title="Extra Details" src={spellbook} />
+                        <div className='extraDetailsBody'></div>
                         <Form>
                             <Form.Item
-                                className='extraDetailsTitle'
                                 label="Correct Answer"
+                                
                             >
                                 <Select
                                     onChange={handleSelectChange}
@@ -425,7 +428,6 @@ const CreateQuizQuestions = (props) => {
                             </Form.Item>
                             <Form.Item
                                 label="Time Limit (seconds)"
-                                className='extraDetailsTitle'
                                 rules={[{ required: true, message: 'Please input your answer!' }]}
                             >
                                 <Input

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Form, Modal, Button, Image, Col, Row, Input, Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-
 import { useCreateQuizContext } from '../utils/CreateQuizContext';
 
 import { ADD_QUIZ } from '../utils/mutations';
