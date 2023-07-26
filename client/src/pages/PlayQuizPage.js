@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Row, Col, Image, Link } from 'antd';
+import { Button, Row, Col, Image,  } from 'antd';
 import { useQuery, useMutation } from '@apollo/client';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import '../CSS/quiz.css';
 import { GET_QUIZ_QUESTIONS } from '../utils/queries';
 import { ADD_LEADERBOARD } from '../utils/mutations';
