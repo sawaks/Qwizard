@@ -129,6 +129,17 @@ const Quiz = () => {
         }
     };
 
+    function reStart() {
+        setIntro(true);
+        setQuestionIndex(0);
+        // setQuizQuestions([]);
+        // setActiveQuestion(quizQuestions[0]);
+        // setTimer(0);
+        setResult(0);
+        setEnd(false);
+        // setQuizImg();
+    }
+
     return (
         <div className="master-div">
 
@@ -247,7 +258,7 @@ const Quiz = () => {
                                                                         </Link>
                                                                     </Col>
                                                                     <Col span={8} className='end-btn-div'>
-                                                                        <Link to={`/Quiz/${quizId}`}>
+                                                                        <Link onClick={reStart} to={`/Quiz/${quizId}`}>
                                                                             <Button
                                                                                 block
                                                                                 className='orangeBtn end-play-btn'

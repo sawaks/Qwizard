@@ -67,12 +67,14 @@ const Leaderboard = () => {
                                     {playedBefore ? (
                                         <Link to={`/Quiz/${quizId}`} >
                                             <Button 
+                                            block
                                             // href={`/Quiz/${quizId}`} 
                                             className="leaderboard-play-btn">Play Again</Button>
                                         </Link>
                                     ) : (
                                         <Link to={`/Leaderboard/${quizId}`} >
-                                            <Button 
+                                            <Button
+                                            block
                                             // href={`/Leaderboard/${quizId}`} 
                                             className="leaderboard-play-btn">Play</Button>
                                         </Link>
