@@ -1,14 +1,15 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 // import { Col, Row } from 'antd';
 import titleIcon from "../images/witch-hat2.png";
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 import DesignedTitle from './DesignedTitle';
+import CustomModal from './CustomModal';
 
 import Auth from '../utils/auth';
 
 const QuizListSection = ({ dbQuizzes, refetch }) => {
-
+    const [showModal, setShowModal] = useState(false);
     useEffect(() => {
         refetch();
     }, [])
@@ -61,11 +62,12 @@ const QuizListSection = ({ dbQuizzes, refetch }) => {
                                             </>
 
                                         ) : (
-                                            <p>Please login or signup..., and play quiz! </p>
+                                            <Button onClick={() => setShowModal(true)} type="primary" style={{ margin: "5px", width: "100%", background: "#05004E", borderColor: "#05004E" }} shape="round">Login or Signup and start playing! </Button>
                                         )}
                                     </div>
                                 </div>
                             </div>
+                            <CustomModal showModal={showModal} setShowModal={setShowModal} />
                         </div>
                     ))
 
