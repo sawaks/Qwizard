@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'antd';
+import { Button, Row, Col } from 'antd';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import '../CSS/leaderboard.css';
@@ -28,7 +28,7 @@ const Leaderboard = () => {
         }
     }, [data]);
     return (
-        <div className="container">
+        <div id="lead-container">
             <Helmet>
                 <title>Qwizard | Leaderboard</title>
                 <meta name="description" content="Viewing all players by ranking" />
@@ -37,17 +37,29 @@ const Leaderboard = () => {
                 <h1>Loading...</h1>
             ) : (
                 <div className="leaderboard-master-div">
-                    <div className="star-icon"><img src={starIcon} /><img src={starIcon} /><img src={starIcon} /><img src={starIcon} /><img src={starIcon} /></div>
+                    <div className="star-icon">
+                        <img src={starIcon} />
+                        <img src={starIcon} />
+                        <img src={starIcon} />
+                    </div>
                     <div className="leaderboard">
                         <DesignedTitle title="Leaderboard" src={titleIcon} />
 
                         <div className='leaderboard-card'>
+                            <Row className='leaderboard-btn-div'>
+                                <Col span={12}>
+                                    <Button href="/" className="leaderboard-btn">Home</Button>
+                                </Col>
+                                <Col span={12}>
+                                    <Button href={`/Quiz/${quizId}`} className="leaderboard-play-btn">Play</Button>
+                                </Col>
+                            </Row>
                             {leaderboard?.length > 0 ? (
                                 <ol className="leaderboard-list">
                                     {leaderboard.map((leaderboard) => {
                                         return (
                                             <li className="leaderboard-li">
-                                                {leaderboard.player}: {leaderboard.points}
+                                                <span>{leaderboard.player}</span> <span>{leaderboard.points}</span>
                                             </li>
                                         )
 
@@ -65,16 +77,12 @@ const Leaderboard = () => {
                             </>
                             )}
 
-                            <Button href="/" className="leaderboard-btn">Go Back</Button>
-
                         </div>
                     </div>
-
+                    <div className="leaderboard-footer-icon"><img src={footerIcon} /></div>
                 </div>
             )
             }
-
-            <div className="leaderboard-footer-icon"><img src={footerIcon} /></div>
         </div >
     );
 }
