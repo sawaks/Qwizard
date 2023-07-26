@@ -19,6 +19,7 @@ const CreateQuiz = () => {
 
     return (
         <CreateQuizProvider>
+
             <Helmet>
                 <title>Qwizard | Create Quiz</title>
                 <meta name="description" content="Create and update your own quiz!" />
@@ -37,6 +38,7 @@ const CreateQuiz = () => {
 
             )
             }
+
         </CreateQuizProvider >
     );
 };

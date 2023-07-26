@@ -7,7 +7,7 @@ import { GET_LEADERBOARD, GET_ME } from '../utils/queries';
 import titleIcon from "../images/crystal-ball2.png";
 import starIcon from "../images/star.png";
 import DesignedTitle from '../components/DesignedTitle';
-import footerIcon from "../images/town.png";
+import footerIcon from "../images/newTown.png";
 import { Helmet } from 'react-helmet-async';
 
 const Leaderboard = () => {
@@ -48,11 +48,13 @@ const Leaderboard = () => {
                 <h1>Loading...</h1>
             ) : (
                 <div className="leaderboard-master-div">
+
                     <div className="star-icon">
-                        <img src={starIcon} alt="stars"/>
-                        <img src={starIcon} alt="stars"/>
-                        <img src={starIcon} alt="stars"/>
+                        {/* <img src={starIcon} alt="stars" />
+                            <img src={starIcon} alt="stars" /> */}
+
                     </div>
+
                     <div className="leaderboard">
                         <DesignedTitle title="Leaderboard" src={titleIcon} />
 
@@ -95,10 +97,11 @@ const Leaderboard = () => {
 
                         </div>
                     </div>
-                    <div className="leaderboard-footer-icon"><img src={footerIcon} alt="city"/></div>
+                    {/* <div className="leaderboard-footer-icon"></div> */}
                 </div>
             )
             }
+            <div className="leaderboard-footer-icon"></div>
         </div >
     );
 }
