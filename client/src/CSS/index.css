@@ -3,6 +3,7 @@
 * {
   box-sizing: border-box;
 
+
 }
 
 Button:hover {
@@ -15,10 +16,12 @@ Button:hover {
   box-sizing: border-box;
 }
 
+
 body {
   /* font-family: 'Rubik', sans-serif; */
   position: relative;
   max-width: 100%;
+  box-sizing: border-box;
 
 
 }
