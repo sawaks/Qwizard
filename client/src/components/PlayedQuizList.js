@@ -13,6 +13,7 @@ const PlayedQuizList = () => {
 
     useEffect(() => {
         refetch();
+        // eslint-disable-next-line
     }, [userData2])
 
     const [playedQuizzes, setPlayedQuizzes] = useState(userData2);

@@ -141,7 +141,7 @@ const Quiz = () => {
                     <div className="quiz-container">
                         <Row justify="center">
                             <Col span={4}
-                                className="left-icon"><img src={leftIcon} />
+                                className="left-icon"><img src={leftIcon} alt="create icon" />
                             </Col>
                             <Col justify="center" span={16}>
                                 <DesignedTitle color={"rgb(253, 95, 0)"} title={data.getQuizQuestions.title} src={titleIcon} />
@@ -261,7 +261,7 @@ const Quiz = () => {
                                     </div>
                                 )}
                             </Col>
-                            <Col span={4} className="right-icon"><img src={rightIcon} />
+                            <Col span={4} className="right-icon"><img src={rightIcon} alt="icon"/>
                             </Col>
                         </Row>
 

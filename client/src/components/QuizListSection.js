@@ -12,6 +12,7 @@ const QuizListSection = ({ dbQuizzes, refetch }) => {
     const [showModal, setShowModal] = useState(false);
     useEffect(() => {
         refetch();
+        // eslint-disable-next-line
     }, [])
 
     if (!dbQuizzes.length) {
