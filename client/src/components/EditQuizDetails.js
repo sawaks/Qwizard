@@ -124,9 +124,9 @@ const EditQuizDetails = (props) => {
                                     value={quizDetails.imgURL}
                                     onChange={handleSelectChange}
                                 >
-                                    <Select.Option value="./logo512.png">Default</Select.Option>
-                                    <Select.Option value="./logo512.png1">Dark</Select.Option>
-                                    <Select.Option value="./logo512.png3">Light</Select.Option>
+                                    <Select.Option value="./booktheme.png">Default</Select.Option>
+                                    <Select.Option value="./magiciantheme.png">Fun</Select.Option>
+                                    <Select.Option value="./cardstheme.png">Educational</Select.Option>
                                 </Select>
                             </Form.Item>
                             <Button

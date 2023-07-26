@@ -30,7 +30,7 @@ const CreateQuizDetails = () => {
     const navigate = useNavigate();
     const handleModalCancel = () => {
         setShowModal(false);
-        navigate("/");
+        navigate("/myQuizzes");
     };
 
     const handleQuizInputChange = (event) => {
@@ -138,9 +138,9 @@ const CreateQuizDetails = () => {
                                     value={quizDetails.imgURL? quizDetails.imgURL : './logo512.png'}
 
                                 >
-                                    <Select.Option value='./logo512.png'>Default</Select.Option>
-                                    <Select.Option value='./logo512.png2'>Dark</Select.Option>
-                                    <Select.Option value='./logo512.png3'>Light</Select.Option>
+                                    <Select.Option value='./booktheme.png'>Default</Select.Option>
+                                    <Select.Option value='./magiciantheme.png'>Fun</Select.Option>
+                                    <Select.Option value='./cardstheme.png'>Educational</Select.Option>
                                 </Select>
                             </Form.Item>
                         </Form>

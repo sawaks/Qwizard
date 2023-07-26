@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 // import { Col, Row } from 'antd';
 import titleIcon from "../images/witch-hat2.png";
 import { Button } from 'antd';
@@ -7,7 +7,12 @@ import DesignedTitle from './DesignedTitle';
 
 import Auth from '../utils/auth';
 
-const QuizListSection = ({ dbQuizzes }) => {
+const QuizListSection = ({ dbQuizzes, refetch }) => {
+
+    useEffect(() => {
+        refetch();
+    }, [])
+
     if (!dbQuizzes.length) {
         return (
             <div className="quizList-container">
@@ -18,7 +23,7 @@ const QuizListSection = ({ dbQuizzes }) => {
     }
     return (
         <div className="quizList-container">
-            <DesignedTitle title="Quiz List" src={titleIcon} />
+            <DesignedTitle title="All Quizzes" src={titleIcon} />
             <div className="row quizCards-container">
                 {dbQuizzes &&
                     dbQuizzes.map((dbQuiz) => (

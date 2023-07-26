@@ -12,9 +12,9 @@ export default function CreateQuizProvider({ children }) {
 
     const [quizDetails, setQuizDetails] = useState(
         {
-            title: 'My Quiz',
-            description: 'Description',
-            imgURL: './logo512.png',
+            title: '',
+            description: '',
+            imgURL: './booktheme.png',
         });
 
 
