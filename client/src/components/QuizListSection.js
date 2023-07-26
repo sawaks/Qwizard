@@ -18,7 +18,7 @@ const QuizListSection = ({ dbQuizzes, refetch }) => {
     if (!dbQuizzes.length) {
         return (
             <div className="quizList-container">
-                <DesignedTitle title="Quiz List" src={titleIcon} />
+                <DesignedTitle title="All Quizzes" src={titleIcon} />
                 <h4>No Quiz Yet</h4>
             </div>
         )
