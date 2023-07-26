@@ -43,7 +43,7 @@ const QuizListSection = ({ dbQuizzes, refetch }) => {
                                                         <Button type="primary"
                                                             style={{ margin: "5px", width: "100%", background: "#FD5F00", borderColor: "#FD5F00" }}
                                                             shape="round" >
-                                                            Replay
+                                                            Play Again
                                                         </Button>
                                                     </Link>) :
                                                     (<Link to={`/Quiz/${dbQuiz._id}`}>
