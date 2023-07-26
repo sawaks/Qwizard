@@ -24,7 +24,7 @@ const HeroSection = () => {
                     </div>
                     <Row>
                         <Col className="wichies-container">
-                            <img src={heroWitch} alt="witch" />
+                            {/* <img src={heroWitch} alt="witch" /> */}
                         </Col>
                         <Col className="hero-button-contaienr">
                             <Button onClick={() => setShowModal(true)} className="hero-button" shape="round">Create and Play Quiz! </Button>

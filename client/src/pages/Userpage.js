@@ -31,14 +31,14 @@ const Userpage = () => {
             <Navbar
                 leftLinkTo='/createQuiz'
                 rightLinkTo='/'
-                leftTitle='Create Your Quiz!'
-                rightTitle='Find and Play Quiz!'
+                leftTitle='Create a Quiz!'
+                rightTitle='Play a Quiz!'
                 rightSrc={crystalBall}
                 leftSrc={witch}
 
             />
 
-            <Row justify="space-between" style={{ marginTop: "50px" }}>
+            <Row justify="space-between" style={{ marginBottom: "100px", marginTop: "50px" }}>
                 <UserPageProvider>
                     <Col xs={24} sm={24} md={16} lg={16} xl={16}>
 

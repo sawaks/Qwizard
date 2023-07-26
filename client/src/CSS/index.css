@@ -112,16 +112,42 @@ h6 {
 }
 
 .wichies-container {
+  animation: fuwafuwa 3s infinite ease-in-out .8s alternate;
+  background: url(../images/hero-witch1.png) no-repeat center center / 90% auto;
+  display: inline-block;
+  transition: 1.5s ease-in-out;
+  width: 200px;
+  height: 200px;
+  margin-top: 15px;
+  margin-left: 20px;
+  /* background-color: #F4D160; */
+}
+
+@keyframes fuwafuwa {
+  0% {
+    transform: translate(0, 0) rotate(-7deg);
+  }
+
+  50% {
+    transform: translate(0, -7px) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(7deg);
+  }
+}
+
+/* .wichies-container {
   margin-left: 10%;
   margin-top: 20px;
 }
 
 .wichies-container img {
   width: 200px
-}
+} */
 
 .hero-button-contaienr {
-  margin-left: 8%;
+  /* margin-left: 8%; */
   margin-top: 50px;
 }
 
@@ -341,6 +367,35 @@ h6 {
 }
 
 /* user Navi */
+.naviIcon {
+  animation-name: anim_jump;
+  transform: rotate(10deg);
+  animation-duration: 10s;
+
+
+}
+
+.animation {
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-duration: 1.5s;
+}
+
+
+@keyframes anim_jump {
+  50% {
+    transform: rotate(-10deg);
+
+  }
+
+  100% {
+    transform: rotate(10deg);
+
+  }
+}
+
+
 .userPageNavi-container {
   margin-top: 30px;
   margin-bottom: 30px;
@@ -590,13 +645,9 @@ h6 {
 
 
 @media (max-width: 758px) {
+
   .hero-button-contaienr {
-    margin-left: 10%;
-
-  }
-
-  .wichies-container {
-    margin-left: 10%;
+    margin-left: -10px;
 
   }
 

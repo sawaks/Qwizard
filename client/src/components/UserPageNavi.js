@@ -13,13 +13,13 @@ const UserPageNavi = ({ rightLinkTo, leftLinkTo, rightTitle, leftTitle, rightSrc
                     <Link to={leftLinkTo} ><Button className="creteQuizbtn-container">
                         {leftTitle}
                     </Button ></Link>
-                    <div className="witch-container"><img src={leftSrc} style={{ width: "100px" }} alt={leftSrc} /></div >
+                    <div className="witch-container"><img className="naviIcon animation" src={leftSrc} style={{ width: "100px" }} alt={leftSrc} /></div >
                 </Col>
                 <Col xs={24} sm={24} md={12} lg={12} xl={12} className="findQuizbtn-wrapper creteQuizbtn-wrppaer">
                     <Link to={rightLinkTo} ><Button className="findQuizbtn-container">
                         {rightTitle}
                     </Button></Link>
-                    <div className="crystalBall-container witch-container"><img src={rightSrc} style={{ width: "100px" }} alt={rightSrc} /></div>
+                    <div className="crystalBall-container witch-container"><img className="naviIcon animation" src={rightSrc} style={{ width: "100px" }} alt={rightSrc} /></div>
                 </Col>
 
             </Row>

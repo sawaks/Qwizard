@@ -30,8 +30,8 @@ const HomePage = () => {
                     <Navbar
                         leftLinkTo='/createQuiz'
                         rightLinkTo='/myQuizzes'
-                        leftTitle='Create Your Quiz!'
-                        rightTitle='View Your Quizzies!'
+                        leftTitle='Create a Quiz!'
+                        rightTitle='My Profile'
                         rightSrc={wizard}
                         leftSrc={witch}
 
