@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'antd';
+import { Button, Row, Col } from 'antd';
 import { useQuery, useMutation } from '@apollo/client';
 import { useParams } from 'react-router-dom';
-
+import '../CSS/quiz.css';
 import { GET_QUIZ_QUESTIONS } from '../utils/queries';
 import { ADD_LEADERBOARD } from '../utils/mutations';
+import leftIcon from '../images/wizard.png';
+import titleIcon from "../images/crystal-ball2.png";
+import rightIcon from '../images/potion.png';
+import DesignedTitle from '../components/DesignedTitle';
 
 import { Helmet } from 'react-helmet-async';
 
@@ -14,7 +18,7 @@ const Quiz = () => {
     const { loading, data } = useQuery(GET_QUIZ_QUESTIONS, {
         variables: { quizId },
     });
-
+    const [intro, setIntro] = useState(false);
     const [questionIndex, setQuestionIndex] = useState(0);
     const [quizQuestions, setQuizQuestions] = useState([]);
     const [activeQuestion, setActiveQuestion] = useState(quizQuestions[0]);
@@ -42,31 +46,35 @@ const Quiz = () => {
     }, [data]);
 
     useEffect(() => {
-
-        if (quizQuestions.length > 0) {
-            if (questionIndex >= quizQuestions.length) {
-                setEnd(true);
-                setActiveQuestion(null);
-                setTimer(0);
-                submitLeaderboard();
-                return;
+        if (intro === false) {
+            if (quizQuestions.length > 0) {
+                if (questionIndex >= quizQuestions.length) {
+                    setEnd(true);
+                    setActiveQuestion(null);
+                    setTimer(0);
+                    submitLeaderboard();
+                    return;
+                }
+                startTimer(quizQuestions[questionIndex].timeLimit);
+                setActiveQuestion(quizQuestions[questionIndex]);
             }
-            startTimer(quizQuestions[questionIndex].timeLimit);
-            setActiveQuestion(quizQuestions[questionIndex]);
         }
-    }, [quizQuestions, questionIndex]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [quizQuestions, questionIndex, intro]);
 
     function checkAnswer(event) {
         if (event.target.dataset.id === activeQuestion.correctAnswer) {
             setResult((result + 1) * (timer + 1));
+            event.target.classList.add('correct-answer');
             setTimeout(() => {
+                event.target.classList.remove('correct-answer');
                 endTimer();
             }, 1000);
-            // add CSS to show correct answer
         }
         else {
-            // add CSS to show wrong answer
+            event.target.classList.add('wrong-answer');
             setTimeout(() => {
+                event.target.classList.remove('wrong-answer');
                 endTimer();
             }, 1000);
             return;
@@ -111,67 +119,122 @@ const Quiz = () => {
 
     return (
         <div className="master-div">
-            <Helmet>
-                <title>Qwizard | Play</title>
-                <meta name="description" content="Quiz Playing in progress!" />
-            </Helmet>
-            {loading ? (
-                <h1>Loading...</h1>
-            ) : (
-                <div className="quiz-container">
-                    <h1>{data.getQuizQuestions.title}</h1>
-                    <div className="quiz-card">
-                        {activeQuestion && timer ? (
-                            <>
-                                <h2>{activeQuestion.questionText}</h2>
-                                <h2 className="timer">Time Left:{timer} </h2>
-                                <div className="answer-card">
-
-                                    <Button data-id={activeQuestion.answer1} value={activeQuestion.answer1} onClick={checkAnswer}>
-                                        <span data-id={activeQuestion.answer1}>
-                                            {activeQuestion.answer1}
-                                        </span>
-                                    </Button>
-                                    <Button data-id={activeQuestion.answer2} value={activeQuestion.answer2} onClick={checkAnswer}>
-                                        <span data-id={activeQuestion.answer2}>
-                                            {activeQuestion.answer2}
-                                        </span>
-                                    </Button>
-                                    <Button data-id={activeQuestion.answer3} value={activeQuestion.answer3} onClick={checkAnswer}>
-                                        <span data-id={activeQuestion.answer3}>
-                                            {activeQuestion.answer3}
-                                        </span>
-                                    </Button>
-                                    <Button data-id={activeQuestion.answer4} value={activeQuestion.answer4} onClick={checkAnswer}>
-                                        <span data-id={activeQuestion.answer4}>
-                                            {activeQuestion.answer4}
-                                        </span>
-                                    </Button>
-
-                                </div>
-                            </>
-                        ) : (
-                            <>
-                                {end ? (
-                                    <>
-                                        <h1>Quiz Completed</h1>
-                                        <h1>Score:{result}</h1>
-                                        <Button href="/">Go Back</Button>
-                                        <Button href={`/leaderboard/${quizId}`}>Leaderboard</Button>
-                                    </>
-                                ) : (
-                                    <>
-                                        <h1>Loading...</h1>
-                                    </>
-                                )}
-                            </>
-                        )}
-
-                    </div>
+            {intro ? (
+                <div className="ready-btn-div">
+                    <Button className="ready-btn" onClick={() => setIntro(false)}>Ready?</Button>
                 </div>
+            ) : (
 
-            )}
-        </div>
+                <div>
+                    {loading ? (
+                        <h1>Loading...</h1>
+                    ) : (
+
+                        <div className="quiz-container">
+                            <Row justify="center">
+                                <Col span={4}
+                                    className="left-icon"><img src={leftIcon} />
+                                </Col>
+                                <Col justify="center" span={16}>
+                                <DesignedTitle color={"rgb(253, 95, 0)"} title={data.getQuizQuestions.title}src={titleIcon} />
+                                    <div className="quiz-play-card">
+                                        {activeQuestion && timer ? (
+                                            <>
+                                                <Row align='middle'>
+                                                    <Col span={24} >
+                                                        <img src={data.getQuizQuestions.imgURL} alt="imgURL" className="quiz-play-img" />
+
+                                                        <h2 className="timer">Time Left:{timer} </h2>
+
+                                                        <h2 className="play-question">{activeQuestion.questionText}</h2>
+
+                                                    </Col>
+                                                </Row>
+                                                <div className="answer-play-card">
+
+                                                    <Row>
+                                                        <Col span={12} className="answer-play-btn-col">
+                                                            <Button data-id={activeQuestion.answer1}
+                                                                value={activeQuestion.answer1}
+                                                                onClick={checkAnswer}
+                                                                className="answer-play-btn"
+                                                                block
+                                                            >
+                                                                <span data-id={activeQuestion.answer1}>
+                                                                    {activeQuestion.answer1}
+                                                                </span>
+                                                            </Button>
+                                                        </Col>
+                                                        <Col span={12} className="answer-play-btn-col">
+                                                            <Button data-id={activeQuestion.answer2}
+                                                                value={activeQuestion.answer2}
+                                                                onClick={checkAnswer}
+                                                                className="answer-play-btn"
+                                                                block
+                                                            >
+                                                                <span data-id={activeQuestion.answer2}>
+                                                                    {activeQuestion.answer2}
+                                                                </span>
+                                                            </Button>
+                                                        </Col>
+                                                    </Row>
+                                                    <Row>
+                                                        <Col span={12} className="answer-play-btn-col">
+                                                            <Button data-id={activeQuestion.answer3}
+                                                                value={activeQuestion.answer3}
+                                                                onClick={checkAnswer}
+                                                                className="answer-play-btn"
+                                                                block
+                                                            >
+                                                                <span data-id={activeQuestion.answer3}>
+                                                                    {activeQuestion.answer3}
+                                                                </span>
+                                                            </Button>
+                                                        </Col>
+                                                        <Col span={12} className="answer-play-btn-col">
+                                                            <Button data-id={activeQuestion.answer4}
+                                                                value={activeQuestion.answer4}
+                                                                onClick={checkAnswer}
+                                                                className="answer-play-btn"
+                                                                block
+                                                            >
+                                                                <span data-id={activeQuestion.answer4}>
+                                                                    {activeQuestion.answer4}
+                                                                </span>
+                                                            </Button>
+                                                        </Col>
+                                                    </Row>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <>
+                                                {end ? (
+                                                    <div className="end-play-quiz">
+                                                        <h1>Quiz Completed</h1>
+                                                        <h1>Score:{result}</h1>
+                                                        <Button href="/">Go Back</Button>
+                                                        <Button href={`/leaderboard/${quizId}`}>Leaderboard</Button>
+                                                    </div>
+                                                ) : (
+                                                    <>
+                                                        <h1>Loading...</h1>
+                                                    </>
+                                                )}
+                                            </>
+                                        )}
+
+                                    </div>
+                                </Col>
+                                <Col span={4} className="right-icon"><img src={ rightIcon } />
+                                </Col>
+                            </Row>
+                        </div>
+
+                    )}
+                </div>
+            )
+            }
+        </div >
     );
 }
 export default Quiz;
