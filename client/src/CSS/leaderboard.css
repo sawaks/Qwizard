@@ -1,18 +1,24 @@
+#lead-container {
+    background-color: rgb(5, 0, 78);
+}
+
 .leaderboard-master-div {
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-bottom: 50px;
 }
 
 .star-icon {
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
+}
+
+.star-icon img {
+    width: 700px;
+    object-fit: cover;
+    display: flex;
 }
 
 .leaderboard-container {
@@ -32,6 +38,8 @@
 .leaderboard {
     border-radius: 15px;
     width: 60%;
+    padding-bottom: 30px;
+    z-index: 1;
 
 }
 
@@ -41,50 +49,101 @@
     align-items: center;
     justify-content: center;
     background-color: rgb(249, 248, 235);
-    width: 100%;
     padding: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+    padding-bottom: 10px;
+    z-index: 1;
 }
+
 .leaderboard-list {
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding: 5px;
-margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    margin-top: 10px;
 }
 
 .leaderboard-li:nth-of-type(1n+16) {
     display: none;
-} 
+}
+
+.leaderboard-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.leaderboard-li {
+    width: 100%;
+    border-bottom: dashed 2px #F4D160;
+    display: flex;
+    flex-direction: column;
+    font-size: large;
+    font-weight: bolder;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.leaderboard-li span {
+    padding-bottom: 5px;
+}
 
 .leaderboard-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%;
     height: 50px;
     border-radius: 15px;
-    color: rgb(249, 248, 235);;
+    color: rgb(249, 248, 235);
+    ;
     font-size: 16px;
     background: rgb(5, 0, 78);
     border: solid 1px rgb(249, 248, 235);
-    border-radius: 15px;
-    height: 60px;
+    border-radius: 25px;
+    height: 50px;
     margin-top: 10px;
     cursor: pointer;
 }
 
-.leaderboard-footer-icon{
-    width: 100%;
+.leaderboard-play-btn {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border-radius: 15px;
+    color: black;
+    font-size: 16px;
+    background: #F4D160;
+    border: solid 1px black;
+    border-radius: 25px;
+    height: 50px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.leaderboard-btn-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+}
+
+.leaderboard-footer-icon {
+    width: 99%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+    position: fixed;
 }
 
 .leaderboard-footer-icon img {
     width: 100%;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    padding-bottom: 50px;
+    object-fit: fill;
 }
-
