@@ -94,7 +94,7 @@ const Leaderboard = () => {
 
                         </div>
                     </div>
-                    <div className="leaderboard-footer-icon"><img src={footerIcon} /></div>
+                    <div className="leaderboard-footer-icon"><img src={footerIcon} alt="city"/></div>
                 </div>
             )
             }
