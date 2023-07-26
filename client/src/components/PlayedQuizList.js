@@ -31,7 +31,7 @@ const PlayedQuizList = () => {
                     <div className="icon-container icon-created-container"><img src={titleIcon} alt="crystalball"/></div>
                 </div> */}
                 <DesignedTitle title="Play History" color="#76B39D" src={titleIcon} />
-                <h3>Not Played Quiz Yet</h3>
+                <h3>No Quiz Played</h3>
             </div>
         )
     }

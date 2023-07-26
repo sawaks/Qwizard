@@ -36,6 +36,7 @@ const Leaderboard = () => {
             console.log('sortedLeaderboard', sortedLeaderboard)
             setLeaderboard(sortedLeaderboard);
         }
+        // eslint-disable-next-line
     }, [data, playedData]);
     return (
         <div id="lead-container">
@@ -48,9 +49,9 @@ const Leaderboard = () => {
             ) : (
                 <div className="leaderboard-master-div">
                     <div className="star-icon">
-                        <img src={starIcon} />
-                        <img src={starIcon} />
-                        <img src={starIcon} />
+                        <img src={starIcon} alt="stars"/>
+                        <img src={starIcon} alt="stars"/>
+                        <img src={starIcon} alt="stars"/>
                     </div>
                     <div className="leaderboard">
                         <DesignedTitle title="Leaderboard" src={titleIcon} />

@@ -48,7 +48,7 @@ const CreatedQuizList = () => {
         return (
             <div className="createdQuizList-Container">
                 <DesignedTitle title="My Created Quizzes" src={titleIcon} />
-                <h3>Not Created Quiz Yet</h3>
+                <h3>No Quiz Created</h3>
             </div>)
     }
     return (
