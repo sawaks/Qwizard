@@ -28,6 +28,7 @@ const QuizListSection = ({ dbQuizzes }) => {
                                 <div className="d-flex flex-column card-body">
                                     <h5 className="card-title">{dbQuiz.title}</h5>
                                     <p className="card-text">{dbQuiz.description}</p>
+                                    <h6 className="card-text" style={{ textAlign: 'center' }}>Created by {dbQuiz.quizAuthor}</h6>
                                     <div className='linkBtn-container mt-auto'>
                                         {Auth.loggedIn() ? (
                                             <>

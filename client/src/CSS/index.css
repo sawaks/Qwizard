@@ -20,6 +20,7 @@ body {
   position: relative;
   max-width: 100%;
 
+
 }
 
 h1,
@@ -101,7 +102,7 @@ h6 {
 .hero-container {
   width: 100%;
   background-color: #76B39D;
-
+  margin-bottom: 10px;
 
 }
 
@@ -261,6 +262,7 @@ h6 {
 .quizList-container {
   padding: 50px;
   padding-bottom: 200px;
+  margin-top: -20px;
 }
 
 
@@ -284,6 +286,7 @@ h6 {
 
 .quizCards-container {
   width: auto;
+
 }
 
 
@@ -300,9 +303,14 @@ h6 {
 
 }
 
+.card-style-container {
+  margin-bottom: 30px;
+}
+
 
 .card-style {
   margin-top: 30px;
+
   border: solid black 1px;
   background-color: #F9F8EB;
   position: relative;
@@ -316,7 +324,7 @@ h6 {
   color: red;
   border: red 5px solid;
   background-color: #F9F8EB;
-  ;
+
   border-radius: 10px;
   font-weight: bold;
   width: 80px;
@@ -329,12 +337,12 @@ h6 {
 /* userPage */
 .userPage-container {
   padding: 30px;
-  padding-bottom: 200px;
+
 }
 
 /* user Navi */
 .userPageNavi-container {
-  margin-top: 0;
+  margin-top: 30px;
   margin-bottom: 30px;
 }
 
@@ -425,11 +433,13 @@ h6 {
 .createdQuizList-Container {
   background-color: #76B39D;
   padding: 20px;
+  height: 100%;
 }
 
 .createdQuizCard-container {
   width: 100%;
   margin: 0 auto;
+  margin-top: 30px;
   margin-bottom: 10px;
   background-color: #F9F8EB;
   border: solid 1px black;
@@ -492,6 +502,7 @@ h6 {
   padding: 20px;
   margin-left: 10px;
   border: #F4D160 solid 10px;
+  height: 100%;
 }
 
 .linkBtn-container {
@@ -501,6 +512,7 @@ h6 {
 
 .playedCard-container {
   text-align: center;
+  margin-top: 30px;
 
 }
 

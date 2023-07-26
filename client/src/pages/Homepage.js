@@ -2,6 +2,10 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import Hero from '../components/HeroSection';
 import QuizListSection from '../components/QuizListSection';
+import Navbar from '../components/UserPageNavi';
+
+import witch from '../images/witch.png';
+import wizard from '../images/hero-wizard.png';
 
 import { GET_DB_QUIZZES } from '../utils/queries';
 
@@ -21,7 +25,19 @@ const HomePage = () => {
                 <meta name="description" content="Welcome to Qwizard! Enjoy and create your own Quiz." />
             </Helmet>
 
-            {Auth.loggedIn() ? ('') : (<Hero />)}
+            {Auth.loggedIn() ? (
+                <div style={{ marginTop: "50px", marginLeft: "40px", marginRight: "35px" }}>
+                    <Navbar
+                        leftLinkTo='/createQuiz'
+                        rightLinkTo='/myQuizzes'
+                        leftTitle='Create Your Quiz!'
+                        rightTitle='View Your Quizzies!'
+                        rightSrc={wizard}
+                        leftSrc={witch}
+
+                    />
+                </div>
+            ) : (<Hero />)}
 
             {loading ? (
                 <div>Loading...</div>
