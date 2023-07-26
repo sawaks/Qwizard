@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Row, Col } from 'antd';
+import { Button, Row, Col, Image } from 'antd';
 import { useQuery, useMutation } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import '../CSS/quiz.css';
@@ -8,17 +8,19 @@ import { ADD_LEADERBOARD } from '../utils/mutations';
 import leftIcon from '../images/wizard.png';
 import titleIcon from "../images/crystal-ball2.png";
 import rightIcon from '../images/potion.png';
+import theme1 from '../images/booktheme.png';
+import theme2 from '../images/cardstheme.png';
+import theme3 from '../images/magiciantheme.png';
 import DesignedTitle from '../components/DesignedTitle';
-
-import { Helmet } from 'react-helmet-async';
 
 const Quiz = () => {
 
+    const [quizIMG, setQuizImg] = useState();
     const { quizId } = useParams();
     const { loading, data } = useQuery(GET_QUIZ_QUESTIONS, {
         variables: { quizId },
     });
-    const [intro, setIntro] = useState(false);
+    const [intro, setIntro] = useState(true);
     const [questionIndex, setQuestionIndex] = useState(0);
     const [quizQuestions, setQuizQuestions] = useState([]);
     const [activeQuestion, setActiveQuestion] = useState(quizQuestions[0]);
@@ -27,10 +29,20 @@ const Quiz = () => {
     const [end, setEnd] = useState(false);
     const [intervalId, setIntervalId] = useState(null);
     const [addLeaderboard] = useMutation(ADD_LEADERBOARD);
+
     useEffect(() => {
         if (data) {
             setQuizQuestions([]);
             console.log('data', data)
+            if (data.getQuizQuestions.imgURL) {
+                if (data.getQuizQuestions.imgURL === "./booktheme.png") {
+                    setQuizImg(theme1);
+                } else if (data.getQuizQuestions.imgURL === "./cardstheme.png") {
+                    setQuizImg(theme2);
+                } else if (data.getQuizQuestions.imgURL === "./magiciantheme.png") {
+                    setQuizImg(theme3);
+                }
+            }
             setQuizQuestions(data.getQuizQuestions.questions.map((question) => ({
                 id: question._id,
                 questionText: question.questionText,
@@ -119,30 +131,31 @@ const Quiz = () => {
 
     return (
         <div className="master-div">
-            {intro ? (
-                <div className="ready-btn-div">
-                    <Button className="ready-btn" onClick={() => setIntro(false)}>Ready?</Button>
-                </div>
-            ) : (
 
-                <div>
-                    {loading ? (
-                        <h1>Loading...</h1>
-                    ) : (
 
-                        <div className="quiz-container">
-                            <Row justify="center">
-                                <Col span={4}
-                                    className="left-icon"><img src={leftIcon} />
-                                </Col>
-                                <Col justify="center" span={16}>
-                                <DesignedTitle color={"rgb(253, 95, 0)"} title={data.getQuizQuestions.title}src={titleIcon} />
+            <div>
+                {loading ? (
+                    <h1>Loading...</h1>
+                ) : (
+
+                    <div className="quiz-container">
+                        <Row justify="center">
+                            <Col span={4}
+                                className="left-icon"><img src={leftIcon} alt="create icon" />
+                            </Col>
+                            <Col justify="center" span={16}>
+                                <DesignedTitle color={"rgb(253, 95, 0)"} title={data.getQuizQuestions.title} src={titleIcon} />
+                                {intro ? (
+                                    <div className="ready-btn-div">
+                                        <Button className="ready-btn" onClick={() => setIntro(false)}>Ready?</Button>
+                                    </div>
+                                ) : (
                                     <div className="quiz-play-card">
                                         {activeQuestion && timer ? (
                                             <>
                                                 <Row align='middle'>
                                                     <Col span={24} >
-                                                        <img src={data.getQuizQuestions.imgURL} alt="imgURL" className="quiz-play-img" />
+                                                        <Image src={quizIMG} alt="imgURL" id='quiz-play-img' />
 
                                                         <h2 className="timer">Time Left:{timer} </h2>
 
@@ -209,11 +222,33 @@ const Quiz = () => {
                                         ) : (
                                             <>
                                                 {end ? (
-                                                    <div className="end-play-quiz">
-                                                        <h1>Quiz Completed</h1>
-                                                        <h1>Score:{result}</h1>
-                                                        <Button href="/">Go Back</Button>
-                                                        <Button href={`/leaderboard/${quizId}`}>Leaderboard</Button>
+                                                    <div >
+                                                        <Row className="end-play-quiz" >
+                                                            <Col span={24} align='middle' justify='middle'>
+                                                                <h1>Quiz Completed</h1>
+                                                                <h1>Score:{result}</h1>
+                                                                <Row>
+                                                                    <Col span={8} className='end-btn-div'>
+                                                                        <Button
+                                                                        className='greenBtn end-play-btn'
+                                                                            block
+                                                                            href="/">Home</Button>
+                                                                    </Col>
+                                                                    <Col span={8} className='end-btn-div'>
+                                                                        <Button
+                                                                        block
+                                                                        className='blueBtn end-play-btn'
+                                                                            href={`/leaderboard/${quizId}`}>Leaderboard</Button>
+                                                                    </Col>
+                                                                    <Col span={8} className='end-btn-div'>
+                                                                        <Button 
+                                                                        block
+                                                                        className='orangeBtn end-play-btn'
+                                                                        href={`/Quiz/${quizId}`}>Play Again</Button>
+                                                                    </Col>
+                                                                </Row>
+                                                            </Col>
+                                                        </Row>
                                                     </div>
                                                 ) : (
                                                     <>
@@ -224,16 +259,16 @@ const Quiz = () => {
                                         )}
 
                                     </div>
-                                </Col>
-                                <Col span={4} className="right-icon"><img src={ rightIcon } />
-                                </Col>
-                            </Row>
-                        </div>
+                                )}
+                            </Col>
+                            <Col span={4} className="right-icon"><img src={rightIcon} alt="icon"/>
+                            </Col>
+                        </Row>
 
-                    )}
-                </div>
-            )
-            }
+                    </div>
+                )}
+
+            </div>
         </div >
     );
 }

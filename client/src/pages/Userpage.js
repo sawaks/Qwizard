@@ -38,7 +38,7 @@ const Userpage = () => {
 
             />
 
-            <Row justify="space-between" style={{ marginTop: "50px" }}>
+            <Row justify="space-between" style={{ marginTop: "50px", paddingBottom: "100px"}}>
                 <UserPageProvider>
                     <Col xs={24} sm={24} md={16} lg={16} xl={16}>
 
