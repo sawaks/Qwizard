@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Row, Col } from 'antd';
 import { useQuery } from '@apollo/client';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import '../CSS/leaderboard.css';
 import { GET_LEADERBOARD, GET_ME } from '../utils/queries';
 import titleIcon from "../images/crystal-ball2.png";
@@ -65,9 +65,17 @@ const Leaderboard = () => {
                                 </Col>
                                 <Col span={12}>
                                     {playedBefore ? (
-                                        <Button href={`/Quiz/${quizId}`} className="leaderboard-play-btn">Play Again</Button>
+                                        <Link to={`/Quiz/${quizId}`} >
+                                            <Button 
+                                            // href={`/Quiz/${quizId}`} 
+                                            className="leaderboard-play-btn">Play Again</Button>
+                                        </Link>
                                     ) : (
-                                        <Button href={`/Quiz/${quizId}`} className="leaderboard-play-btn">Play</Button>
+                                        <Link to={`/Leaderboard/${quizId}`} >
+                                            <Button 
+                                            // href={`/Leaderboard/${quizId}`} 
+                                            className="leaderboard-play-btn">Play</Button>
+                                        </Link>
                                     )}
 
                                 </Col>

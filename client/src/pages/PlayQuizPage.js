@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Row, Col, Image } from 'antd';
+import { Button, Row, Col, Image, Link } from 'antd';
 import { useQuery, useMutation } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import '../CSS/quiz.css';
@@ -228,23 +228,32 @@ const Quiz = () => {
                                                                 <h1>Quiz Completed</h1>
                                                                 <h1>Score:{result}</h1>
                                                                 <Row>
+
                                                                     <Col span={8} className='end-btn-div'>
-                                                                        <Button
-                                                                        className='greenBtn end-play-btn'
-                                                                            block
-                                                                            href="/">Home</Button>
+                                                                        <Link to='/'>
+                                                                            <Button
+                                                                                className='greenBtn end-play-btn'
+                                                                                block
+                                                                                href="/">Home</Button>
+                                                                        </Link>
                                                                     </Col>
                                                                     <Col span={8} className='end-btn-div'>
-                                                                        <Button
-                                                                        block
-                                                                        className='blueBtn end-play-btn'
-                                                                            href={`/leaderboard/${quizId}`}>Leaderboard</Button>
+                                                                        <Link to={`/Leaderboard/${quizId}`}>
+                                                                            <Button
+                                                                                block
+                                                                                className='blueBtn end-play-btn'
+                                                                                // href={`/Leaderboard/${quizId}`}
+                                                                                >Leaderboard</Button>
+                                                                        </Link>
                                                                     </Col>
                                                                     <Col span={8} className='end-btn-div'>
-                                                                        <Button 
-                                                                        block
-                                                                        className='orangeBtn end-play-btn'
-                                                                        href={`/Quiz/${quizId}`}>Play Again</Button>
+                                                                        <Link to={`/Quiz/${quizId}`}>
+                                                                            <Button
+                                                                                block
+                                                                                className='orangeBtn end-play-btn'
+                                                                                // href={`/Quiz/${quizId}`}
+                                                                                >Play Again</Button>
+                                                                        </Link>
                                                                     </Col>
                                                                 </Row>
                                                             </Col>
@@ -261,7 +270,7 @@ const Quiz = () => {
                                     </div>
                                 )}
                             </Col>
-                            <Col span={4} className="right-icon"><img src={rightIcon} alt="icon"/>
+                            <Col span={4} className="right-icon"><img src={rightIcon} alt="icon" />
                             </Col>
                         </Row>
 
