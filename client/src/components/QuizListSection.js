@@ -1,13 +1,19 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 // import { Col, Row } from 'antd';
 import titleIcon from "../images/witch-hat2.png";
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 import DesignedTitle from './DesignedTitle';
+import CustomModal from './CustomModal';
 
 import Auth from '../utils/auth';
 
-const QuizListSection = ({ dbQuizzes }) => {
+const QuizListSection = ({ dbQuizzes, refetch }) => {
+    const [showModal, setShowModal] = useState(false);
+    useEffect(() => {
+        refetch();
+    }, [])
+
     if (!dbQuizzes.length) {
         return (
             <div className="quizList-container">
@@ -18,7 +24,7 @@ const QuizListSection = ({ dbQuizzes }) => {
     }
     return (
         <div className="quizList-container">
-            <DesignedTitle title="Quiz List" src={titleIcon} />
+            <DesignedTitle title="All Quizzes" src={titleIcon} />
             <div className="row quizCards-container">
                 {dbQuizzes &&
                     dbQuizzes.map((dbQuiz) => (
@@ -28,6 +34,7 @@ const QuizListSection = ({ dbQuizzes }) => {
                                 <div className="d-flex flex-column card-body">
                                     <h5 className="card-title">{dbQuiz.title}</h5>
                                     <p className="card-text">{dbQuiz.description}</p>
+                                    <h6 className="card-text" style={{ textAlign: 'center' }}>Created by {dbQuiz.quizAuthor}</h6>
                                     <div className='linkBtn-container mt-auto'>
                                         {Auth.loggedIn() ? (
                                             <>
@@ -56,11 +63,12 @@ const QuizListSection = ({ dbQuizzes }) => {
                                             </>
 
                                         ) : (
-                                            <p>Please login or signup..., and play quiz! </p>
+                                            <Button onClick={() => setShowModal(true)} type="primary" style={{ margin: "5px", width: "100%", background: "#05004E", borderColor: "#05004E" }} shape="round">Login or Signup and start playing! </Button>
                                         )}
                                     </div>
                                 </div>
                             </div>
+                            <CustomModal showModal={showModal} setShowModal={setShowModal} />
                         </div>
                     ))
 

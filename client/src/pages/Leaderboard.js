@@ -7,8 +7,8 @@ import { GET_LEADERBOARD } from '../utils/queries';
 import titleIcon from "../images/crystal-ball2.png";
 import starIcon from "../images/star.png";
 import DesignedTitle from '../components/DesignedTitle';
-import { Helmet } from 'react-helmet-async';
 import footerIcon from "../images/town.png";
+import { Helmet } from 'react-helmet-async';
 
 const Leaderboard = () => {
     const { quizId } = useParams();
@@ -28,7 +28,11 @@ const Leaderboard = () => {
         }
     }, [data]);
     return (
-        <div className="leaderboard-container">
+        <div className="container">
+            <Helmet>
+                <title>Qwizard | Leaderboard</title>
+                <meta name="description" content="Viewing all players by ranking" />
+            </Helmet>
             {loading ? (
                 <h1>Loading...</h1>
             ) : (

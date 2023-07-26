@@ -9,7 +9,9 @@ import leftIcon from '../images/wizard.png';
 import titleIcon from "../images/crystal-ball2.png";
 import rightIcon from '../images/potion.png';
 import DesignedTitle from '../components/DesignedTitle';
+
 import { Helmet } from 'react-helmet-async';
+
 const Quiz = () => {
 
     const { quizId } = useParams();
