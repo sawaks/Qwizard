@@ -12,12 +12,13 @@ const QuizListSection = ({ dbQuizzes, refetch }) => {
     const [showModal, setShowModal] = useState(false);
     useEffect(() => {
         refetch();
+        // eslint-disable-next-line
     }, [])
 
     if (!dbQuizzes.length) {
         return (
             <div className="quizList-container">
-                <DesignedTitle title="Quiz List" src={titleIcon} />
+                <DesignedTitle title="All Quizzes" src={titleIcon} />
                 <h4>No Quiz Yet</h4>
             </div>
         )
@@ -43,7 +44,7 @@ const QuizListSection = ({ dbQuizzes, refetch }) => {
                                                         <Button type="primary"
                                                             style={{ margin: "5px", width: "100%", background: "#FD5F00", borderColor: "#FD5F00" }}
                                                             shape="round" >
-                                                            Replay
+                                                            Play Again
                                                         </Button>
                                                     </Link>) :
                                                     (<Link to={`/Quiz/${dbQuiz._id}`}>

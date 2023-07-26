@@ -28,7 +28,9 @@ const SignupForm = () => {
         console.log(data)
         // debugger;
         const token = data.addUser.token;
+        // debugger;
         Auth.login(token);
+        // debugger;
       }
     }
   );
@@ -58,11 +60,13 @@ const SignupForm = () => {
         },
       });
       // debugger;
-      Auth.login(response.token);
+      console.log(response);
+      // Auth.login(response.addUser.token);
       // debugger;
     } catch (err) {
       // debugger;
       console.error(err);
+      // debugger;
       setShowAlert(true);
     }
 

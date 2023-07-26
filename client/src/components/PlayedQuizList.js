@@ -13,6 +13,7 @@ const PlayedQuizList = () => {
 
     useEffect(() => {
         refetch();
+        // eslint-disable-next-line
     }, [userData2])
 
     const [playedQuizzes, setPlayedQuizzes] = useState(userData2);
@@ -30,7 +31,7 @@ const PlayedQuizList = () => {
                     <div className="icon-container icon-created-container"><img src={titleIcon} alt="crystalball"/></div>
                 </div> */}
                 <DesignedTitle title="Play History" color="#76B39D" src={titleIcon} />
-                <h3>Not Played Quiz Yet</h3>
+                <h3>No Quiz Played</h3>
             </div>
         )
     }
@@ -56,7 +57,7 @@ const PlayedQuizList = () => {
                             <Meta title={userData.title} />
                             <p style={{ textAlign: "center" }}><span style={{ fontWeight: "bold" }}>Points:</span> {userData.leaderboard[userData.leaderboard.length - 1].points}</p>
                             <Link to={`/Quiz/${userData._id}`}>
-                                <Button type="primary" style={{ width: "100%", backgroundColor: "#FD5F00", border: "solid 1px #FD5F00" }} shape="round" >Replay</Button>
+                                <Button type="primary" style={{ width: "100%", backgroundColor: "#FD5F00", border: "solid 1px #FD5F00" }} shape="round" >Play Again</Button>
                             </Link>
                             <Link to={`/Leaderboard/${userData._id}`}>
                                 <Button type="primary" style={{ width: "100%", backgroundColor: "#05004E", border: "solid 1px #05004E" }} shape="round" >Leaderboard</Button>
