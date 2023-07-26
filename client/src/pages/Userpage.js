@@ -31,8 +31,8 @@ const Userpage = () => {
             <Navbar
                 leftLinkTo='/createQuiz'
                 rightLinkTo='/'
-                leftTitle='Create Your Quiz!'
-                rightTitle='Find and Play Quiz!'
+                leftTitle='Create a Quiz!'
+                rightTitle='Play a Quiz!'
                 rightSrc={crystalBall}
                 leftSrc={witch}
 
