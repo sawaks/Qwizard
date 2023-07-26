@@ -242,7 +242,8 @@ const Quiz = () => {
                                                                             <Button
                                                                                 block
                                                                                 className='blueBtn end-play-btn'
-                                                                                href={`/Leaderboard/${quizId}`}>Leaderboard</Button>
+                                                                                // href={`/Leaderboard/${quizId}`}
+                                                                                >Leaderboard</Button>
                                                                         </Link>
                                                                     </Col>
                                                                     <Col span={8} className='end-btn-div'>
@@ -250,7 +251,8 @@ const Quiz = () => {
                                                                             <Button
                                                                                 block
                                                                                 className='orangeBtn end-play-btn'
-                                                                                href={`/Quiz/${quizId}`}>Play Again</Button>
+                                                                                // href={`/Quiz/${quizId}`}
+                                                                                >Play Again</Button>
                                                                         </Link>
                                                                     </Col>
                                                                 </Row>
