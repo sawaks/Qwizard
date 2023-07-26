@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 
 import { GET_LEADERBOARD } from '../utils/queries';
 
+import { Helmet } from 'react-helmet-async';
 
 const Leaderboard = () => {
     const { quizId } = useParams();
@@ -25,6 +26,10 @@ const Leaderboard = () => {
     }, [data]);
     return (
         <div className="container">
+            <Helmet>
+                <title>Qwizard | Leaderboard</title>
+                <meta name="description" content="Viewing all players by ranking" />
+            </Helmet>
             {loading ? (
                 <h1>Loading...</h1>
             ) : (

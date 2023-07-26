@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import titleIcon from "../images/crystal-ball2.png";
 import DesignedTitle from './DesignedTitle';
 
@@ -9,7 +9,19 @@ import { useUserPageContext } from '../utils/userPageContext';
 const { Meta } = Card;
 
 const PlayedQuizList = () => {
-    const { userData2 } = useUserPageContext();
+    const { userData2, refetch } = useUserPageContext();
+
+    useEffect(() => {
+        refetch();
+    }, [userData2])
+
+    const [playedQuizzes, setPlayedQuizzes] = useState(userData2);
+
+    useEffect(() => {
+        setPlayedQuizzes([...userData2].reverse());
+    }, [userData2])
+
+
     if (!userData2.length) {
         return (
             <div className="playedQuizList-Container">
@@ -33,8 +45,8 @@ const PlayedQuizList = () => {
             <DesignedTitle title="Play History" color="#76B39D" src={titleIcon} />
 
             <div className="playedCard-container">
-                {userData2 &&
-                    userData2.map((userData) => (
+                {playedQuizzes &&
+                    playedQuizzes.map((userData) => (
 
                         <Card
                             key={userData._id}

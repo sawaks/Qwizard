@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 # Qwizard
+=======
+Canva Presentation: https://www.canva.com/design/DAFpl3LVneE/AXSXS0G51Npd-DExqQAy8A/edit
+
+
+Live Website!:  https://qwizard-c649b0755527.herokuapp.com/
+>>>>>>> main
 
 ## Description
 Welcome to the Qwizard! This interactive platform offers a dynamic quiz-based learning experience that combines education, entertainment, and motivation, making studying an exciting journey.

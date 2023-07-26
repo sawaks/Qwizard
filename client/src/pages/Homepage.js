@@ -14,7 +14,7 @@ import { Helmet } from 'react-helmet-async';
 import Auth from '../utils/auth';
 
 const HomePage = () => {
-    const { loading, data } = useQuery(GET_DB_QUIZZES);
+    const { loading, data, refetch } = useQuery(GET_DB_QUIZZES);
     console.log(data);
     const dbQuizzes = data?.dbQuizzes || [];
     return (
@@ -44,7 +44,7 @@ const HomePage = () => {
             ) : (
                 <QuizListSection
                     dbQuizzes={dbQuizzes}
-
+                    refetch={refetch}
                 />
             )}
 

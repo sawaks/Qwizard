@@ -36,19 +36,27 @@ const Userpage = () => {
                 rightSrc={crystalBall}
                 leftSrc={witch}
 
+<<<<<<< HEAD
             />
 
             <Row justify="space-between" style={{ marginTop: "50px" }}>
                 <Col xs={24} sm={24} md={16} lg={16} xl={16}>
                     <UserPageProvider>
+=======
+            <Row justify="space-between">
+                <UserPageProvider>
+                    <Col xs={24} sm={24} md={16} lg={16} xl={16}>
+
+>>>>>>> main
                         <CreatedQuizList />
-                    </UserPageProvider>
-                </Col>
-                <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-                    <UserPageProvider>
+
+                    </Col>
+                    <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+
                         <PlayedQuizList />
-                    </UserPageProvider>
-                </Col>
+
+                    </Col>
+                </UserPageProvider>
             </Row>
 
 

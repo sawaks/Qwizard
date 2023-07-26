@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 import { GET_QUIZ_QUESTIONS } from '../utils/queries';
 import { ADD_LEADERBOARD } from '../utils/mutations';
 
+import { Helmet } from 'react-helmet-async';
+
 const Quiz = () => {
 
     const { quizId } = useParams();
@@ -109,6 +111,10 @@ const Quiz = () => {
 
     return (
         <div className="master-div">
+            <Helmet>
+                <title>Qwizard | Play</title>
+                <meta name="description" content="Quiz Playing in progress!" />
+            </Helmet>
             {loading ? (
                 <h1>Loading...</h1>
             ) : (
