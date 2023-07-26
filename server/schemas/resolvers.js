@@ -43,7 +43,7 @@ const resolvers = {
         //     return quizData;
         // },
         dbQuizzes: async (parent) => {
-            return Quiz.find().populate('questions');
+            return Quiz.find().populate('questions').sort({ _id: -1 });
 
         },
 

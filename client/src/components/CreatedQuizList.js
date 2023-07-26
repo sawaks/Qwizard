@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import titleIcon from "../images/magic-wand3.png";
 // import quizImg from "../images/quizImg.png";
 import DesignedTitle from './DesignedTitle';
@@ -11,12 +11,17 @@ import { useUserPageContext } from '../utils/userPageContext';
 
 const CreatedQuizList = () => {
 
-    const { userData, setUserData, refetch } = useUserPageContext();
+    const { userData, userData2, setUserData2, setUserData, refetch } = useUserPageContext();
     console.log('userData in createdQuizes', userData)
 
+    const [createdQuizzes, setCreatedQuizzes] = useState(userData);
     useEffect(() => {
         refetch();
     }, [])
+
+    useEffect(() => {
+        setCreatedQuizzes([...userData].reverse());
+    }, [userData])
 
     const [removeQuiz] = useMutation(REMOVE_QUIZ);
 
@@ -31,6 +36,9 @@ const CreatedQuizList = () => {
 
             const filteredQuizzes = userData.filter((quiz) => quiz._id !== quizId);
             setUserData(filteredQuizzes);
+
+            const filteredQuizzes2 = userData2.filter((quiz) => quiz._id !== quizId);
+            setUserData2(filteredQuizzes2);
         } catch (err) {
             console.error(err);
         }
@@ -39,15 +47,15 @@ const CreatedQuizList = () => {
     if (!userData.length) {
         return (
             <div className="createdQuizList-Container">
-                <DesignedTitle title="Your Created Quiz" src={titleIcon} />
+                <DesignedTitle title="My Created Quizzes" src={titleIcon} />
                 <h3>Not Created Quiz Yet</h3>
             </div>)
     }
     return (
         <div className="createdQuizList-Container">
-            <DesignedTitle title="Your Created Quiz" src={titleIcon} />
-            {userData &&
-                userData.map((userData) => (
+            <DesignedTitle title="My Created Quizzes" src={titleIcon} />
+            {createdQuizzes &&
+                createdQuizzes.map((userData) => (
                     <Row key={userData._id} justify="space-between" className="createdQuizCard-container">
                         <Col xs={24} sm={24} md={10} lg={10} xl={10} className="createdImg-container">
                             <img src={userData.imgURL} alt="quiz" />
