@@ -4,8 +4,11 @@ import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import '../CSS/leaderboard.css';
 import { GET_LEADERBOARD } from '../utils/queries';
-
+import titleIcon from "../images/crystal-ball2.png";
+import starIcon from "../images/star.png";
+import DesignedTitle from '../components/DesignedTitle';
 import { Helmet } from 'react-helmet-async';
+import footerIcon from "../images/town.png";
 
 const Leaderboard = () => {
     const { quizId } = useParams();
@@ -29,38 +32,45 @@ const Leaderboard = () => {
             {loading ? (
                 <h1>Loading...</h1>
             ) : (
-                <div className="leaderboard">
-                    <div className="leaderboard-header">
-                    <h1>Leaderboard</h1>
+                <div className="leaderboard-master-div">
+                    <div className="star-icon"><img src={starIcon} /><img src={starIcon} /><img src={starIcon} /><img src={starIcon} /><img src={starIcon} /></div>
+                    <div className="leaderboard">
+                        <DesignedTitle title="Leaderboard" src={titleIcon} />
+
+                        <div className='leaderboard-card'>
+                            {leaderboard?.length > 0 ? (
+                                <ol className="leaderboard-list">
+                                    {leaderboard.map((leaderboard) => {
+                                        return (
+                                            <li className="leaderboard-li">
+                                                {leaderboard.player}: {leaderboard.points}
+                                            </li>
+                                        )
+
+
+                                    })}
+
+                                </ol>
+
+                            ) : (<>
+                                {leaderboard?.length === 0 ? (
+                                    <h1>No one has played this quiz yet</h1>
+                                ) : (
+                                    <h1>Loading</h1>
+                                )}
+                            </>
+                            )}
+
+                            <Button href="/" className="leaderboard-btn">Go Back</Button>
+
+                        </div>
                     </div>
-                    {leaderboard?.length > 0 ? (
-                        <ol className="leaderboard-list">
-                            {leaderboard.map((leaderboard) => {
-                                return (
-                                    <li className= "leaderboard-li">
-                                        {leaderboard.player}: {leaderboard.points}
-                                    </li>
-                                )
 
-
-                            })}
-
-                        </ol>
-                    ) : (<>
-                        {leaderboard?.length === 0 ? (
-                            <h1>No one has played this quiz yet</h1>
-                        ) : (
-                            <h1>Loading</h1>
-                        )}
-                    </>
-                    )}
-
-                    <Button href="/" className="leaderboard-btn">Go Back</Button>
                 </div>
-
-
             )
             }
+
+            <div className="leaderboard-footer-icon"><img src={footerIcon} /></div>
         </div >
     );
 }

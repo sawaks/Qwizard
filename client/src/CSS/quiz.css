@@ -28,15 +28,6 @@
     width: 100%;
 }
 
-.quiz-play-title {
-    text-align: center;
-    min-width: 60%;
-    border: solid black 1px;
-    color: white;
-    background-color: rgb(253, 95, 0);
-    padding: 15px;
-}
-
 .play-question {
     font-size: 60px;
     padding: 10px;

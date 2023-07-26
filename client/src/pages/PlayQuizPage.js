@@ -6,8 +6,9 @@ import '../CSS/quiz.css';
 import { GET_QUIZ_QUESTIONS } from '../utils/queries';
 import { ADD_LEADERBOARD } from '../utils/mutations';
 import leftIcon from '../images/wizard.png';
+import titleIcon from "../images/crystal-ball2.png";
 import rightIcon from '../images/potion.png';
-
+import DesignedTitle from '../components/DesignedTitle';
 import { Helmet } from 'react-helmet-async';
 const Quiz = () => {
 
@@ -133,12 +134,13 @@ const Quiz = () => {
                                     className="left-icon"><img src={leftIcon} />
                                 </Col>
                                 <Col justify="center" span={16}>
-                                    <h1 className="quiz-play-title">{data.getQuizQuestions.title}</h1>
+                                <DesignedTitle color={"rgb(253, 95, 0)"} title={data.getQuizQuestions.title}src={titleIcon} />
                                     <div className="quiz-play-card">
                                         {activeQuestion && timer ? (
                                             <>
                                                 <Row align='middle'>
                                                     <Col span={24} >
+                                                        <img src={data.getQuizQuestions.imgURL} alt="imgURL" className="quiz-play-img" />
 
                                                         <h2 className="timer">Time Left:{timer} </h2>
 
