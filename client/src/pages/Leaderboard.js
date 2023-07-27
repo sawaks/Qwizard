@@ -5,9 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import '../CSS/leaderboard.css';
 import { GET_LEADERBOARD, GET_ME } from '../utils/queries';
 import titleIcon from "../images/crystal-ball2.png";
-// import starIcon from "../images/star.png";
 import DesignedTitle from '../components/DesignedTitle';
-// import footerIcon from "../images/newTown.png";
 import { Helmet } from 'react-helmet-async';
 
 const Leaderboard = () => {
@@ -50,9 +48,6 @@ const Leaderboard = () => {
                 <div className="leaderboard-master-div">
 
                     <div className="star-icon">
-                        {/* <img src={starIcon} alt="stars" />
-                            <img src={starIcon} alt="stars" /> */}
-
                     </div>
 
                     <div className="leaderboard">

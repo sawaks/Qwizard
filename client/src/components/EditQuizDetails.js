@@ -4,6 +4,9 @@ import { useMutation, useQuery } from '@apollo/client';
 import EditImage from '../images/edit.png'
 
 import witchHat from '../images/witch-hat2.png'
+import theme1 from '../images/booktheme.png';
+import theme2 from '../images/cardstheme.png';
+import theme3 from '../images/magiciantheme.png';
 
 import { EDIT_QUIZ } from '../utils/mutations';
 import { GET_QUIZ_QUESTIONS } from '../utils/queries';
@@ -20,14 +23,33 @@ const EditQuizDetails = (props) => {
     const { data } = useQuery(GET_QUIZ_QUESTIONS, {
         variables: { quizId: props.value.param }
     });
+    const [imgSRC, setImgSRC] = useState(theme1);
 
+    useEffect(() => {
+        if(quizDetails.imgURL === "./booktheme.png") {
+            setImgSRC(theme1);
+        } else if(quizDetails.imgURL === "./cardstheme.png") {
+            setImgSRC(theme2);
+        } else if(quizDetails.imgURL === "./magiciantheme.png") {
+            setImgSRC(theme3);
+        }
+    }, [quizDetails.imgURL])
+        
     useEffect(() => {
         setToEdit(false);
 
         if (props.value.param !== 0 && data) {
             setQuizId(props.value.param);
             // console.log(data.getQuizQuestions)
-
+            if (data.getQuizQuestions.imgURL) {
+                if (data.getQuizQuestions.imgURL === "./booktheme.png") {
+                    setImgSRC(theme1);
+                } else if (data.getQuizQuestions.imgURL === "./cardstheme.png") {
+                    setImgSRC(theme2);
+                } else if (data.getQuizQuestions.imgURL === "./magiciantheme.png") {
+                    setImgSRC(theme3);
+                }
+            }
             setQuizDetails({
                 title: data.getQuizQuestions.title,
                 description: data.getQuizQuestions.description,
@@ -48,7 +70,15 @@ const EditQuizDetails = (props) => {
     };
 
     const handleSelectChange = (value) => {
-        console.log(`selected ${value}`);
+        // console.log(`selected ${value}`);
+        // let imgURL;
+        if (value === "./booktheme.png") {
+            setImgSRC(theme1);
+        } else if (value === "./cardstheme.png") {
+            setImgSRC(theme2);
+        } else if (value === "./magiciantheme.png") {
+            setImgSRC(theme3);
+        }
         setQuizDetails({ ...quizDetails, imgURL: value });
     };
 
@@ -140,13 +170,13 @@ const EditQuizDetails = (props) => {
                         </Form>
                     </Col>
                     <Col span={6} id="imgContainer">
-                        <Image alt="theme img" id="themeIMG2" src={quizDetails.imgURL} />
+                        <Image alt="theme img" id="themeIMG2" src={imgSRC} />
                     </Col>
                 </Row>
             ) : (
                 <Row align={"middle"} id="QdetailsContainer" className='editQuestionComp'>
                     <Col span={4} align={"middle"}>
-                        <Image alt="theme img" id="themeIMG3" src={quizDetails.imgURL} />
+                        <Image alt="theme img" id="themeIMG3" src={imgSRC} />
                     </Col>
                     <Col span={16} id="quizDetails" >
                         <img id="witchHat-edit" src={witchHat} alt="witch hat" />

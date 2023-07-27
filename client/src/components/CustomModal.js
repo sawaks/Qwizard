@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal, Tab, Nav } from 'react-bootstrap';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignupForm';
-import { ColorFactory } from 'antd/es/color-picker/color';
-import { Button } from 'antd';
-import star from "../images/star.png"
 
 const CustomModal = ({ showModal, setShowModal }) => {
     return (

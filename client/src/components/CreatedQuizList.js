@@ -17,6 +17,7 @@ const CreatedQuizList = () => {
     const [createdQuizzes, setCreatedQuizzes] = useState(userData);
     useEffect(() => {
         refetch();
+        // eslint-disable-next-line
     }, [])
 
     useEffect(() => {
