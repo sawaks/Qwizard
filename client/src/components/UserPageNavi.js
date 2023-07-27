@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Row } from 'antd';
-// import witch from '../images/witch.png';
-// import crystalBall from '../images/crystal-ball.png';
 import { Button } from 'antd';
 
 const UserPageNavi = ({ rightLinkTo, leftLinkTo, rightTitle, leftTitle, rightSrc, leftSrc, }) => {

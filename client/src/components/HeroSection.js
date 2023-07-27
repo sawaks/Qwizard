@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import star from '../images/newStar.png';
 import txt from '../images/heroTxt.png';
-import heroWitch from '../images/hero-witch1.png';
 import magicWand from '../images/magic-wand2.png';
 import crystalBall from '../images/crystal-ball2.png';
 import singupWand from '../images/signup.png';

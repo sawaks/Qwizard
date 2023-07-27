@@ -129,6 +129,13 @@ const Quiz = () => {
         }
     };
 
+    function reStart() {
+        setIntro(true);
+        setQuestionIndex(0);
+        setResult(0);
+        setEnd(false);
+    }
+
     return (
         <div className="master-div">
 
@@ -242,16 +249,14 @@ const Quiz = () => {
                                                                             <Button
                                                                                 block
                                                                                 className='blueBtn end-play-btn'
-                                                                                // href={`/Leaderboard/${quizId}`}
                                                                                 >Leaderboard</Button>
                                                                         </Link>
                                                                     </Col>
                                                                     <Col span={8} className='end-btn-div'>
-                                                                        <Link to={`/Quiz/${quizId}`}>
+                                                                        <Link onClick={reStart} to={`/Quiz/${quizId}`}>
                                                                             <Button
                                                                                 block
                                                                                 className='orangeBtn end-play-btn'
-                                                                                // href={`/Quiz/${quizId}`}
                                                                                 >Play Again</Button>
                                                                         </Link>
                                                                     </Col>

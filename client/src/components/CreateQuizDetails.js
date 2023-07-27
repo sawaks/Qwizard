@@ -9,9 +9,6 @@ import { ADD_QUIZ } from '../utils/mutations';
 import '../CSS/createDetails.css'
 
 const { TextArea } = Input;
-// IMG URLS NEED UPDATING
-// URL REROUTING NEEDS UPDATING
-
 const CreateQuizDetails = () => {
 
 
@@ -25,8 +22,6 @@ const CreateQuizDetails = () => {
 
     const [addQuiz] = useMutation(ADD_QUIZ);
 
-
-    // CHANGE!!!!!!!!!!!!!!!
     const navigate = useNavigate();
     const handleModalCancel = () => {
         setShowModal(false);

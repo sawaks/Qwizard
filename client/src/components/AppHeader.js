@@ -9,10 +9,8 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
+import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Button } from 'antd';
-// import SignUpForm from './SignupForm';
-// import LoginForm from './LoginForm';
 import CustomModal from './CustomModal';
 import logo from '../images/logoQuiz.png';
 
