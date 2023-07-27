@@ -132,12 +132,8 @@ const Quiz = () => {
     function reStart() {
         setIntro(true);
         setQuestionIndex(0);
-        // setQuizQuestions([]);
-        // setActiveQuestion(quizQuestions[0]);
-        // setTimer(0);
         setResult(0);
         setEnd(false);
-        // setQuizImg();
     }
 
     return (
@@ -253,7 +249,6 @@ const Quiz = () => {
                                                                             <Button
                                                                                 block
                                                                                 className='blueBtn end-play-btn'
-                                                                                // href={`/Leaderboard/${quizId}`}
                                                                                 >Leaderboard</Button>
                                                                         </Link>
                                                                     </Col>
@@ -262,7 +257,6 @@ const Quiz = () => {
                                                                             <Button
                                                                                 block
                                                                                 className='orangeBtn end-play-btn'
-                                                                                // href={`/Quiz/${quizId}`}
                                                                                 >Play Again</Button>
                                                                         </Link>
                                                                     </Col>

@@ -4,7 +4,7 @@
     padding-bottom: 50px;
     height: 100vh;
     box-sizing: border-box;
-
+    overflow-x: hidden;
 }
 
 .leaderboard-master-div {
@@ -13,26 +13,25 @@
     justify-content: center;
     align-items: center;
     padding-bottom: 50px;
-    /* position: relative;
-    padding-bottom: 210px; */
 }
 
 .star-icon {
     width: 100%;
     height: 100px;
     background-image: url(../images/star.png);
-    animation: flowing 10s linear infinite;
-    transform: translateX(100px);
-    object-fit: cover;
+    animation: flowing 80s linear infinite;
+    transform: translateX(100%);
     margin-top: 20px;
     margin-bottom: 20px;
-    animation-fill-mode: backwords;
 }
 
-
 @keyframes flowing {
+    0% {
+        transform: translateX(100%);
+    }
+
     100% {
-        transform: translateX(-100px);
+        transform: translateX(-100%);
     }
 }
 
@@ -55,8 +54,6 @@
     width: 60%;
     padding-bottom: 30px;
     z-index: 1;
-    /* padding-top: 10px; */
-
 }
 
 .leaderboard-card {
@@ -69,7 +66,6 @@
     margin-top: 10px;
     margin-bottom: 10px;
     padding-bottom: 10px;
-    z-index: 1;
 }
 
 .leaderboard-list {
@@ -111,7 +107,6 @@
 }
 
 .leaderboard-btn {
-    /* width: 90%; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,7 +125,6 @@
 }
 
 .leaderboard-play-btn {
-    /* width: 90%; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -154,28 +148,11 @@
     width: 100%;
 }
 
-/* .leaderboard-footer-icon {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 20px;
-    position: fixed;
-    bottom: -10%;
-}
-
-.leaderboard-footer-icon img {
-    width: 100%;
-    padding-bottom: 50px;
-    object-fit: cover;
-
-} */
 .leaderboard-footer-icon {
     background-image: url(../images/greentown.png);
     background-position: 20% 0%;
     width: 100%;
     height: 90px;
-    position: absolute;
+    position: fixed;
     bottom: 100px;
-
-
 }
